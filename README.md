@@ -1,10 +1,10 @@
-# BibAdmin
-Admin for BibApi
+# InsAdmin
+Admin for InsApi
 
-Interface d'administration pour [BibApi](https://github.com/BibCnrs/BibApi).
+Interface d'administration pour [InsApi](https://github.com/InsermBiblio/InsApi).
 Elle utilise l'outil [ng-admin](https://github.com/marmelab/ng-admin).
 
-Elle permet de gérer les droits d'accès par institut, unité, individu aux ressources documentaires exposées à travers [BibEzProxy](https://github.com/BibCnrs/BibEzProxy).
+Elle permet de gérer les droits d'accès par institut, unité, individu aux ressources documentaires exposées à travers [InsEzProxy](https://github.com/InsermBiblio/InsEzProxy).
 
 ## Installation
 
@@ -14,9 +14,9 @@ make install
 
 ## Développement
 
-Pré-requis : lancer BibApi
+Pré-requis : lancer InsApi
 
-Ensuite démarrer BibAdmin : `make run-dev`
+Ensuite démarrer InsAdmin : `make run-dev`
 
-Ensuite rendez vous sur http://localhost:3011/public pour l'accès à l'interface Web de BibAdmin.
-Logguez vous avec le login/mdp administrateur défini au moment de l'installation de BibApi.
+Ensuite rendez vous sur http://localhost:3011/public pour l'accès à l'interface Web de InsAdmin.
+Logguez vous avec le login/mdp administrateur défini au moment de l'installation de InsApi.

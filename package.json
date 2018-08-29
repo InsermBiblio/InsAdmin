@@ -1,20 +1,20 @@
 {
-  "name": "bibadmin",
+  "name": "insadmin",
   "version": "1.0.0",
-  "description": "Admin for bibApi",
+  "description": "Admin for insApi",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/BibCnrs/BibAdmin.git"
+    "url": "https://github.com/InsermBiblio/InsAdmin.git"
   },
   "author": "",
   "license": "CeCILL",
   "bugs": {
-    "url": "https://github.com/BibCnrs/BibAdmin/issues"
+    "url": "https://github.com/InsermBiblio/InsAdmin/issues"
   },
-  "homepage": "https://github.com/BibCnrs/BibAdmin",
+  "homepage": "https://github.com/InsermBiblio/InsAdmin",
   "dependencies": {
     "blueimp-load-image": "^2.10.0",
     "ng-admin": "1.0.13",

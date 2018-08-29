@@ -23,39 +23,39 @@ npm-install: ## ## install npm dependencies
 
 install: npm-install copy-script bump ## install npm dependencies and bump currentCommit file
 
-run-dev: ## run BibAdmin for development
+run-dev: ## run InsAdmin for development
 	docker-compose -f docker-compose.dev.yml up --force-recreate
 
-run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
+run-prod: ## run InsAdmin for production make sure env INSAPI_HOST and INSADMIN_HOST are set
 	docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
-build-docker: ## args: <version> build bibcnrs/bibadmin:<version> docker image default <version> to latest
+build-docker: ## args: <version> build insermbiblio/insadmin:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build --no-cache -t vsnexus.intra.inist.fr:8083/bibcnrs/bibadmin:$(COMMAND_ARGS) .
+	docker build --no-cache -t vsnexus.intra.inist.fr:8083/insermbiblio/insadmin:$(COMMAND_ARGS) .
 else
-	docker build --no-cache -t vsnexus.intra.inist.fr:8083/bibcnrs/bibadmin:latest .
+	docker build --no-cache -t vsnexus.intra.inist.fr:8083/insermbiblio/insadmin:latest .
 endif
 
 copy-script: # copy dependency in ./public/vendor
 	cp -f node_modules/ng-admin/build/ng-admin.min.js ./public/vendor/ng-admin.min.js
 	cp -f node_modules/ng-admin/build/ng-admin.min.css ./public/vendor/ng-admin.min.css
 
-build-script: ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
+build-script: ## build javascript and css for production make sure env INSAPI_HOST and INSADMIN_HOST are set
 	docker-compose run --rm build
 
-build: install build-script build-docker ## build javascript and css for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
+build: install build-script build-docker ## build javascript and css for production make sure env INSAPI_HOST and INSADMIN_HOST are set
 
 npm: ## dockerized npm command example: make npm 'install some_dependency --save'
 	docker-compose run --rm npm $(COMMAND_ARGS)
 
-docker-rm: ## remove all bibadmin container
-	test -z "$$(docker ps -a | grep bibadmin)" || \
-            docker rm --force $$(docker ps -a | grep bibadmin | awk '{ print $$1 }')
+docker-rm: ## remove all insadmin container
+	test -z "$$(docker ps -a | grep insadmin)" || \
+            docker rm --force $$(docker ps -a | grep insadmin | awk '{ print $$1 }')
 
-stop: ## stop all bibcnrs docker image
-	test -z "$$(docker ps | grep bibadmin)" || \
-            docker stop $$(docker ps | grep bibadmin | awk '{ print $$1 }')
+stop: ## stop all insadmin docker image
+	test -z "$$(docker ps | grep insadmin)" || \
+            docker stop $$(docker ps | grep insadmin | awk '{ print $$1 }')
 
-cleanup-docker: ## stop all bibcnrs docker image
-	test -z "$$(docker ps -a | grep bibadmin)" || \
-            docker rm $$(docker ps -a | grep bibadmin | awk '{ print $$1 }')
+cleanup-docker: ## stop all insadmin docker image
+	test -z "$$(docker ps -a | grep insadmin)" || \
+            docker rm $$(docker ps -a | grep insadmin | awk '{ print $$1 }')

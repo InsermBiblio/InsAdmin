@@ -10,7 +10,7 @@ window.login = function login(event) {
         }
     }
 
-    fetch(`${__BIBAPI_HOST__}/login`, {
+    fetch(`${__INSAPI_HOST__}/login`, {
         mode: 'cors',
         method: 'post',
         headers: {
@@ -31,7 +31,7 @@ window.login = function login(event) {
     .then(function (response) {
         window.sessionStorage.setItem('token', response.token);
         const url = window.sessionStorage.getItem('url');
-        window.location.href = url || `${__BIBADMIN_HOST__}/`;
+        window.location.href = url || `${__INSADMIN_HOST__}/`;
     })
     .catch(e => {
         const error = document.getElementById('error');

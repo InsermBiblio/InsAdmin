@@ -4,8 +4,8 @@ devserver:
     service: node
   environment:
     NODE_ENV: development
-    BIBADMIN_HOST: http://localhost:3011/public
-    BIBAPI_HOST: http://localhost:3000/admin
+    INSADMIN_HOST: http://localhost:3011/public
+    INSAPI_HOST: http://localhost:3000/admin
   volumes:
     - ./public:/public
   ports:

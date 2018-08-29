@@ -20,6 +20,6 @@ build:
     service: node
   environment:
     NODE_ENV: production
-    BIBADMIN_HOST: ${BIBADMIN_HOST}
-    BIBAPI_HOST: ${BIBAPI_HOST}
+    INSADMIN_HOST: ${INSADMIN_HOST}
+    INSAPI_HOST: ${INSAPI_HOST}
   command: node node_modules/webpack/bin/webpack.js -p

@@ -15,19 +15,19 @@ import services from './services';
 import directives from './directives';
 import loadImage from 'blueimp-load-image';
 
-const bibAdmin = angular.module('bibAdmin', ['ng-admin']);
+const insAdmin = angular.module('insAdmin', ['ng-admin']);
 
-bibAdmin.factory('crypto', [function () {
+insAdmin.factory('crypto', [function () {
     return crypto;
 }]);
-bibAdmin.factory('blueimp-load-image', [function () {
+insAdmin.factory('blueimp-load-image', [function () {
     return loadImage;
 }]);
 
-services(bibAdmin);
-directives(bibAdmin);
+services(insAdmin);
+directives(insAdmin);
 
-bibAdmin.config(['$translateProvider', function ($translateProvider) {
+insAdmin.config(['$translateProvider', function ($translateProvider) {
     $translateProvider.translations('fr', {
         BACK: 'Retour',
         DELETE: 'Supprimer',
@@ -73,7 +73,7 @@ bibAdmin.config(['$translateProvider', function ($translateProvider) {
     $translateProvider.preferredLanguage('fr');
 }]);
 
-bibAdmin.factory('noCacheInterceptor', function () {
+insAdmin.factory('noCacheInterceptor', function () {
     return {
         request: function (config) {
             if(config.method=='GET'){
@@ -89,11 +89,11 @@ bibAdmin.factory('noCacheInterceptor', function () {
     };
 });
 
-bibAdmin.config(['$httpProvider', function($httpProvider) {
+insAdmin.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('noCacheInterceptor');
 }]);
 
-bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function (nga, RestangularProvider) {
+insAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function (nga, RestangularProvider) {
     const token = window.sessionStorage.getItem('token');
 
     RestangularProvider.setDefaultHeaders({
@@ -117,8 +117,8 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
     });
 
     // create the admin application
-    const admin = nga.application('BibAdmin')
-    .baseApiUrl(`${__BIBAPI_HOST__}/`);
+    const admin = nga.application('InsAdmin')
+    .baseApiUrl(`${__INSAPI_HOST__}/`);
 
     admin.dashboard(nga.dashboard());
 
@@ -153,7 +153,7 @@ bibAdmin.config(['NgAdminConfigurationProvider', 'RestangularProvider', function
 
     admin.header(
 `<div class="navbar-header">
-    <a class="navbar-brand" href="#" ng-click="appController.displayHome()">BibAdmin</a>
+    <a class="navbar-brand" href="#" ng-click="appController.displayHome()">InsAdmin</a>
 </div>
 <ul class="nav navbar-top-links navbar-right hidden-xs">
     <li>

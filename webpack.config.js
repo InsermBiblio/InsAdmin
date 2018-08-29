@@ -1,8 +1,8 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-if (!process.env.BIBADMIN_HOST || !process.env.BIBAPI_HOST) {
-    throw new Error('environment variable BIBADMIN_HOST and BIBAPI_HOST need to be set');
+if (!process.env.INSADMIN_HOST || !process.env.INSAPI_HOST) {
+    throw new Error('environment variable INSADMIN_HOST and INSAPI_HOST need to be set');
 }
 
 module.exports = {
@@ -34,8 +34,8 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            __BIBADMIN_HOST__: JSON.stringify(process.env.BIBADMIN_HOST),
-            __BIBAPI_HOST__: JSON.stringify(process.env.BIBAPI_HOST)
+            __INSADMIN_HOST__: JSON.stringify(process.env.INSADMIN_HOST),
+            __INSAPI_HOST__: JSON.stringify(process.env.INSAPI_HOST)
         }),
         new ExtractTextPlugin('[name].css', {
             allChunks: true
