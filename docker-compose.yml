@@ -1,25 +1,27 @@
-node:
-  image: node:6.9.2
-  volumes:
-    - .:/app
-  working_dir: /app
+version: "2"
+services:
+  node:
+    image: node:6.9.2
+    volumes:
+      - .:/app
+    working_dir: /app
 
-npm:
-  extends:
-    file: ./docker-compose.yml
-    service: node
-  environment:
-    http_proxy: ${http_proxy}
-    https_proxy: ${https_proxy}
-    no_proxy: "localhost,127.0.0.1,"
-  entrypoint: ['npm']
+  npm:
+    extends:
+      file: ./docker-compose.yml
+      service: node
+    environment:
+      http_proxy: ${http_proxy}
+      https_proxy: ${https_proxy}
+      no_proxy: "localhost,127.0.0.1,"
+    entrypoint: ['npm']
 
-build:
-  extends:
-    file: ./docker-compose.yml
-    service: node
-  environment:
-    NODE_ENV: production
-    INSADMIN_HOST: ${INSADMIN_HOST}
-    INSAPI_HOST: ${INSAPI_HOST}
-  command: node node_modules/webpack/bin/webpack.js -p
+  build:
+    extends:
+      file: ./docker-compose.yml
+      service: node
+    environment:
+      NODE_ENV: production
+      INSADMIN_HOST: ${INSADMIN_HOST}
+      INSAPI_HOST: ${INSAPI_HOST}
+    command: node node_modules/webpack/bin/webpack.js -p
