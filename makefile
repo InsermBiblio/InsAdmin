@@ -29,29 +29,29 @@ run-dev: ## run BibAdmin for development
 run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
 	 docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
-build-docker: ## args: <version> build bibcnrs/bibadmin:<version> docker image default <version> to latest
+build-docker: ## args: <version> build insermbiblio/insadmin:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build --no-cache -t vsnexus.intra.inist.fr:8083/bibcnrs/bibadmin:$(COMMAND_ARGS) .
+	docker build --no-cache -t vsnexus.intra.inist.fr:8083/insermbiblio/insadmin:$(COMMAND_ARGS) .
 else
-	docker build --no-cache -t vsnexus.intra.inist.fr:8083/bibcnrs/bibadmin:latest .
+	docker build --no-cache -t vsnexus.intra.inist.fr:8083/insermbiblio/insadmin:latest .
 endif
 
-build-script: ## build javascript and css for production make sure env REACT_APP_BIBAPI_HOST and REACT_APP_BIBADMIN_HOST are set
+build-script: ## build javascript and css for production make sure env REACT_APP_INSAPI_HOST and REACT_APP_INSADMIN_HOST are set
 	docker-compose run --rm build
 
-build: build-script build-docker ## build javascript and css for production make sure env REACT_APP_BIBAPI_HOST and REACT_APP_BIBADMIN_HOST are set
+build: build-script build-docker ## build javascript and css for production make sure env REACT_APP_INSAPI_HOST and REACT_APP_INSADMIN_HOST are set
 
 npm: ## dockerized npm command example: make npm 'install some_dependency --save'
 	docker-compose run --rm npm $(COMMAND_ARGS)
 
-docker-rm: ## remove all bibadmin container
-	test -z "$$(docker ps -a | grep bibadmin)" || \
-            docker rm --force $$(docker ps -a | grep bibadmin | awk '{ print $$1 }')
+docker-rm: ## remove all insadmin container
+	test -z "$$(docker ps -a | grep insadmin)" || \
+            docker rm --force $$(docker ps -a | grep insadmin | awk '{ print $$1 }')
 
-stop: ## stop all bibcnrs docker image
-	test -z "$$(docker ps | grep bibadmin)" || \
-            docker stop $$(docker ps | grep bibadmin | awk '{ print $$1 }')
+stop: ## stop all insadmin docker image
+	test -z "$$(docker ps | grep insadmin)" || \
+            docker stop $$(docker ps | grep insadmin | awk '{ print $$1 }')
 
-cleanup-docker: ## stop all bibcnrs docker image
-	test -z "$$(docker ps -a | grep bibadmin)" || \
-            docker rm $$(docker ps -a | grep bibadmin | awk '{ print $$1 }')
+cleanup-docker: ## stop all insadmin docker image
+	test -z "$$(docker ps -a | grep insadmin)" || \
+            docker rm $$(docker ps -a | grep insadmin | awk '{ print $$1 }')

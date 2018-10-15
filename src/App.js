@@ -42,7 +42,7 @@ class App extends Component {
       return fetchUtils.fetchJson(url, options);
     };
 
-    const dataProvider = jsonServerProvider(process.env.REACT_APP_BIBAPI_HOST, httpClient);
+    const dataProvider = jsonServerProvider(process.env.REACT_APP_INSAPI_HOST, httpClient);
 
     this.setState({ dataProvider });
   }

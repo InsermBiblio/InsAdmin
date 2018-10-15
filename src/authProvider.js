@@ -4,7 +4,7 @@ export default (type, params) => {
   // called when the user attempts to log in
   if (type === AUTH_LOGIN) {
     const { username, password } = params;
-    return fetch(`${process.env.REACT_APP_BIBAPI_HOST}/login`, {
+    return fetch(`${process.env.REACT_APP_INSAPI_HOST}/login`, {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: {

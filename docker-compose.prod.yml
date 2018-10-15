@@ -1,8 +1,11 @@
-server:
-  image: vsnexus.intra.inist.fr:8083/insermbiblio/insadmin:${insadmin_version}
-  environment:
-    NODE_ENV: production
-  working_dir: /public
-  restart: always
-  ports:
-    - 3010:8080
+version: "2"
+
+services:
+  server:
+    image: vsnexus.intra.inist.fr:8083/insermbiblio/insadmin:${insadmin_version}
+    environment:
+      NODE_ENV: production
+    working_dir: /public
+    restart: always
+    ports:
+      - 3010:8080
