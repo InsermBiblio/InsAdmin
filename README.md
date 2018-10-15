@@ -1,4 +1,4 @@
-# BibAdmin
+# InsAdmin
 
 Admin for InsApi
 

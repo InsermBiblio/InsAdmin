@@ -60,7 +60,7 @@ class App extends Component {
 
     return (
       <Admin
-        title="BibAdmin"
+        title="InsAdmin"
         dashboard={Dashboard}
         dataProvider={dataProvider}
         i18nProvider={i18nProvider}

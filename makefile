@@ -23,10 +23,10 @@ npm-install: ## ## install npm dependencies
 
 install: npm-install bump ## install npm dependencies and bump currentCommit file
 
-run-dev: ## run BibAdmin for development
+run-dev: ## run InsAdmin for development
 	docker-compose -f docker-compose.dev.yml up --force-recreate
 
-run-prod: ## run BibAdmin for production make sure env BIBAPI_HOST and BIBADMIN_HOST are set
+run-prod: ## run InsAdmin for production make sure env INSAPI_HOST and INSADMIN_HOST are set
 	 docker-compose -f docker-compose.prod.yml up -d --force-recreate
 
 build-docker: ## args: <version> build insermbiblio/insadmin:<version> docker image default <version> to latest

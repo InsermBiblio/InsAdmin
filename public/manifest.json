@@ -1,6 +1,6 @@
 {
-  "short_name": "BibAdmin",
-  "name": "Bib Admin",
+  "short_name": "InsAdmin",
+  "name": "Ins Admin",
   "icons": [
     {
       "src": "favicon.ico",
