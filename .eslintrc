@@ -1,38 +1,7 @@
 {
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "modules": true
-        }
-    },
-    "rules": {
-        "indent": [
-            2,
-            4
-        ],
-        "quotes": [
-            2,
-            "single"
-        ],
-        "linebreak-style": [
-            2,
-            "unix"
-        ],
-        "semi": [
-            2,
-            "always"
-        ]
-    },
-    "env": {
-        "es6": true,
-        "node": true,
-        "browser": true
-    },
-    "extends": "eslint:recommended",
-    "globals": {
-        "angular": true,
-        "__INSAPI_HOST__": true,
-        "__INSADMIN_HOST__": true
-    }
+  "extends": "react-app",
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
 }

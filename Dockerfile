@@ -1,3 +1,5 @@
 FROM cannin/nodejs-http-server
 
-ADD ./public /public
+MAINTAINER BibCNRS <bibcnrs@inist.fr>
+
+ADD ./build /public
