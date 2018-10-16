@@ -23,5 +23,5 @@ services:
     environment:
       NODE_ENV: production
       REACT_APP_INSADMIN_HOST: ${REACT_APP_INSADMIN_HOST}
-      REACT_APP_INS_API_HOST: ${REACT_APP_INS_API_HOST}
+      REACT_APP_INSAPI_HOST: ${REACT_APP_INSAPI_HOST}
     command: npm run build --production
