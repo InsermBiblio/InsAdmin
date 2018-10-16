@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+td > a:visited {
+  color: blue;
+}
+
+/* change size */
+a[role="menuitem"] {
+  font-size: 15px;
+}
+
+a[role="menuitem"] span {
+  padding-right: 0.5em;
+}
+
+/* determine size of input in form */
+form.simple-form > div > div > div,
+form.simple-form > div > div > span > div {
+  width: 90% !important;
+}
+
+div[role="combobox"] > div,
+div.picker > div {
+  width: 100% !important;
+}
+
+div.ra-input-all_communities > div > div > div,
+div.ra-input-all_communities > div > div > div > a {
+  width: initial;
+}
+
+/* determine size of chips */
+.tags > a {
+  width: initial;
+}
+
+/* reduce margin size */
+table th,
+table td {
+  padding: 0 6px !important;
+}

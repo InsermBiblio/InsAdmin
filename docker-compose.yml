@@ -1,7 +1,7 @@
 version: "2"
 services:
   node:
-    image: node:6.9.2
+    image: node:8.12.0-alpine
     volumes:
       - .:/app
     working_dir: /app
@@ -14,7 +14,7 @@ services:
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
       no_proxy: "localhost,127.0.0.1,"
-    entrypoint: ['npm']
+    entrypoint: ["npm"]
 
   build:
     extends:
@@ -22,6 +22,6 @@ services:
       service: node
     environment:
       NODE_ENV: production
-      INSADMIN_HOST: ${INSADMIN_HOST}
-      INSAPI_HOST: ${INSAPI_HOST}
-    command: node node_modules/webpack/bin/webpack.js -p
+      REACT_APP_INSADMIN_HOST: ${REACT_APP_INSADMIN_HOST}
+      REACT_APP_INS_API_HOST: ${REACT_APP_INS_API_HOST}
+    command: npm run build --production

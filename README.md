@@ -1,14 +1,15 @@
 # InsAdmin
+
 Admin for InsApi
 
 Interface d'administration pour [InsApi](https://github.com/InsermBiblio/InsApi).
-Elle utilise l'outil [ng-admin](https://github.com/marmelab/ng-admin).
+Elle utilise l'outil [react-admin](https://github.com/marmelab/react-admin).
 
 Elle permet de gérer les droits d'accès par institut, unité, individu aux ressources documentaires exposées à travers [InsEzProxy](https://github.com/InsermBiblio/InsEzProxy).
 
 ## Installation
 
-```
+```bash
 make install
 ```
 
