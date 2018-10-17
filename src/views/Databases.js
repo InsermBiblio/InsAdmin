@@ -18,6 +18,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import ListActions from "../components/ListActions";
 
 const DatabasesFilter = props => (
   <Filter {...props}>
@@ -26,7 +27,12 @@ const DatabasesFilter = props => (
 );
 
 export const DatabasesList = ({ ...props }) => (
-  <List {...props} filters={<DatabasesFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<DatabasesFilter />}
+    sort={{ field: "name_fr", order: "ASC" }}
+    perPage={10}
+  >
     <Datagrid>
       <LinkEdit source="name_fr" label="resources.databases.fields.name_fr" />
       <LinkEdit source="name_en" label="resources.databases.fields.name_en" />
@@ -42,7 +48,7 @@ const DatabasesTitle = ({ record }) => {
 };
 
 export const DatabasesEdit = ({ ...props }) => (
-  <Edit title={<DatabasesTitle />} {...props}>
+  <Edit title={<DatabasesTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="name_fr" label="resources.databases.fields.name_fr" />
       <TextInput source="name_en" label="resources.databases.fields.name_en" />
@@ -72,7 +78,7 @@ export const DatabasesEdit = ({ ...props }) => (
 );
 
 export const DatabasesCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="name_fr" label="resources.databases.fields.name_fr" />
       <TextInput source="name_en" label="resources.databases.fields.name_en" />

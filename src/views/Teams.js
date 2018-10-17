@@ -12,31 +12,30 @@ import {
   ReferenceArrayInput,
   SelectArrayInput,
   ReferenceArrayField,
-  ReferenceInput,
-  AutocompleteInput,
   ChipField
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
 
-const FavorisFilter = props => (
+const TeamsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
+    <TextInput source="title" label="resources.revues.fields.title" />
 
-    <ReferenceInput
+    <ReferenceArrayInput
       label="resources.revues.fields.communities"
-      source="community_id"
       reference="communities"
-      perPage={100}
+      source="communities"
     >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      <SelectArrayInput>
+        <ChipField source="name" />
+      </SelectArrayInput>
+    </ReferenceArrayInput>
   </Filter>
 );
 
-export const FavorisList = ({ ...props }) => (
-  <List {...props} filters={<FavorisFilter />} perPage={10}>
+export const TeamsList = ({ ...props }) => (
+  <List {...props} filters={<TeamsFilter />} perPage={10}>
     <Datagrid>
       <LinkEdit source="title" label="resources.revues.fields.title" />
 
@@ -56,12 +55,12 @@ export const FavorisList = ({ ...props }) => (
   </List>
 );
 
-const FavorisTitle = ({ record }) => {
+const TeamsTitle = ({ record }) => {
   return record.title;
 };
 
-export const FavorisEdit = ({ ...props }) => (
-  <Edit title={<FavorisTitle />} {...props} actions={<ListActions />}>
+export const TeamsEdit = ({ ...props }) => (
+  <Edit title={<TeamsTitle />} {...props}>
     <SimpleForm>
       <TextInput source="title" label="resources.revues.fields.title" />
       <TextInput source="url" label="resources.revues.fields.url" />
@@ -79,8 +78,8 @@ export const FavorisEdit = ({ ...props }) => (
   </Edit>
 );
 
-export const FavorisCreate = ({ ...props }) => (
-  <Create {...props} actions={<ListActions />}>
+export const TeamsCreate = ({ ...props }) => (
+  <Create {...props}>
     <SimpleForm redirect="list">
       <TextInput source="title" label="resources.revues.fields.title" />
       <TextInput source="url" label="resources.revues.fields.url" />

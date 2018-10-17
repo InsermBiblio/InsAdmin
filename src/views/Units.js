@@ -20,10 +20,12 @@ import {
   ReferenceArrayInput,
   SelectInput,
   SelectArrayInput,
-  LongTextInput
+  LongTextInput,
+  AutocompleteInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import ListActions from "../components/ListActions";
 
 const UnitsFilter = props => (
   <Filter {...props}>
@@ -31,10 +33,28 @@ const UnitsFilter = props => (
     <TextInput source="like_unit.code" label="resources.units.fields.code" />
     <TextInput source="like_unit.name" label="resources.units.fields.name" />
 
-    <ReferenceArrayInput
+    <ReferenceInput
       label="resources.units.fields.communities"
+      source="community.id"
       reference="communities"
-      source="communities"
+      perPage={100}
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
+
+    <ReferenceInput
+      label="resources.units.fields.main_institute"
+      source="unit.main_institute"
+      reference="institutes"
+      perPage={100}
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
+
+    <ReferenceArrayInput
+      label="resources.units.fields.institutes"
+      source="institute.id"
+      reference="institutes"
     >
       <SelectArrayInput>
         <ChipField source="name" />
@@ -42,34 +62,16 @@ const UnitsFilter = props => (
     </ReferenceArrayInput>
 
     <ReferenceInput
-      label="resources.units.fields.main_institute"
-      source="main_institute"
-      reference="institutes"
+      label="resources.units.fields.section_cn"
+      source="section_cn.id"
+      reference="section_cn"
+      perPage={50}
+      sort={{ field: "name" }}
     >
-      <SelectInput source="name" className="scollbar" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
 
-    <ReferenceArrayInput
-      label="resources.units.fields.institutes"
-      reference="institutes"
-      source="institutes"
-    >
-      <SelectArrayInput>
-        <ChipField source="name" />
-      </SelectArrayInput>
-    </ReferenceArrayInput>
-
-    <ReferenceArrayInput
-      label="resources.units.fields.section_cn"
-      reference="section_cn"
-      source="sections_cn"
-    >
-      <SelectArrayInput>
-        <ChipField source="code" />
-      </SelectArrayInput>
-    </ReferenceArrayInput>
-
-    <BooleanInput source="active" label="resources.inistAccounts.fields.active" />
+    <BooleanInput source="unit.active" label="resources.inistAccounts.fields.active" />
   </Filter>
 );
 
@@ -153,7 +155,7 @@ UrlSearchJanus.defaultProps = {
 };
 
 export const UnitsEdit = ({ ...props }) => (
-  <Edit title={<UnitsTitle />} {...props}>
+  <Edit title={<UnitsTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="code" label="resources.units.fields.code" />
       <TextInput source="name" label="resources.units.fields.name" />
@@ -199,7 +201,7 @@ export const UnitsEdit = ({ ...props }) => (
         source="main_institute"
         reference="institutes"
       >
-        <SelectInput source="name" className="scollbar" />
+        <SelectInput source="name" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -232,6 +234,8 @@ export const UnitsEdit = ({ ...props }) => (
         reference="section_cn"
         source="sections_cn"
         className="tags"
+        perPage={50}
+        sort={{ field: "name" }}
       >
         <SelectArrayInput>
           <ChipField source="code" />
@@ -246,7 +250,7 @@ export const UnitsEdit = ({ ...props }) => (
 );
 
 export const UnitsCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
+  <Create {...props} redirect="list" actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextInput source="code" label="resources.units.fields.code" />
       <TextInput source="name" label="resources.units.fields.name" />
@@ -292,7 +296,7 @@ export const UnitsCreate = ({ ...props }) => (
         source="main_institute"
         reference="institutes"
       >
-        <SelectInput source="name" className="scollbar" />
+        <SelectInput source="name" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -321,6 +325,9 @@ export const UnitsCreate = ({ ...props }) => (
         label="resources.units.fields.section_cn"
         reference="section_cn"
         source="sections_cn"
+        className="tags"
+        perPage={50}
+        sort={{ field: "name" }}
       >
         <SelectArrayInput>
           <ChipField source="code" />

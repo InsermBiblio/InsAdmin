@@ -20,6 +20,12 @@ import { CommunitiesList, CommunitiesEdit, CommunitiesCreate } from "./views/Com
 import { DatabasesList, DatabasesEdit, DatabasesCreate } from "./views/Databases";
 import { SectionsList, SectionsEdit, SectionsCreate } from "./views/Sections";
 import { FavorisList, FavorisEdit, FavorisCreate } from "./views/Favoris";
+import { TeamsList, TeamsEdit, TeamsCreate } from "./views/Teams";
+import {
+  RegionalsDelegationsList,
+  RegionalsDelegationsEdit,
+  RegionalsDelegationsCreate
+} from "./views/RegionalsDelegations";
 
 import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
@@ -60,7 +66,7 @@ class App extends Component {
 
     return (
       <Admin
-        title="InsAdmin"
+        title="InsApi"
         dashboard={Dashboard}
         dataProvider={dataProvider}
         i18nProvider={i18nProvider}
@@ -75,13 +81,41 @@ class App extends Component {
           icon={UserAddIcon}
         />
         <Resource
+          name="section_cn"
+          list={SectionsList}
+          create={SectionsCreate}
+          edit={SectionsEdit}
+          icon={FolderIcon}
+        />
+        <Resource
+          name="communities"
+          list={CommunitiesList}
+          create={CommunitiesCreate}
+          edit={CommunitiesEdit}
+          icon={FolderIcon}
+        />
+        <Resource name="janusAccounts" list={JanusList} edit={JanusEdit} icon={UserIcon} />
+        <Resource
           name="inistAccounts"
           list={InistList}
           create={InistCreate}
           edit={InistEdit}
           icon={UserIcon}
         />
-        <Resource name="janusAccounts" list={JanusList} edit={JanusEdit} icon={UserIcon} />
+        <Resource
+          name="regionals_delegations"
+          list={RegionalsDelegationsList}
+          create={RegionalsDelegationsCreate}
+          edit={RegionalsDelegationsEdit}
+          icon={UserIcon}
+        />
+        <Resource
+          name="teams"
+          list={TeamsList}
+          create={TeamsCreate}
+          edit={TeamsEdit}
+          icon={UserIcon}
+        />
         <Resource
           name="institutes"
           list={InstitutsList}
@@ -97,24 +131,10 @@ class App extends Component {
           icon={GroupIcon}
         />
         <Resource
-          name="communities"
-          list={CommunitiesList}
-          create={CommunitiesCreate}
-          edit={CommunitiesEdit}
-          icon={FolderIcon}
-        />
-        <Resource
           name="databases"
           list={DatabasesList}
           create={DatabasesCreate}
           edit={DatabasesEdit}
-          icon={FolderIcon}
-        />
-        <Resource
-          name="section_cn"
-          list={SectionsList}
-          create={SectionsCreate}
-          edit={SectionsEdit}
           icon={FolderIcon}
         />
         <Resource

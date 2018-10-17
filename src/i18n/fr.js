@@ -26,7 +26,7 @@ export default {
       }
     },
     inistAccounts: {
-      name: "Comptes INIST",
+      name: "Comptes structures et équipes",
       fields: {
         username: "Login",
         password: "Password",
@@ -35,9 +35,9 @@ export default {
         phone: "Téléphone",
         mail: "Email",
         dr: "dr",
-        main_institute: "Institut principal",
+        primary_institute: "Institut principal",
         institutes: "Institut secondaire",
-        main_unit: "Unité principale",
+        primary_unit: "Unité principale",
         units: "Unités secondaires",
         communities: "Communautés propres",
         all_communities: "Toutes les communautés",
@@ -52,14 +52,14 @@ export default {
       }
     },
     janusAccounts: {
-      name: "Comptes Janus",
+      name: "Comptes individuels FédéInserm",
       fields: {
         uid: "Uid",
         cnrs: "CNRS",
         name: "Nom",
         firstname: "Prénom",
         mail: "Email",
-        main_institute: "Institut Janus",
+        primary_institute: "Institut Janus",
         additional_institutes: "Institut secondaire",
         primary_unit: "Unité Janus",
         additional_units: "Unités secondaires",
@@ -76,7 +76,7 @@ export default {
       }
     },
     institutes: {
-      name: "Instituts",
+      name: "IT",
       fields: {
         id: "id",
         code: "Code",
@@ -85,7 +85,7 @@ export default {
       }
     },
     units: {
-      name: "Unités",
+      name: "Structures",
       fields: {
         code: "Code",
         name: "Nom",
@@ -121,6 +121,14 @@ export default {
         comment: "Commentaire"
       }
     },
+    team: {
+      name: "Equipes",
+      fields: {}
+    },
+    regionals_delegations: {
+      name: "Délégations régionales",
+      fields: {}
+    },
     communities: {
       name: "Communautés",
       fields: {
@@ -147,7 +155,7 @@ export default {
       }
     },
     section_cn: {
-      name: "Sections du comité national",
+      name: "Commissions spécialisées",
       fields: {
         name: "Nom",
         code: "Code",

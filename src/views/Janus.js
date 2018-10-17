@@ -17,12 +17,15 @@ import {
   TextInput,
   BooleanInput,
   LongTextInput,
+  ReferenceInput,
   ReferenceArrayInput,
+  AutocompleteInput,
   SelectArrayInput
 } from "react-admin";
+import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import { DateInput } from "react-admin-date-inputs";
+import ListActions from "../components/ListActions";
 
 const JanusFilter = props => (
   <Filter {...props}>
@@ -35,29 +38,46 @@ const JanusFilter = props => (
       label="resources.janusAccounts.fields.mail"
     />
 
+    <ReferenceInput
+      label="resources.janusAccounts.fields.primary_institute"
+      source="janus_account.primary_institute"
+      reference="institutes"
+    >
+      <AutocompleteInput optionText="code" />
+    </ReferenceInput>
+
     <ReferenceArrayInput
       label="resources.janusAccounts.fields.additional_institutes"
-      reference="institutes"
       source="additional_institutes"
+      reference="institutes"
     >
       <SelectArrayInput optionText="name" />
     </ReferenceArrayInput>
 
+    <ReferenceInput
+      label="resources.janusAccounts.fields.primary_unit"
+      source="janus_account.primary_unit"
+      reference="units"
+    >
+      <AutocompleteInput optionText="code" />
+    </ReferenceInput>
+
     <ReferenceArrayInput
       label="resources.janusAccounts.fields.additional_units"
-      reference="units"
       source="additional_units"
+      reference="units"
     >
       <SelectArrayInput optionText="code" />
     </ReferenceArrayInput>
 
-    <ReferenceArrayInput
+    <ReferenceInput
       label="resources.janusAccounts.fields.communities"
+      source="community.id"
       reference="communities"
-      source="communities"
+      perPage={100}
     >
-      <SelectArrayInput optionText="name" />
-    </ReferenceArrayInput>
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
 
     <DateInput
       source="to_janus_account.last_connexion"
@@ -93,7 +113,7 @@ export const JanusList = props => (
       <LinkEdit source="mail" label="resources.janusAccounts.fields.mail" />
 
       <ReferenceField
-        label="resources.janusAccounts.fields.main_institute"
+        label="resources.janusAccounts.fields.primary_institute"
         source="primary_institute"
         reference="institutes"
         linkType="show"
@@ -154,7 +174,7 @@ const JanusTitle = ({ record }) => {
 };
 
 export const JanusEdit = ({ ...props }) => (
-  <Edit title={<JanusTitle />} {...props}>
+  <Edit title={<JanusTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
@@ -166,7 +186,7 @@ export const JanusEdit = ({ ...props }) => (
       <TextInput type="email" source="mail" label="resources.janusAccounts.fields.mail" />
 
       <ReferenceField
-        label="resources.janusAccounts.fields.main_institute"
+        label="resources.janusAccounts.fields.primary_institute"
         source="primary_institute"
         reference="institutes"
         linkType="show"
@@ -227,7 +247,7 @@ export const JanusEdit = ({ ...props }) => (
 );
 
 export const JanusCreate = ({ ...props }) => (
-  <Create {...props} redirect="list">
+  <Create {...props} redirect="list" actions={<ListActions />}>
     <SimpleForm redirect="list">
       <TextField source="uid" label="resources.janusAccounts.fields.uid" />
       <BooleanField source="cnrs" label="resources.janusAccounts.fields.cnrs" />
@@ -239,7 +259,7 @@ export const JanusCreate = ({ ...props }) => (
       <TextInput type="email" source="mail" label="resources.janusAccounts.fields.mail" />
 
       <ReferenceField
-        label="resources.janusAccounts.fields.main_institute"
+        label="resources.janusAccounts.fields.primary_institute"
         source="primary_institute"
         reference="institutes"
         linkType="show"
