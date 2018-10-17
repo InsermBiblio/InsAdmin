@@ -66,7 +66,7 @@ class App extends Component {
 
     return (
       <Admin
-        title="InsApi"
+        title="InsAdmin"
         dashboard={Dashboard}
         dataProvider={dataProvider}
         i18nProvider={i18nProvider}
