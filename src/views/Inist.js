@@ -22,9 +22,10 @@ import {
   SelectArrayInput,
   AutocompleteInput
 } from "react-admin";
+import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import { DateInput } from "react-admin-date-inputs";
+import ListActions from "../components/ListActions";
 
 const InistFilter = props => (
   <Filter {...props}>
@@ -49,7 +50,6 @@ const InistFilter = props => (
       source="main_institute"
       reference="institutes"
       perPage={100}
-      className="scollbar"
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
@@ -60,12 +60,12 @@ const InistFilter = props => (
       reference="institutes"
       perPage={100}
     >
-      <SelectArrayInput optionText="name" />
+      <AutocompleteInput optionText="name" />
     </ReferenceArrayInput>
 
     <ReferenceInput
       label="resources.inistAccounts.fields.main_unit"
-      source="like_unit.code"
+      source="main_unit.id"
       reference="units"
       perPage={100}
       sort={{ field: "code", order: "ASC" }}
@@ -196,7 +196,13 @@ const passwordValue = Math.random()
 const GeneratePasswordButton = ({ ...rest }) => {
   return (
     <span>
-      <TextInput type="password" id="passwordInput" defaultValue={passwordValue} {...rest} />
+      <TextInput
+        type="password"
+        id="passwordInput"
+        name="password"
+        defaultValue={passwordValue}
+        {...rest}
+      />
     </span>
   );
 };
@@ -206,7 +212,7 @@ const InistTitle = ({ record }) => {
 };
 
 export const InistEdit = ({ ...props }) => (
-  <Edit title={<InistTitle />} {...props}>
+  <Edit title={<InistTitle />} {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="username" label="resources.inistAccounts.fields.username" />
       <GeneratePasswordButton />
@@ -223,9 +229,9 @@ export const InistEdit = ({ ...props }) => (
         source="main_institute"
         reference="institutes"
         sort={{ field: "name" }}
-        perPage={100}
+        perPage={250}
       >
-        <AutocompleteInput className="scrollbar" optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -233,7 +239,7 @@ export const InistEdit = ({ ...props }) => (
         source="institutes"
         reference="institutes"
         sort={{ field: "name" }}
-        perPage={100}
+        perPage={250}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -243,9 +249,9 @@ export const InistEdit = ({ ...props }) => (
         source="main_unit"
         reference="units"
         sort={{ field: "code" }}
-        perPage={100}
+        perPage={250}
       >
-        <AutocompleteInput className="scrollbar" optionText="code" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -253,7 +259,7 @@ export const InistEdit = ({ ...props }) => (
         source="units"
         reference="units"
         sort={{ field: "code" }}
-        perPage={100}
+        perPage={250}
       >
         <SelectArrayInput optionText="code" />
       </ReferenceArrayInput>
@@ -262,7 +268,7 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.communities"
         source="communities"
         reference="communities"
-        perPage={100}
+        perPage={250}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -271,7 +277,7 @@ export const InistEdit = ({ ...props }) => (
         label="resources.inistAccounts.fields.all_communities"
         source="all_communities"
         reference="communities"
-        perPage={100}
+        perPage={250}
       >
         <SingleFieldList>
           <ChipField source="name" />
@@ -295,7 +301,7 @@ export const InistEdit = ({ ...props }) => (
 );
 
 export const InistCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListActions />}>
     <SimpleForm>
       <TextInput source="username" label="resources.inistAccounts.fields.username" />
       <GeneratePasswordButton source="password" label="resources.inistAccounts.fields.password" />
@@ -312,9 +318,9 @@ export const InistCreate = ({ ...props }) => (
         source="main_institute"
         reference="institutes"
         sort={{ field: "name" }}
-        perPage={100}
+        perPage={250}
       >
-        <AutocompleteInput className="scrollbar" optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -322,7 +328,7 @@ export const InistCreate = ({ ...props }) => (
         source="institutes"
         reference="institutes"
         sort={{ field: "name" }}
-        perPage={100}
+        perPage={250}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -332,9 +338,9 @@ export const InistCreate = ({ ...props }) => (
         source="main_unit"
         reference="units"
         sort={{ field: "code" }}
-        perPage={100}
+        perPage={250}
       >
-        <AutocompleteInput className="scrollbar" optionText="code" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <ReferenceArrayInput
@@ -351,7 +357,7 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.communities"
         source="communities"
         reference="communities"
-        perPage={100}
+        perPage={250}
       >
         <SelectArrayInput optionText="name" />
       </ReferenceArrayInput>
@@ -360,7 +366,7 @@ export const InistCreate = ({ ...props }) => (
         label="resources.inistAccounts.fields.all_communities"
         source="all_communities"
         reference="communities"
-        perPage={100}
+        perPage={250}
       >
         <SingleFieldList>
           <ChipField source="name" />
