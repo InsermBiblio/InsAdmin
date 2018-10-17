@@ -2,7 +2,7 @@
   "name": "insadmin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://insermbiblio.inserm.fr/admin/",
+  "homepage": "https://insermbiblio-dev.inist.fr/admin/",
   "dependencies": {
     "prettier": "^1.14.3",
     "prop-types": "^15.6.2",
