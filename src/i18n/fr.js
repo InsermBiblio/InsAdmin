@@ -79,9 +79,12 @@ export default {
       name: "IT",
       fields: {
         id: "id",
-        code: "Code",
         name: "Nom",
-        communities: "Communautés"
+        address: "Adresse",
+        phone: "Téléphone",
+        manager: "Responsable",
+        mail_manager: "Mail responsable",
+        dr: "dr"
       }
     },
     units: {
