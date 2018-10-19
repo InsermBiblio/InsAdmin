@@ -131,7 +131,20 @@ export default {
     },
     regionals_delegations: {
       name: "Délégations régionales",
-      fields: {}
+      fields: {
+        name: "Nom",
+        address: "Adresse",
+        phone: "Téléphone",
+        mail: "Email",
+        manager: "Directeur",
+        manager_mail: "Mail directeur",
+        rh: "RH",
+        rh_mail: "Mail RH",
+        rri: "RRI",
+        rri_mail: "Mail RRI",
+        website: "Site web",
+        dr: "dr"
+      }
     },
     communities: {
       name: "Communautés",
