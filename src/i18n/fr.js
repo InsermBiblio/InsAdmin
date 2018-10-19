@@ -82,6 +82,7 @@ export default {
         name: "Nom",
         address: "Adresse",
         phone: "Téléphone",
+        mail: "Mail",
         manager: "Responsable",
         mail_manager: "Mail responsable",
         dr: "dr"
@@ -162,9 +163,7 @@ export default {
       fields: {
         name: "Nom",
         code: "Code",
-        comment: "Commentaire",
-        primary_institutes: "Instituts principaux",
-        secondary_institutes: "Instituts secondaires"
+        comment: "Commentaire"
       }
     },
     revues: {

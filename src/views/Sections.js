@@ -8,9 +8,7 @@ import {
   Filter,
   SimpleForm,
   TextInput,
-  LongTextInput,
-  ReferenceArrayInput,
-  SelectArrayInput
+  LongTextInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -24,24 +22,8 @@ import ListActions from "../components/ListActions";
 const SectionsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="name" label="resources.section_cn.fields.name" />
-    <TextInput source="code" label="resources.section_cn.fields.code" />
-    <LongTextInput source="comment" label="resources.section_cn.fields.comment" />
-    <ReferenceArrayInput
-      label="resources.section_cn.fields.primary_institutes"
-      source="primary_institutes"
-      reference="institutes"
-      className="tags"
-    >
-      <SelectArrayInput optionText="name" />
-    </ReferenceArrayInput>
-    <ReferenceArrayInput
-      label="resources.section_cn.fields.secondary_institutes"
-      source="secondary_institutes"
-      reference="institutes"
-    >
-      <SelectArrayInput optionText="name" />
-    </ReferenceArrayInput>
+    {/*<TextInput source="name" label="resources.section_cn.fields.name" />
+    <TextInput source="code" label="resources.section_cn.fields.code" />*/}
   </Filter>
 );
 
@@ -65,22 +47,10 @@ export const SectionsEdit = ({ ...props }) => (
     <SimpleForm>
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
-      <LongTextInput source="comment" label="resources.section_cn.fields.comment" />
-      <ReferenceArrayInput
-        label="resources.section_cn.fields.primary_institutes"
-        source="primary_institutes"
-        reference="institutes"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
-      <ReferenceArrayInput
-        label="resources.section_cn.fields.secondary_institutes"
-        source="secondary_institutes"
-        reference="institutes"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+      <LongTextInput
+        source="comment"
+        label="resources.section_cn.fields.comment"
+      />
     </SimpleForm>
   </Edit>
 );
@@ -90,23 +60,10 @@ export const SectionsCreate = ({ ...props }) => (
     <SimpleForm redirect="list">
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
-      <LongTextInput source="comment" label="resources.section_cn.fields.comment" />
-      <ReferenceArrayInput
-        label="resources.section_cn.fields.primary_institutes"
-        source="primary_institutes"
-        reference="institutes"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
-      <ReferenceArrayInput
-        label="resources.section_cn.fields.secondary_institutes"
-        source="secondary_institutes"
-        reference="institutes"
-        className="tags"
-      >
-        <SelectArrayInput optionText="name" />
-      </ReferenceArrayInput>
+      <LongTextInput
+        source="comment"
+        label="resources.section_cn.fields.comment"
+      />
     </SimpleForm>
   </Create>
 );

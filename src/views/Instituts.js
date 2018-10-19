@@ -17,7 +17,10 @@ const InstitutsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput source="id" label="resources.institutes.fields.id" />
-    <TextInput source="like_institute.name" label="resources.institutes.fields.name" />
+    <TextInput
+      source="like_institute.name"
+      label="resources.institutes.fields.name"
+    />
   </Filter>
 );
 
@@ -42,8 +45,12 @@ export const InstitutsEdit = ({ ...props }) => (
       <TextInput source="name" label="resources.institutes.fields.name" />
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
+      <TextInput source="mail" label="resources.institutes.fields.mail" />
       <TextInput source="manager" label="resources.institutes.fields.manager" />
-      <TextInput source="mail_manager" label="resources.institutes.fields.mail_manager" />
+      <TextInput
+        source="mail_manager"
+        label="resources.institutes.fields.mail_manager"
+      />
       <TextInput source="dr" label="resources.institutes.fields.dr" />
     </SimpleForm>
   </Edit>
@@ -55,8 +62,12 @@ export const InstitutsCreate = ({ ...props }) => (
       <TextInput source="name" label="resources.institutes.fields.name" />
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
+      <TextInput source="mail" label="resources.institutes.fields.mail" />
       <TextInput source="manager" label="resources.institutes.fields.manager" />
-      <TextInput source="mail_manager" label="resources.institutes.fields.mail_manager" />
+      <TextInput
+        source="mail_manager"
+        label="resources.institutes.fields.mail_manager"
+      />
       <TextInput source="dr" label="resources.institutes.fields.dr" />
     </SimpleForm>
   </Create>
