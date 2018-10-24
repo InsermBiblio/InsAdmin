@@ -96,8 +96,8 @@ export const RegionalsDelegationsEdit = ({ ...props }) => (
         label="resources.regionals_delegations.fields.website"
       />
       <TextInput
-        source="dr"
-        label="resources.regionals_delegations.fields.dr"
+        source="code"
+        label="resources.regionals_delegations.fields.code"
       />
     </SimpleForm>
   </Edit>
@@ -151,8 +151,8 @@ export const RegionalsDelegationsCreate = ({ ...props }) => (
         label="resources.regionals_delegations.fields.website"
       />
       <TextInput
-        source="dr"
-        label="resources.regionals_delegations.fields.dr"
+        source="code"
+        label="resources.regionals_delegations.fields.code"
       />
     </SimpleForm>
   </Create>

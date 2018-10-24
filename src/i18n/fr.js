@@ -85,7 +85,7 @@ export default {
         mail: "Mail",
         manager: "Responsable",
         mail_manager: "Mail responsable",
-        dr: "dr"
+        code: "code"
       }
     },
     units: {
@@ -125,7 +125,7 @@ export default {
         comment: "Commentaire"
       }
     },
-    team: {
+    teams: {
       name: "Equipes",
       fields: {}
     },
@@ -143,7 +143,7 @@ export default {
         rri: "RRI",
         rri_mail: "Mail RRI",
         website: "Site web",
-        dr: "dr"
+        code: "code"
       }
     },
     communities: {

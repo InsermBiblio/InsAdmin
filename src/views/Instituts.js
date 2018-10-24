@@ -51,7 +51,7 @@ export const InstitutsEdit = ({ ...props }) => (
         source="mail_manager"
         label="resources.institutes.fields.mail_manager"
       />
-      <TextInput source="dr" label="resources.institutes.fields.dr" />
+      <TextInput source="code" label="resources.institutes.fields.code" />
     </SimpleForm>
   </Edit>
 );
@@ -68,7 +68,7 @@ export const InstitutsCreate = ({ ...props }) => (
         source="mail_manager"
         label="resources.institutes.fields.mail_manager"
       />
-      <TextInput source="dr" label="resources.institutes.fields.dr" />
+      <TextInput source="code" label="resources.institutes.fields.code" />
     </SimpleForm>
   </Create>
 );
