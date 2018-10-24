@@ -11,7 +11,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListAddActions, ListEditActions } from "../components/ListActions";
 
 const InstitutsFilter = props => (
   <Filter {...props}>
@@ -29,6 +29,7 @@ export const InstitutsList = ({ ...props }) => (
     <Datagrid>
       <LinkEdit source="id" label="resources.institutes.fields.id" />
       <LinkEdit source="name" label="resources.institutes.fields.name" />
+      <LinkEdit source="code" label="resources.institutes.fields.code" />
       <EditButton />
       <DeleteButtonWithConfirmation />
     </Datagrid>
@@ -40,7 +41,7 @@ const InstitutsTitle = ({ record }) => {
 };
 
 export const InstitutsEdit = ({ ...props }) => (
-  <Edit title={<InstitutsTitle />} {...props} actions={<ListActions />}>
+  <Edit title={<InstitutsTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm>
       <TextInput source="name" label="resources.institutes.fields.name" />
       <TextInput source="address" label="resources.institutes.fields.address" />
@@ -57,7 +58,7 @@ export const InstitutsEdit = ({ ...props }) => (
 );
 
 export const InstitutsCreate = ({ ...props }) => (
-  <Create {...props} actions={<ListActions />}>
+  <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
       <TextInput source="name" label="resources.institutes.fields.name" />
       <TextInput source="address" label="resources.institutes.fields.address" />

@@ -11,6 +11,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import { ListAddActions, ListEditActions } from "../components/ListActions";
 
 const RegionalsDelegationsFilter = props => (
   <Filter {...props}>
@@ -49,7 +50,11 @@ const RegionalsDelegationsTitle = ({ record }) => {
 };
 
 export const RegionalsDelegationsEdit = ({ ...props }) => (
-  <Edit title={<RegionalsDelegationsTitle />} {...props}>
+  <Edit
+    title={<RegionalsDelegationsTitle />}
+    {...props}
+    actions={<ListEditActions />}
+  >
     <SimpleForm>
       <TextInput
         source="name"
@@ -104,7 +109,7 @@ export const RegionalsDelegationsEdit = ({ ...props }) => (
 );
 
 export const RegionalsDelegationsCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
       <TextInput
         source="name"
