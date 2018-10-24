@@ -43,6 +43,7 @@ const InstitutsTitle = ({ record }) => {
 export const InstitutsEdit = ({ ...props }) => (
   <Edit title={<InstitutsTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm>
+      <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
@@ -52,7 +53,6 @@ export const InstitutsEdit = ({ ...props }) => (
         source="mail_manager"
         label="resources.institutes.fields.mail_manager"
       />
-      <TextInput source="code" label="resources.institutes.fields.code" />
     </SimpleForm>
   </Edit>
 );
@@ -60,6 +60,7 @@ export const InstitutsEdit = ({ ...props }) => (
 export const InstitutsCreate = ({ ...props }) => (
   <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
+      <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
@@ -69,7 +70,6 @@ export const InstitutsCreate = ({ ...props }) => (
         source="mail_manager"
         label="resources.institutes.fields.mail_manager"
       />
-      <TextInput source="code" label="resources.institutes.fields.code" />
     </SimpleForm>
   </Create>
 );

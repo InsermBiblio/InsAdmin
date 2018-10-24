@@ -31,6 +31,10 @@ export const RegionalsDelegationsList = ({ ...props }) => (
   <List {...props} filters={<RegionalsDelegationsFilter />} perPage={10}>
     <Datagrid>
       <LinkEdit
+        source="code"
+        label="resources.regionals_delegations.fields.code"
+      />
+      <LinkEdit
         source="name"
         label="resources.regionals_delegations.fields.name"
       />
@@ -57,6 +61,10 @@ export const RegionalsDelegationsEdit = ({ ...props }) => (
   >
     <SimpleForm>
       <TextInput
+        source="code"
+        label="resources.regionals_delegations.fields.code"
+      />
+      <TextInput
         source="name"
         label="resources.regionals_delegations.fields.name"
       />
@@ -99,10 +107,6 @@ export const RegionalsDelegationsEdit = ({ ...props }) => (
       <TextInput
         source="website"
         label="resources.regionals_delegations.fields.website"
-      />
-      <TextInput
-        source="code"
-        label="resources.regionals_delegations.fields.code"
       />
     </SimpleForm>
   </Edit>
@@ -112,6 +116,10 @@ export const RegionalsDelegationsCreate = ({ ...props }) => (
   <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
       <TextInput
+        source="code"
+        label="resources.regionals_delegations.fields.code"
+      />
+      <TextInput
         source="name"
         label="resources.regionals_delegations.fields.name"
       />
@@ -154,10 +162,6 @@ export const RegionalsDelegationsCreate = ({ ...props }) => (
       <TextInput
         source="website"
         label="resources.regionals_delegations.fields.website"
-      />
-      <TextInput
-        source="code"
-        label="resources.regionals_delegations.fields.code"
       />
     </SimpleForm>
   </Create>

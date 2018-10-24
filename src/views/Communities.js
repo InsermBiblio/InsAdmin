@@ -19,14 +19,6 @@ import { ListAddActions, ListEditActions } from "../components/ListActions";
 const CommunitiesFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="gate" label="resources.communities.fields.gate" />
-    <TextInput source="user_id" label="resources.communities.fields.user_id" />
-    <TextInput
-      source="password"
-      label="resources.communities.fields.password"
-    />
-    <TextInput source="profile" label="resources.communities.fields.profile" />
-    <BooleanInput source="ebsco" label="resources.communities.fields.ebsco" />
   </Filter>
 );
 
