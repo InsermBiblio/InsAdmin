@@ -41,17 +41,16 @@ build-script: ## build javascript and css for production make sure env REACT_APP
 
 build: build-script build-docker ## build javascript and css for production make sure env REACT_APP_INSAPI_HOST and REACT_APP_INSADMIN_HOST are set
 
+update: stop cleanup-docker install build
+
 npm: ## dockerized npm command example: make npm 'install some_dependency --save'
 	docker-compose run --rm npm $(COMMAND_ARGS)
 
-docker-rm: ## remove all insadmin container
+cleanup-docker: ## stop all insadmin docker image
 	test -z "$$(docker ps -a | grep insadmin)" || \
-            docker rm --force $$(docker ps -a | grep insadmin | awk '{ print $$1 }')
+            docker rm --force $$(docker ps -a | grep insadmin | awk '{ print $$1 }')  && docker rmi --force $$(docker images | grep insadmin | awk '{ print $$1 }')	
 
 stop: ## stop all insadmin docker image
 	test -z "$$(docker ps | grep insadmin)" || \
             docker stop $$(docker ps | grep insadmin | awk '{ print $$1 }')
 
-cleanup-docker: ## stop all insadmin docker image
-	test -z "$$(docker ps -a | grep insadmin)" || \
-            docker rm $$(docker ps -a | grep insadmin | awk '{ print $$1 }')
