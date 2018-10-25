@@ -127,11 +127,14 @@ export default {
     },
     teams: {
       name: "Equipes",
-      fields: {}
+      fields: {
+        id: "id"
+      }
     },
     regionals_delegations: {
       name: "Délégations régionales",
       fields: {
+        id: "id",
         name: "Nom",
         address: "Adresse",
         phone: "Téléphone",
@@ -149,6 +152,7 @@ export default {
     communities: {
       name: "Communautés",
       fields: {
+        id: "id",
         name: "Nom",
         gate: "Portail ezproxy",
         user_id: "User Id",

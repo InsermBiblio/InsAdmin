@@ -17,19 +17,29 @@ const RegionalsDelegationsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput
+      source="code"
+      label="resources.regionals_delegations.fields.code"
+    />
+    <TextInput
       source="name"
       label="resources.regionals_delegations.fields.name"
     />
     <TextInput
-      source="manager"
-      label="resources.regionals_delegations.fields.manager"
+      source="director"
+      label="resources.regionals_delegations.fields.director"
     />
   </Filter>
 );
 
 export const RegionalsDelegationsList = ({ ...props }) => (
-  <List {...props} filters={<RegionalsDelegationsFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<RegionalsDelegationsFilter />}
+    perPage={10}
+    sort={{ field: "id", order: "ASC" }}
+  >
     <Datagrid>
+      <LinkEdit source="id" label="resources.regionals_delegations.fields.id" />
       <LinkEdit
         source="code"
         label="resources.regionals_delegations.fields.code"
@@ -39,8 +49,8 @@ export const RegionalsDelegationsList = ({ ...props }) => (
         label="resources.regionals_delegations.fields.name"
       />
       <LinkEdit
-        source="manager"
-        label="resources.regionals_delegations.fields.manager"
+        source="director"
+        label="resources.regionals_delegations.fields.director"
       />
 
       <EditButton />
@@ -81,12 +91,12 @@ export const RegionalsDelegationsEdit = ({ ...props }) => (
         label="resources.regionals_delegations.fields.mail"
       />
       <TextInput
-        source="manager"
-        label="resources.regionals_delegations.fields.manager"
+        source="director"
+        label="resources.regionals_delegations.fields.director"
       />
       <TextInput
-        source="manager_mail"
-        label="resources.regionals_delegations.fields.manager_mail"
+        source="director_mail"
+        label="resources.regionals_delegations.fields.director_mail"
       />
       <TextInput
         source="rh"
@@ -136,12 +146,12 @@ export const RegionalsDelegationsCreate = ({ ...props }) => (
         label="resources.regionals_delegations.fields.mail"
       />
       <TextInput
-        source="manager"
-        label="resources.regionals_delegations.fields.manager"
+        source="director"
+        label="resources.regionals_delegations.fields.director"
       />
       <TextInput
-        source="manager_mail"
-        label="resources.regionals_delegations.fields.manager_mail"
+        source="director_mail"
+        label="resources.regionals_delegations.fields.director_mail"
       />
       <TextInput
         source="rh"

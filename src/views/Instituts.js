@@ -25,7 +25,12 @@ const InstitutsFilter = props => (
 );
 
 export const InstitutsList = ({ ...props }) => (
-  <List {...props} filters={<InstitutsFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<InstitutsFilter />}
+    perPage={10}
+    sort={{ field: "id", order: "ASC" }}
+  >
     <Datagrid>
       <LinkEdit source="id" label="resources.institutes.fields.id" />
       <LinkEdit source="name" label="resources.institutes.fields.name" />

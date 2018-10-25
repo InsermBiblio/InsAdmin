@@ -23,7 +23,12 @@ const CommunitiesFilter = props => (
 );
 
 export const CommunitiesList = ({ ...props }) => (
-  <List {...props} filters={<CommunitiesFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<CommunitiesFilter />}
+    perPage={10}
+    sort={{ field: "id", order: "ASC" }}
+  >
     <Datagrid>
       <LinkEdit source="name" label="resources.communities.fields.name" />
 

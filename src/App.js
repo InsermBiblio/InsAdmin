@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Admin, Resource, fetchUtils } from "react-admin";
+
+// provider
 import jsonServerProvider from "./utils/jsonServerProvider";
+import authProvider from "./utils/authProvider";
 
 // import icon
 import UserAddIcon from "@material-ui/icons/PersonAdd";
@@ -39,7 +42,6 @@ import {
   RegionalsDelegationsCreate
 } from "./views/RegionalsDelegations";
 
-import authProvider from "./authProvider";
 import langFr from "./i18n/fr";
 
 const i18nProvider = locale => {
