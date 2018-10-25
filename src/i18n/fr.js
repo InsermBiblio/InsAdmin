@@ -83,8 +83,8 @@ export default {
         address: "Adresse",
         phone: "Téléphone",
         mail: "Mail",
-        manager: "Responsable",
-        mail_manager: "Mail responsable",
+        director: "Responsable",
+        mail_director: "Mail responsable",
         code: "code"
       }
     },
@@ -136,8 +136,8 @@ export default {
         address: "Adresse",
         phone: "Téléphone",
         mail: "Email",
-        manager: "Directeur",
-        manager_mail: "Mail directeur",
+        director: "Directeur",
+        director_mail: "Mail directeur",
         rh: "RH",
         rh_mail: "Mail RH",
         rri: "RRI",

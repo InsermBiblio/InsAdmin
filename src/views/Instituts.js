@@ -48,10 +48,13 @@ export const InstitutsEdit = ({ ...props }) => (
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
       <TextInput source="mail" label="resources.institutes.fields.mail" />
-      <TextInput source="manager" label="resources.institutes.fields.manager" />
       <TextInput
-        source="mail_manager"
-        label="resources.institutes.fields.mail_manager"
+        source="director"
+        label="resources.institutes.fields.director"
+      />
+      <TextInput
+        source="mail_director"
+        label="resources.institutes.fields.mail_director"
       />
     </SimpleForm>
   </Edit>
@@ -65,10 +68,13 @@ export const InstitutsCreate = ({ ...props }) => (
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
       <TextInput source="mail" label="resources.institutes.fields.mail" />
-      <TextInput source="manager" label="resources.institutes.fields.manager" />
       <TextInput
-        source="mail_manager"
-        label="resources.institutes.fields.mail_manager"
+        source="director"
+        label="resources.institutes.fields.director"
+      />
+      <TextInput
+        source="mail_director"
+        label="resources.institutes.fields.mail_director"
       />
     </SimpleForm>
   </Create>
