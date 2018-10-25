@@ -12,7 +12,7 @@ import {
   LongTextInput
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
-import ListActions from "../components/ListActions";
+import { ListAddActions, ListEditActions } from "../components/ListActions";
 
 const UsersFilter = props => (
   <Filter {...props}>
@@ -35,7 +35,7 @@ const UsersTitle = ({ record }) => {
 };
 
 export const UsersEdit = ({ ...props }) => (
-  <Edit title={<UsersTitle />} {...props} actions={<ListActions />}>
+  <Edit title={<UsersTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm>
       <TextInput source="username" />
       <TextInput type="password" source="password" />
@@ -45,7 +45,7 @@ export const UsersEdit = ({ ...props }) => (
 );
 
 export const UsersCreate = ({ ...props }) => (
-  <Create {...props} actions={<ListActions />}>
+  <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
       <TextInput source="username" />
       <TextInput type="password" source="password" />

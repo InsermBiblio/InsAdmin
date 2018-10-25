@@ -11,7 +11,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListAddActions, ListEditActions } from "../components/ListActions";
 
 const InstitutsFilter = props => (
   <Filter {...props}>
@@ -29,6 +29,7 @@ export const InstitutsList = ({ ...props }) => (
     <Datagrid>
       <LinkEdit source="id" label="resources.institutes.fields.id" />
       <LinkEdit source="name" label="resources.institutes.fields.name" />
+      <LinkEdit source="code" label="resources.institutes.fields.code" />
       <EditButton />
       <DeleteButtonWithConfirmation />
     </Datagrid>
@@ -40,35 +41,41 @@ const InstitutsTitle = ({ record }) => {
 };
 
 export const InstitutsEdit = ({ ...props }) => (
-  <Edit title={<InstitutsTitle />} {...props} actions={<ListActions />}>
+  <Edit title={<InstitutsTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm>
+      <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
       <TextInput source="mail" label="resources.institutes.fields.mail" />
-      <TextInput source="manager" label="resources.institutes.fields.manager" />
       <TextInput
-        source="mail_manager"
-        label="resources.institutes.fields.mail_manager"
+        source="director"
+        label="resources.institutes.fields.director"
       />
-      <TextInput source="dr" label="resources.institutes.fields.dr" />
+      <TextInput
+        source="mail_director"
+        label="resources.institutes.fields.mail_director"
+      />
     </SimpleForm>
   </Edit>
 );
 
 export const InstitutsCreate = ({ ...props }) => (
-  <Create {...props} actions={<ListActions />}>
+  <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
+      <TextInput source="code" label="resources.institutes.fields.code" />
       <TextInput source="name" label="resources.institutes.fields.name" />
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
       <TextInput source="mail" label="resources.institutes.fields.mail" />
-      <TextInput source="manager" label="resources.institutes.fields.manager" />
       <TextInput
-        source="mail_manager"
-        label="resources.institutes.fields.mail_manager"
+        source="director"
+        label="resources.institutes.fields.director"
       />
-      <TextInput source="dr" label="resources.institutes.fields.dr" />
+      <TextInput
+        source="mail_director"
+        label="resources.institutes.fields.mail_director"
+      />
     </SimpleForm>
   </Create>
 );

@@ -12,7 +12,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import ListActions from "../components/ListActions";
+import { ListAddActions, ListEditActions } from "../components/ListActions";
 
 /**
  * Anciennement nommé "Sections du comité national"
@@ -43,7 +43,7 @@ const SectionsTitle = ({ record }) => {
 };
 
 export const SectionsEdit = ({ ...props }) => (
-  <Edit title={<SectionsTitle />} {...props} actions={<ListActions />}>
+  <Edit title={<SectionsTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm>
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />
@@ -56,7 +56,7 @@ export const SectionsEdit = ({ ...props }) => (
 );
 
 export const SectionsCreate = ({ ...props }) => (
-  <Create {...props} actions={<ListActions />}>
+  <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
       <TextInput source="name" label="resources.section_cn.fields.name" />
       <TextInput source="code" label="resources.section_cn.fields.code" />

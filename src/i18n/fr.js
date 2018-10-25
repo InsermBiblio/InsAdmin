@@ -83,9 +83,9 @@ export default {
         address: "Adresse",
         phone: "Téléphone",
         mail: "Mail",
-        manager: "Responsable",
-        mail_manager: "Mail responsable",
-        dr: "dr"
+        director: "Responsable",
+        mail_director: "Mail responsable",
+        code: "code"
       }
     },
     units: {
@@ -125,13 +125,26 @@ export default {
         comment: "Commentaire"
       }
     },
-    team: {
+    teams: {
       name: "Equipes",
       fields: {}
     },
     regionals_delegations: {
       name: "Délégations régionales",
-      fields: {}
+      fields: {
+        name: "Nom",
+        address: "Adresse",
+        phone: "Téléphone",
+        mail: "Email",
+        director: "Directeur",
+        director_mail: "Mail directeur",
+        rh: "RH",
+        rh_mail: "Mail RH",
+        rri: "RRI",
+        rri_mail: "Mail RRI",
+        website: "Site web",
+        code: "code"
+      }
     },
     communities: {
       name: "Communautés",
