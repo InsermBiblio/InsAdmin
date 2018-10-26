@@ -16,10 +16,13 @@ import { ListAddActions, ListEditActions } from "../components/ListActions";
 const InstitutsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="id" label="resources.institutes.fields.id" />
     <TextInput
       source="like_institute.name"
       label="resources.institutes.fields.name"
+    />
+    <TextInput
+      source="like_institute.code"
+      label="resources.institutes.fields.code"
     />
   </Filter>
 );

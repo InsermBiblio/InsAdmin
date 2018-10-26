@@ -17,15 +17,15 @@ const RegionalsDelegationsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput
-      source="code"
+      source="like_regionals_delegations.code"
       label="resources.regionals_delegations.fields.code"
     />
     <TextInput
-      source="name"
+      source="like_regionals_delegations.name"
       label="resources.regionals_delegations.fields.name"
     />
     <TextInput
-      source="director"
+      source="like_regionals_delegations.director"
       label="resources.regionals_delegations.fields.director"
     />
   </Filter>
