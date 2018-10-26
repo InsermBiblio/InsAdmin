@@ -21,8 +21,14 @@ const UsersFilter = props => (
 );
 
 export const UsersList = ({ ...props }) => (
-  <List {...props} filters={<UsersFilter />} perPage={25}>
+  <List
+    {...props}
+    filters={<UsersFilter />}
+    perPage={25}
+    sort={{ field: "id", order: "ASC" }}
+  >
     <Datagrid>
+      <TextField source="id" label="resources.adminUsers.fields.id" />
       <TextField source="username" label="resources.adminUsers.fields.login" />
       <EditButton />
       <DeleteButtonWithConfirmation />

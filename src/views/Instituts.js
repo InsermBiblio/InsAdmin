@@ -16,16 +16,24 @@ import { ListAddActions, ListEditActions } from "../components/ListActions";
 const InstitutsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="id" label="resources.institutes.fields.id" />
     <TextInput
       source="like_institute.name"
       label="resources.institutes.fields.name"
+    />
+    <TextInput
+      source="like_institute.code"
+      label="resources.institutes.fields.code"
     />
   </Filter>
 );
 
 export const InstitutsList = ({ ...props }) => (
-  <List {...props} filters={<InstitutsFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<InstitutsFilter />}
+    perPage={10}
+    sort={{ field: "id", order: "ASC" }}
+  >
     <Datagrid>
       <LinkEdit source="id" label="resources.institutes.fields.id" />
       <LinkEdit source="name" label="resources.institutes.fields.name" />
