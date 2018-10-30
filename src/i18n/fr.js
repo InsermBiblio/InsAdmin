@@ -88,7 +88,7 @@ export default {
         code: "code"
       }
     },
-    units: {
+    structures: {
       name: "Structures",
       fields: {
         id: "id",

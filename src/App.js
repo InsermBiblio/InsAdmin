@@ -22,7 +22,11 @@ import {
   InstitutsEdit,
   InstitutsCreate
 } from "./views/Instituts";
-import { UnitsList, UnitsEdit, UnitsCreate } from "./views/Units";
+import {
+  StructuresList,
+  StructuresEdit,
+  StructuresCreate
+} from "./views/Structures";
 import {
   CommunitiesList,
   CommunitiesEdit,
@@ -149,10 +153,10 @@ class App extends Component {
           icon={InstituteIcon}
         />
         <Resource
-          name="units"
-          list={UnitsList}
-          create={UnitsCreate}
-          edit={UnitsEdit}
+          name="structures"
+          list={StructuresList}
+          create={StructuresCreate}
+          edit={StructuresEdit}
           icon={GroupIcon}
         />
         {/*<Resource
