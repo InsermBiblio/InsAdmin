@@ -7,8 +7,10 @@ import {
   List,
   Filter,
   SimpleForm,
-  TextInput
+  TextInput,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
@@ -27,9 +29,17 @@ const InstitutsFilter = props => (
   </Filter>
 );
 
+const exporter = records => {
+  const csv = convertToCSV(records, {
+    delimiter: "|"
+  });
+  downloadCSV(csv, "instituts");
+};
+
 export const InstitutsList = ({ ...props }) => (
   <List
     {...props}
+    exporter={exporter}
     filters={<InstitutsFilter />}
     perPage={10}
     sort={{ field: "id", order: "ASC" }}

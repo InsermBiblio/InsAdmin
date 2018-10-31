@@ -21,8 +21,10 @@ import {
   SelectInput,
   SelectArrayInput,
   LongTextInput,
-  AutocompleteInput
+  AutocompleteInput,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
@@ -32,6 +34,13 @@ const StructuresFilter = props => (
     <TextInput label="Rechercher" source="match" alwaysOn />
   </Filter>
 );
+
+const exporter = records => {
+  const csv = convertToCSV(records, {
+    delimiter: "|"
+  });
+  downloadCSV(csv, "structures");
+};
 
 export const StructuresList = ({ ...props }) => (
   <List {...props} filters={<StructuresFilter />} perPage={10}>

@@ -8,8 +8,10 @@ import {
   Filter,
   SimpleForm,
   TextInput,
-  LongTextInput
+  LongTextInput,
+  downloadCSV
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
@@ -27,8 +29,20 @@ const SectionsFilter = props => (
   </Filter>
 );
 
+const exporter = records => {
+  const csv = convertToCSV(records, {
+    delimiter: "|"
+  });
+  downloadCSV(csv, "sections");
+};
+
 export const SectionsList = ({ ...props }) => (
-  <List {...props} filters={<SectionsFilter />} perPage={10}>
+  <List
+    {...props}
+    exporter={exporter}
+    filters={<SectionsFilter />}
+    perPage={10}
+  >
     <Datagrid>
       <LinkEdit label="resources.section_cn.fields.name" source="name" />
       <LinkEdit label="resources.section_cn.fields.code" source="code" />
