@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Admin, Resource, fetchUtils } from "react-admin";
+import { Admin, Resource, fetchUtils, ListGuesser } from "react-admin";
 
 // provider
 import jsonServerProvider from "./utils/jsonServerProvider";

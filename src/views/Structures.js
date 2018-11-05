@@ -32,6 +32,14 @@ import { ListAddActions, ListEditActions } from "../components/ListActions";
 const StructuresFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
+    <TextInput
+      source="like_structures.name"
+      label="resources.structures.fields.name"
+    />
+    <TextInput
+      source="like_structures.code"
+      label="resources.structures.fields.code"
+    />
   </Filter>
 );
 
