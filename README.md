@@ -1,8 +1,8 @@
 # InsAdmin
 
-Admin for InsAdmin
+Admin for InsApi
 
-Interface d'administration pour [InsAdmin](https://github.com/InsermBiblio/InsAdmin).
+Interface d'administration pour [InsApi](https://github.com/InsermBiblio/InsApi).
 Elle utilise l'outil [react-admin](https://github.com/marmelab/react-admin).
 
 Elle permet de gérer les droits d'accès par institut, unité, individu aux ressources documentaires exposées à travers [InsEzProxy](https://github.com/InsermBiblio/InsEzProxy).
@@ -15,7 +15,7 @@ make install
 
 ## Développement
 
-Pré-requis : lancer InsAdmin
+Pré-requis : lancer InsApi
 
 Ensuite démarrer InsAdmin : `make run-dev`
 

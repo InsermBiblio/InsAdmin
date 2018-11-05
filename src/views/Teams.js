@@ -7,13 +7,15 @@ import {
   List,
   Filter,
   SimpleForm,
+  TextField,
   SingleFieldList,
   TextInput,
   BooleanInput,
   ReferenceArrayInput,
   SelectArrayInput,
   ReferenceArrayField,
-  ChipField
+  ChipField,
+  BooleanField
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -22,33 +24,33 @@ const TeamsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput source="title" label="resources.revues.fields.title" />
-
-    <ReferenceArrayInput
-      label="resources.revues.fields.communities"
-      reference="communities"
-      source="communities"
-    >
-      <SelectArrayInput>
-        <ChipField source="name" />
-      </SelectArrayInput>
-    </ReferenceArrayInput>
   </Filter>
 );
 
 export const TeamsList = ({ ...props }) => (
   <List {...props} filters={<TeamsFilter />} perPage={10}>
     <Datagrid>
-      <LinkEdit source="title" label="resources.revues.fields.title" />
+      <LinkEdit
+        source="structure_type"
+        label="resources.teams.fields.structure_type"
+      />
 
-      <ReferenceArrayField
-        label="resources.revues.fields.communities"
-        reference="communities"
-        source="communities"
-      >
-        <SingleFieldList>
-          <ChipField source="name" />
-        </SingleFieldList>
-      </ReferenceArrayField>
+      <LinkEdit source="code" label="resources.teams.fields.code" />
+
+      <TextField
+        source="id_structure"
+        label="resources.structures.fields.id_structure"
+      />
+
+      <TextField
+        source="iunop_code"
+        label="resources.structures.fields.iunop_code"
+      />
+
+      <BooleanField
+        source="active"
+        label="resources.structures.fields.active"
+      />
 
       <EditButton />
       <DeleteButtonWithConfirmation />

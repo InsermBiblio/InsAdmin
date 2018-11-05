@@ -96,7 +96,7 @@ export default {
         iunop_code: "Code iunop",
         code: "code",
         name: "nom",
-        number_of_certified_team: "Nombres d'équipes labéilisé",
+        number_of_certified_team: "Nombres d'équipes labélisé",
         regional_delegation: "Délégation régionale",
         site: "Site",
         street: "Rue",
@@ -161,7 +161,7 @@ export default {
       name: "Equipes",
       fields: {
         id: "id",
-        structure_type: "Type de structure",
+        id_structure: "Structure",
         code: "code",
         regional_delegation: "Délégation régionale",
         site: "Site",

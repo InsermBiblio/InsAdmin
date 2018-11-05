@@ -40,6 +40,10 @@ const StructuresFilter = props => (
       source="like_structures.code"
       label="resources.structures.fields.code"
     />
+    <TextInput
+      source="like_structures.structure_type"
+      label="resources.structures.fields.structure_type"
+    />
   </Filter>
 );
 
@@ -53,9 +57,19 @@ const exporter = records => {
 export const StructuresList = ({ ...props }) => (
   <List {...props} filters={<StructuresFilter />} perPage={10}>
     <Datagrid>
+      <LinkEdit source="name" label="resources.structures.fields.name" />
+
       <LinkEdit source="code" label="resources.structures.fields.code" />
 
-      <LinkEdit source="name" label="resources.structures.fields.name" />
+      <TextField
+        source="structure_type"
+        label="resources.structures.fields.structure_type"
+      />
+
+      <TextField
+        source="iunop_code"
+        label="resources.structures.fields.iunop_code"
+      />
 
       <BooleanField
         source="active"
