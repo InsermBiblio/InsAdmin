@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Admin, Resource, fetchUtils } from "react-admin";
+import { Admin, Resource, fetchUtils, ListGuesser } from "react-admin";
 
 // provider
 import jsonServerProvider from "./utils/jsonServerProvider";
@@ -22,7 +22,11 @@ import {
   InstitutsEdit,
   InstitutsCreate
 } from "./views/Instituts";
-import { UnitsList, UnitsEdit, UnitsCreate } from "./views/Units";
+import {
+  StructuresList,
+  StructuresEdit,
+  StructuresCreate
+} from "./views/Structures";
 import {
   CommunitiesList,
   CommunitiesEdit,
@@ -149,10 +153,10 @@ class App extends Component {
           icon={InstituteIcon}
         />
         <Resource
-          name="units"
-          list={UnitsList}
-          create={UnitsCreate}
-          edit={UnitsEdit}
+          name="structures"
+          list={StructuresList}
+          create={StructuresCreate}
+          edit={StructuresEdit}
           icon={GroupIcon}
         />
         {/*<Resource
