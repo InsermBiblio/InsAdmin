@@ -116,6 +116,7 @@ export default {
         cnrs_mixity: "Mixitié CNRS",
         other_mixity: "Autre mixité",
         principal_it: "Institut du responsable d'équipe",
+        secondary_it: "Institut secondaire",
         specialized_commission: "Commission spécialisée",
         total_etp_effectiv: "Nombre d'effectif ETP total",
         nb_researchers_inserm_pp: "Nombres de chercheurs INSERM PP",
