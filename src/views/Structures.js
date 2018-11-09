@@ -8,19 +8,13 @@ import {
   Filter,
   SimpleForm,
   TextField,
-  ReferenceField,
-  ReferenceArrayField,
-  SingleFieldList,
   BooleanField,
   ChipField,
   TextInput,
-  NumberInput,
   BooleanInput,
   ReferenceInput,
   ReferenceArrayInput,
-  SelectInput,
   SelectArrayInput,
-  LongTextInput,
   AutocompleteInput,
   downloadCSV
 } from "react-admin";
@@ -55,7 +49,12 @@ const exporter = records => {
 };
 
 export const StructuresList = ({ ...props }) => (
-  <List {...props} filters={<StructuresFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<StructuresFilter />}
+    perPage={10}
+    exporter={exporter}
+  >
     <Datagrid>
       <LinkEdit source="name" label="resources.structures.fields.name" />
 
@@ -122,6 +121,15 @@ export const StructuresEdit = ({ ...props }) => (
         source="number_of_certified_team"
         label="resources.structures.fields.number_of_certified_team"
       />
+      <ReferenceArrayInput
+        label="resources.structures.fields.community"
+        reference="communities"
+        source="communities"
+      >
+        <SelectArrayInput>
+          <ChipField source="name" />
+        </SelectArrayInput>
+      </ReferenceArrayInput>
       <ReferenceInput
         label="resources.structures.fields.regional_delegation"
         source="structures.regional_delegation"
@@ -355,6 +363,15 @@ export const StructuresCreate = ({ ...props }) => (
         source="number_of_certified_team"
         label="resources.structures.fields.number_of_certified_team"
       />
+      <ReferenceArrayInput
+        label="resources.structures.fields.community"
+        reference="communities"
+        source="communities"
+      >
+        <SelectArrayInput>
+          <ChipField source="name" />
+        </SelectArrayInput>
+      </ReferenceArrayInput>
       <TextInput source="site" label="resources.structures.fields.site" />
       <TextInput source="street" label="resources.structures.fields.street" />
       <TextInput
