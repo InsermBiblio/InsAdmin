@@ -22,32 +22,86 @@ const TeamsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput source="like_teams.name" label="resources.teams.fields.name" />
+    <TextInput
+      source="like_teams.team_number"
+      label="resources.teams.fields.team_number"
+    />
   </Filter>
 );
+
+/*const LinkForStructure = ({ record }) => {
+  const link = `#/structures/${record.structure_code}/show`;
+  return <a href={link}>{record.structure_code}</a>;
+};
+LinkForStructure.defaultProps = {
+  label: "resources.teams.fields.structure_code"
+};
+const LinkForRegionalsDelegations = ({ record }) => {
+  const link = `#/section_cn/${record.regional_delegation}`;
+  return <a href={link}>{record.regional_delegation}</a>;
+};
+LinkForStructure.defaultProps = {
+  label: "resources.teams.fields.regional_delegation"
+};*/
 
 export const TeamsList = ({ ...props }) => (
   <List {...props} filters={<TeamsFilter />} perPage={10}>
     <Datagrid>
-      <LinkEdit source="name" label="resources.teams.fields.name" />
-
-      <TextField
-        source="structure_code"
-        label="resources.teams.fields.structure_code"
-      />
-
+      <LinkEdit source="id" label="resources.teams.fields.id" />
       <ReferenceField
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
+        linkType="show"
       >
         <TextField source="code" />
       </ReferenceField>
 
-      <TextField
+      <LinkEdit
         source="team_number"
         label="resources.teams.fields.team_number"
       />
+      <LinkEdit source="name" label="resources.teams.fields.name" />
 
+      <ReferenceField
+        label="resources.teams.fields.regional_delegation"
+        source="regional_delegation"
+        reference="regionals_delegations"
+        linkType="show"
+      >
+        <TextField source="code" />
+      </ReferenceField>
+
+      <TextField source="site" label="resources.teams.fields.site" />
+      <TextField source="city" label="resources.teams.fields.city" />
+      <TextField
+        source="mixt_university"
+        label="resources.teams.fields.mixt_university"
+      />
+      <TextField
+        source="cnrs_mixity"
+        label="resources.teams.fields.cnrs_mixity"
+      />
+      <TextField
+        source="other_mixity"
+        label="resources.teams.fields.other_mixity"
+      />
+      <TextField
+        source="total_etp_effectiv"
+        label="resources.teams.fields.total_etp_effectiv"
+      />
+      <TextField
+        source="nb_structures_accounts"
+        label="resources.teams.fields.nb_structures_accounts"
+      />
+      <TextField
+        source="nb_teams_account"
+        label="resources.teams.fields.nb_teams_account"
+      />
+      <TextField
+        source="nb_personal_accounts"
+        label="resources.teams.fields.nb_personal_accounts"
+      />
       <BooleanField source="active" label="resources.teams.fields.active" />
 
       <EditButton />
@@ -64,10 +118,23 @@ export const TeamsEdit = ({ ...props }) => (
   <Edit title={<TeamsTitle />} {...props}>
     <SimpleForm>
       <TextInput source="name" label="resources.teams.fields.name" />
-      <TextInput
-        source="structure_code"
+
+      <ReferenceInput
+        label="resources.teams.fields.specialized_commission"
+        source="specialized_commission"
+        reference="section_cn"
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceInput
         label="resources.teams.fields.structure_code"
-      />
+        source="structure_code"
+        reference="structures"
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
+
       <TextInput
         source="team_number"
         label="resources.teams.fields.team_number"
@@ -84,11 +151,6 @@ export const TeamsEdit = ({ ...props }) => (
       <TextInput
         source="principal_email"
         label="resources.teams.fields.principal_email"
-      />
-
-      <TextInput
-        source="principal_it"
-        label="resources.teams.fields.principal_it"
       />
 
       <ReferenceInput
@@ -243,12 +305,25 @@ export const TeamsEdit = ({ ...props }) => (
 
 export const TeamsCreate = ({ ...props }) => (
   <Create {...props}>
-    <SimpleForm redirect="list">
+    <SimpleForm>
       <TextInput source="name" label="resources.teams.fields.name" />
-      <TextInput
-        source="structure_code"
+
+      <ReferenceInput
+        label="resources.teams.fields.specialized_commission"
+        source="specialized_commission"
+        reference="section_cn"
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceInput
         label="resources.teams.fields.structure_code"
-      />
+        source="structure_code"
+        reference="structures"
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
+
       <TextInput
         source="team_number"
         label="resources.teams.fields.team_number"

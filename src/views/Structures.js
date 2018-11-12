@@ -121,22 +121,6 @@ export const StructuresEdit = ({ ...props }) => (
         source="number_of_certified_team"
         label="resources.structures.fields.number_of_certified_team"
       />
-      <ReferenceArrayInput
-        label="resources.structures.fields.community"
-        reference="communities"
-        source="communities"
-      >
-        <SelectArrayInput>
-          <ChipField source="name" />
-        </SelectArrayInput>
-      </ReferenceArrayInput>
-      <ReferenceInput
-        label="resources.structures.fields.regional_delegation"
-        source="structures.regional_delegation"
-        reference="regionals_delegations"
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
       <TextInput source="site" label="resources.structures.fields.site" />
       <TextInput source="street" label="resources.structures.fields.street" />
       <TextInput
@@ -190,13 +174,6 @@ export const StructuresEdit = ({ ...props }) => (
         source="other_mixity"
         label="resources.structures.fields.other_mixity"
       />
-      <ReferenceInput
-        label="resources.structures.fields.principal_it"
-        source="structures.principal_it"
-        reference="institute"
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
       <TextInput
         source="total_etp_effectiv"
         label="resources.structures.fields.total_etp_effectiv"
