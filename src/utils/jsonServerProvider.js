@@ -66,14 +66,33 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           case "units":
             field = `unit.${field}`;
             break;
-          case "databases":
-            field = `database.${field}`;
+          case "teams":
+            if (
+              [
+                "city",
+                "site",
+                "mixt_university",
+                "cnrs_mixity",
+                "other_mixity",
+                "total_etp_effectiv",
+                "nb_structures_accounts",
+                "nb_teams_account",
+                "nb_personal_accounts"
+              ].includes(field)
+            ) {
+              field = `structures.${field}`;
+            } else {
+              field = `teams.${field}`;
+            }
             break;
           case "section_cn":
             field = `section_cn.${field}`;
             break;
           case "revues":
             field = `revue.${field}`;
+            break;
+          case "structures":
+            field = `structures.${field}`;
             break;
           default:
             break;

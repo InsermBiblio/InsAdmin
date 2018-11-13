@@ -23,9 +23,66 @@ const TeamsFilter = props => (
     <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput source="like_teams.name" label="resources.teams.fields.name" />
     <TextInput
-      source="like_teams.team_number"
-      label="resources.teams.fields.team_number"
+      source="like_teams.structure_code"
+      label="resources.teams.fields.structure_code"
     />
+    <TextInput
+      source="like_teams.team_number"
+      label="resources.teams.fields.structure_code"
+    />
+    <TextInput
+      source="like_teams.principal_lastname"
+      label="resources.teams.fields.principal_lastname"
+    />
+
+    <ReferenceInput
+      label="resources.teams.fields.principal_it"
+      source="teams.principal_it"
+      reference="institutes"
+      linkType="show"
+    >
+      <AutocompleteInput source="name" />
+    </ReferenceInput>
+
+    <ReferenceInput
+      label="resources.teams.fields.specialized_commission"
+      source="teams.specialized_commission"
+      reference="section_cn"
+      linkType="show"
+    >
+      <AutocompleteInput source="name" />
+    </ReferenceInput>
+
+    <TextInput
+      source="like_structures.site"
+      label="resources.teams.fields.site"
+    />
+    <TextInput
+      source="like_structures.city"
+      label="resources.teams.fields.city"
+    />
+
+    <ReferenceInput
+      label="resources.teams.fields.regional_delegation"
+      source="teams.regional_delegation"
+      reference="regionals_delegations"
+      linkType="show"
+    >
+      <AutocompleteInput source="name" />
+    </ReferenceInput>
+    <TextInput
+      source="like_teams.principal_lastname"
+      label="resources.teams.fields.principal_lastname"
+    />
+    <TextInput
+      source="like_teams.cnrs_mixity"
+      label="resources.teams.fields.cnrs_mixity"
+    />
+    <TextInput
+      source="like_teams.other_mixity"
+      label="resources.teams.fields.other_mixity"
+    />
+    <BooleanInput source="teams.active" label="resources.teams.fields.active" />
   </Filter>
 );
 
@@ -47,7 +104,6 @@ LinkForStructure.defaultProps = {
 export const TeamsList = ({ ...props }) => (
   <List {...props} filters={<TeamsFilter />} perPage={10}>
     <Datagrid>
-      <LinkEdit source="id" label="resources.teams.fields.id" />
       <ReferenceField
         label="resources.teams.fields.structure_code"
         source="structure_code"
@@ -117,6 +173,39 @@ const TeamsTitle = ({ record }) => {
 export const TeamsEdit = ({ ...props }) => (
   <Edit title={<TeamsTitle />} {...props}>
     <SimpleForm>
+      <TextField
+        source="structure_type"
+        label="resources.teams.fields.structure_type"
+      />
+
+      <TextField
+        source="iunop_code"
+        label="resources.teams.fields.iunop_code"
+      />
+      <TextField source="code" label="resources.teams.fields.code" />
+
+      <ReferenceField
+        label="resources.teams.fields.regional_delegation"
+        source="regional_delegation"
+        reference="regionals_delegations"
+        linkType="show"
+      >
+        <TextField source="code" />
+      </ReferenceField>
+
+      <TextField source="site" label="resources.teams.fields.site" />
+      <TextField source="city" label="resources.teams.fields.city" />
+      <TextField
+        source="dc_lastname"
+        label="resources.teams.fields.dc_lastname"
+      />
+      <TextField
+        source="dc_firstname"
+        label="resources.teams.fields.dc_firstname"
+      />
+      <TextField source="dc_phone" label="resources.teams.fields.dc_phone" />
+      <TextField source="dc_email" label="resources.teams.fields.dc_email" />
+
       <TextInput source="name" label="resources.teams.fields.name" />
 
       <ReferenceInput
@@ -154,7 +243,7 @@ export const TeamsEdit = ({ ...props }) => (
       />
 
       <ReferenceInput
-        label="resources.structures.fields.principal_it"
+        label="resources.teams.fields.principal_it"
         source="principal_it"
         reference="institutes"
       >
