@@ -437,18 +437,6 @@ export const StructuresEdit = ({ ...props }) => (
         source="nb_admin_etp"
         label="resources.structures.fields.nb_admin_etp"
       />
-      <TextInput
-        source="nb_structures_accounts"
-        label="resources.structures.fields.nb_structures_accounts"
-      />
-      <TextInput
-        source="nb_teams_account"
-        label="resources.structures.fields.nb_teams_account"
-      />
-      <TextInput
-        source="nb_personal_accounts"
-        label="resources.structures.fields.nb_personal_accounts"
-      />
       <BooleanInput
         source="active"
         label="resources.structures.fields.active"
@@ -701,18 +689,6 @@ export const StructuresCreate = ({ ...props }) => (
       <TextInput
         source="nb_admin_etp"
         label="resources.structures.fields.nb_admin_etp"
-      />
-      <TextInput
-        source="nb_structures_accounts"
-        label="resources.structures.fields.nb_structures_accounts"
-      />
-      <TextInput
-        source="nb_teams_account"
-        label="resources.structures.fields.nb_teams_account"
-      />
-      <TextInput
-        source="nb_personal_accounts"
-        label="resources.structures.fields.nb_personal_accounts"
       />
       <BooleanInput
         source="active"
