@@ -394,7 +394,7 @@ export const TeamsEdit = ({ ...props }) => (
 
 export const TeamsCreate = ({ ...props }) => (
   <Create {...props}>
-    <SimpleForm>
+    <SimpleForm redirect="list">
       <TextInput source="name" label="resources.teams.fields.name" />
 
       <ReferenceInput

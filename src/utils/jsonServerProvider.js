@@ -184,10 +184,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           case "communities":
             data = json.map(resource => ({ ...resource, id: resource.name }));
             break;
-          case "structures":
-          case "institutes":
-            data = json.map(resource => ({ ...resource, id: resource.code }));
-            break;
           default:
             break;
         }

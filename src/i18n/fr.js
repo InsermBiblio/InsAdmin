@@ -25,16 +25,16 @@ export default {
         comment: "Commentaire"
       }
     },
-    inistAccounts: {
+    account_structures_teams: {
       name: "Comptes structures et équipes",
       fields: {
         login: "Identifiant",
         password: "Mot de passe",
-        type_of_code: "Type de code",
-        type_of_structure: "Type de structure",
+        structure_type: "Type de structure",
         structure_code: "Code structure",
         team_number: "Numéro d'équipe",
         team_name: "Intitulé d'équipe",
+        type_of_code: "Type de code",
         researcher_lastname: "Nom du chercheur",
         researcher_firstname: "Prénom du chercheur",
         researcher_email: "Courriel du chercheur",
@@ -47,13 +47,17 @@ export default {
         principal_it: "IT principal",
         specialized_commission: "Commission spécialisée",
         register_date: "Date d'inscription",
+        register_date_before: "Date d'inscription avant",
+        register_date_after: "Date d'inscription après",
         expiration_date: "Date d'expiration",
+        expiration_date_before: "Date d'expiration avant",
+        expiration_date_after: "Date d'expiration après",
         active: "Active",
         community: "Communauté",
         comment: "Commentaire"
       }
     },
-    fedeInserm: {
+    accounts_fede_inserm: {
       name: "Comptes individuels FédéInserm",
       fields: {
         uid: "UID",
@@ -61,15 +65,15 @@ export default {
         firstname: "Prénom",
         inserm_email: "Courriel Inserm",
         email: "Courriel usuel",
-        type_of_structure: "Type de structure",
+        structure_type: "Type de structure",
         structure_code: "Code de la structure",
+        structure_name: "Intitulé de la structure",
         community: "Communauté",
         team_number: "Numéro d'équipe",
         team_name: "Intitulé d'équipe",
         regional_delegation: "Délégation régionale",
         specialized_commission: "Commission spécialisée",
         uinop_code: "Code uinop",
-        structure_name: "Intitulé de la structure",
         second_team_code: "Code équipe secondaire",
         site: "Site",
         city: "Ville",
