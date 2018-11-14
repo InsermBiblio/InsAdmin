@@ -45,7 +45,6 @@ export const InstitutsList = ({ ...props }) => (
     sort={{ field: "id", order: "ASC" }}
   >
     <Datagrid>
-      <LinkEdit source="id" label="resources.institutes.fields.id" />
       <LinkEdit source="name" label="resources.institutes.fields.name" />
       <LinkEdit source="code" label="resources.institutes.fields.code" />
       <EditButton />

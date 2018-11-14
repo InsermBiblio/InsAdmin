@@ -49,7 +49,6 @@ export const RegionalsDelegationsList = ({ ...props }) => (
     sort={{ field: "id", order: "ASC" }}
   >
     <Datagrid>
-      <LinkEdit source="id" label="resources.regionals_delegations.fields.id" />
       <LinkEdit
         source="code"
         label="resources.regionals_delegations.fields.code"

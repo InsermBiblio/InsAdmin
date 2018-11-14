@@ -16,7 +16,11 @@ import FolderIcon from "@material-ui/icons/Folder";
 import Dashboard from "./views/Dashboard";
 import { UsersList, UsersEdit, UsersCreate } from "./views/Users";
 import { InistList, InistEdit, InistCreate } from "./views/Inist";
-import { JanusList, JanusEdit } from "./views/Janus";
+import {
+  AccountsFedeInsermList,
+  AccountsFedeInsermEdit,
+  AccountsFedeInsermCreate
+} from "./views/AccountsFedeInserm";
 import {
   InstitutsList,
   InstitutsEdit,
@@ -119,9 +123,10 @@ class App extends Component {
           icon={FolderIcon}
         />
         <Resource
-          name="janusAccounts"
-          list={JanusList}
-          edit={JanusEdit}
+          name="accounts_fede_inserm"
+          list={AccountsFedeInsermList}
+          create={AccountsFedeInsermCreate}
+          edit={AccountsFedeInsermEdit}
           icon={UserIcon}
         />
         <Resource

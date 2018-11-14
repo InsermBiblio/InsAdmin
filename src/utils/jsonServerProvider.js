@@ -179,13 +179,25 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     switch (type) {
       case GET_LIST:
       case GET_MANY_REFERENCE:
+        let data = json;
+        switch (resource) {
+          case "communities":
+            data = json.map(resource => ({ ...resource, id: resource.name }));
+            break;
+          case "structures":
+          case "institutes":
+            data = json.map(resource => ({ ...resource, id: resource.code }));
+            break;
+          default:
+            break;
+        }
         if (!headers.has("x-total-count")) {
           throw new Error(
             "The X-Total-Count header is missing in the HTTP Response. The jsonServer Data Provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?"
           );
         }
         return {
-          data: json,
+          data,
           total: parseInt(
             headers
               .get("x-total-count")
