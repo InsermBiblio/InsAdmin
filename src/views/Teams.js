@@ -581,14 +581,6 @@ export const TeamsCreate = ({ ...props }) => (
         source="nb_admin_etp"
         label="resources.teams.fields.nb_admin_etp"
       />
-      <TextField
-        source="nb_structures_accounts"
-        label="resources.structures.fields.nb_structures_accounts"
-      />
-      <TextField
-        source="nb_teams_account"
-        label="resources.structures.fields.nb_teams_account"
-      />
       <BooleanInput source="active" label="resources.teams.fields.active" />
       <TextInput source="comment" label="resources.teams.fields.comment" />
       <ReferenceField
