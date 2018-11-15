@@ -178,7 +178,10 @@ export const TeamsEdit = ({ ...props }) => (
         source="iunop_code"
         label="resources.teams.fields.iunop_code"
       />
-      <TextField source="code" label="resources.teams.fields.code" />
+      <TextField
+        source="structure_name"
+        label="resources.teams.fields.structure_name"
+      />
 
       <ReferenceField
         label="resources.teams.fields.regional_delegation"

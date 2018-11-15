@@ -52,19 +52,35 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
          * permet d'effectuer un tri (améliorer l'api pour supprimer cette portion de code)
          */
         switch (resource) {
-          case "inistAccounts":
-            field = `inist_account.${field}`;
-            break;
-          case "janusAccounts":
-            if (field !== "primary_unit" && field !== "primary_institute") {
-              field = `janus_account.${field}`;
+          case "account_structures_teams":
+            if (
+              [
+                "name",
+                "principal_lastname",
+                "principal_email",
+                "principal_it",
+                "specialized_commission"
+              ].includes(field)
+            ) {
+              field = `teams.${field}`;
+            } else if (
+              [
+                "regional_delegation",
+                "site",
+                "city",
+                "mixt_university",
+                "cnrs_mixity",
+                "other_mixity"
+              ].includes(field)
+            ) {
+              field = `structures.${field}`;
+            } else {
+              field = `account_structures_teams.${field}`;
             }
+
             break;
           case "institutes":
             field = `institute.${field}`;
-            break;
-          case "units":
-            field = `unit.${field}`;
             break;
           case "teams":
             if (
@@ -100,8 +116,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           _perPage: perPage || 10
         };
 
-        query._sortField = field;
-        query._sortDir = order || "ASC";
+        if (field !== "id") {
+          query._sortField = field;
+          query._sortDir = order || "ASC";
+        }
 
         if (Object.keys(filters).length > 0) {
           query._filters = JSON.stringify(filters);
