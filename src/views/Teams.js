@@ -17,6 +17,11 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import {
+  UrlSearchStructures,
+  UrlSearchTeams,
+  UrlSearchFedeInserm
+} from "../components/LinkAccount";
 
 const TeamsFilter = props => (
   <Filter {...props}>
@@ -91,21 +96,6 @@ const TeamsFilter = props => (
   </Filter>
 );
 
-/*const LinkForStructure = ({ record }) => {
-  const link = `#/structures/${record.structure_code}/show`;
-  return <a href={link}>{record.structure_code}</a>;
-};
-LinkForStructure.defaultProps = {
-  label: "resources.teams.fields.structure_code"
-};
-const LinkForRegionalsDelegations = ({ record }) => {
-  const link = `#/section_cn/${record.regional_delegation}`;
-  return <a href={link}>{record.regional_delegation}</a>;
-};
-LinkForStructure.defaultProps = {
-  label: "resources.teams.fields.regional_delegation"
-};*/
-
 export const TeamsList = ({ ...props }) => (
   <List {...props} filters={<TeamsFilter />} perPage={10}>
     <Datagrid>
@@ -152,17 +142,17 @@ export const TeamsList = ({ ...props }) => (
         source="total_etp_effectiv"
         label="resources.teams.fields.total_etp_effectiv"
       />
-      <TextField
-        source="nb_structures_accounts"
-        label="resources.teams.fields.nb_structures_accounts"
+      <UrlSearchStructures
+        source="nb_structure_account"
+        label="resources.structures.fields.nb_structure_account"
       />
-      <TextField
-        source="nb_teams_account"
-        label="resources.teams.fields.nb_teams_account"
+      <UrlSearchTeams
+        source="nb_team_account"
+        label="resources.structures.fields.nb_team_account"
       />
-      <TextField
-        source="nb_personal_accounts"
-        label="resources.teams.fields.nb_personal_accounts"
+      <UrlSearchFedeInserm
+        source="nb_individual_account"
+        label="resources.structures.fields.nb_individual_account"
       />
       <BooleanField source="active" label="resources.teams.fields.active" />
 
@@ -391,9 +381,17 @@ export const TeamsEdit = ({ ...props }) => (
         source="nb_admin_etp"
         label="resources.teams.fields.nb_admin_etp"
       />
-      <TextInput
-        source="nb_personal_accounts"
-        label="resources.teams.fields.nb_personal_accounts"
+      <UrlSearchStructures
+        source="nb_structure_account"
+        label="resources.structures.fields.nb_structure_account"
+      />
+      <UrlSearchTeams
+        source="nb_team_account"
+        label="resources.structures.fields.nb_team_account"
+      />
+      <UrlSearchFedeInserm
+        source="nb_individual_account"
+        label="resources.structures.fields.nb_individual_account"
       />
       <BooleanInput source="active" label="resources.teams.fields.active" />
       <TextInput source="comment" label="resources.teams.fields.comment" />
@@ -583,10 +581,6 @@ export const TeamsCreate = ({ ...props }) => (
         source="nb_admin_etp"
         label="resources.teams.fields.nb_admin_etp"
       />
-      <TextInput
-        source="nb_personal_accounts"
-        label="resources.teams.fields.nb_personal_accounts"
-      />
       <TextField
         source="nb_structures_accounts"
         label="resources.structures.fields.nb_structures_accounts"
@@ -594,10 +588,6 @@ export const TeamsCreate = ({ ...props }) => (
       <TextField
         source="nb_teams_account"
         label="resources.structures.fields.nb_teams_account"
-      />
-      <TextField
-        source="nb_personal_accounts"
-        label="resources.structures.fields.nb_personal_accounts"
       />
       <BooleanInput source="active" label="resources.teams.fields.active" />
       <TextInput source="comment" label="resources.teams.fields.comment" />
