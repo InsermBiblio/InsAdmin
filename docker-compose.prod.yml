@@ -2,7 +2,7 @@ version: "2"
 
 services:
   server:
-    image: vsnexus.intra.inist.fr:8083/insermbiblio/insadmin:${insadmin_version}
+    image: vsnexus.intra.inist.fr:8083/insermbiblio/insadmin-prd:${insadmin_version}
     environment:
       NODE_ENV: production
     working_dir: /public
