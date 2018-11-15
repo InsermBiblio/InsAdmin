@@ -127,7 +127,7 @@ class App extends Component {
           icon={FolderIcon}
         />
         <Resource
-          name="accounts_fede_inserm"
+          name="individual_account_fede"
           list={AccountsFedeInsermList}
           create={AccountsFedeInsermCreate}
           edit={AccountsFedeInsermEdit}

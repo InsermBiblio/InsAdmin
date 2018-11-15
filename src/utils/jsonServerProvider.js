@@ -91,16 +91,13 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           case "revues":
             field = `revue.${field}`;
             break;
-          case "structures":
-            field = `structures.${field}`;
-            break;
           default:
             break;
         }
 
         const query = {
           _page: page,
-          _perPage: perPage
+          _perPage: perPage || 10
         };
 
         query._sortField = field;

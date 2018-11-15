@@ -46,14 +46,24 @@ const AccountsStructuresTeamsFilter = props => (
       source="like_account_structures_teams.researcher_email"
       label="resources.account_structures_teams.fields.researcher_email"
     />
-    <TextInput
-      source="like_account_structures_teams.structure_type"
+    <SelectInput
+      source="account_structures_teams.structure_type"
       label="resources.account_structures_teams.fields.structure_type"
+      choices={[
+        { id: "CIC", name: "CIC" },
+        { id: "IFR", name: "IFR" },
+        { id: "U", name: "U" },
+        { id: "US", name: "US" }
+      ]}
     />
-    <TextInput
-      source="like_account_structures_teams.structure_code"
+    <ReferenceInput
       label="resources.account_structures_teams.fields.structure_code"
-    />
+      source="account_structures_teams.structure_code"
+      reference="structures"
+      allowEmpty={true}
+    >
+      <AutocompleteInput source="code" />
+    </ReferenceInput>
     <TextInput
       source="like_account_structures_teams.team_number"
       label="resources.account_structures_teams.fields.team_number"
@@ -228,14 +238,24 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
           { id: "Equipe", name: "Equipe" }
         ]}
       />
-      <TextInput
+      <SelectInput
         source="structure_type"
         label="resources.account_structures_teams.fields.structure_type"
+        choices={[
+          { id: "CIC", name: "CIC" },
+          { id: "IFR", name: "IFR" },
+          { id: "U", name: "U" },
+          { id: "US", name: "US" }
+        ]}
       />
-      <TextInput
-        source="structure_code"
+      <ReferenceInput
         label="resources.account_structures_teams.fields.structure_code"
-      />
+        source="account_structures_teams.structure_code"
+        reference="structures"
+        allowEmpty={true}
+      >
+        <AutocompleteInput source="code" />
+      </ReferenceInput>
       <TextInput
         source="team_number"
         label="resources.account_structures_teams.fields.team_number"
@@ -285,14 +305,24 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
           { id: "Equipe", name: "Equipe" }
         ]}
       />
-      <TextInput
+      <SelectInput
         source="structure_type"
         label="resources.account_structures_teams.fields.structure_type"
+        choices={[
+          { id: "CIC", name: "CIC" },
+          { id: "IFR", name: "IFR" },
+          { id: "U", name: "U" },
+          { id: "US", name: "US" }
+        ]}
       />
-      <TextInput
-        source="structure_code"
+      <ReferenceInput
         label="resources.account_structures_teams.fields.structure_code"
-      />
+        source="account_structures_teams.structure_code"
+        reference="structures"
+        allowEmpty={true}
+      >
+        <AutocompleteInput source="code" />
+      </ReferenceInput>
       <TextInput
         source="team_number"
         label="resources.account_structures_teams.fields.team_number"

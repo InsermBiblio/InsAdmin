@@ -21,15 +21,20 @@ import LinkEdit from "../components/LinkEdit";
 const TeamsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="like_teams.name" label="resources.teams.fields.name" />
-    <TextInput
-      source="like_teams.structure_code"
+
+    <ReferenceInput
       label="resources.teams.fields.structure_code"
-    />
+      source="teams.structure_code"
+      reference="structures"
+      allowEmpty={true}
+    >
+      <AutocompleteInput source="code" />
+    </ReferenceInput>
     <TextInput
       source="like_teams.team_number"
-      label="resources.teams.fields.structure_code"
+      label="resources.teams.fields.team_number"
     />
+    <TextInput source="like_teams.name" label="resources.teams.fields.name" />
     <TextInput
       source="like_teams.principal_lastname"
       label="resources.teams.fields.principal_lastname"
@@ -39,7 +44,7 @@ const TeamsFilter = props => (
       label="resources.teams.fields.principal_it"
       source="teams.principal_it"
       reference="institutes"
-      linkType="show"
+      allowEmpty={true}
     >
       <AutocompleteInput source="name" />
     </ReferenceInput>
@@ -48,7 +53,7 @@ const TeamsFilter = props => (
       label="resources.teams.fields.specialized_commission"
       source="teams.specialized_commission"
       reference="section_cn"
-      linkType="show"
+      allowEmpty={true}
     >
       <AutocompleteInput source="name" />
     </ReferenceInput>
@@ -66,13 +71,13 @@ const TeamsFilter = props => (
       label="resources.teams.fields.regional_delegation"
       source="teams.regional_delegation"
       reference="regionals_delegations"
-      linkType="show"
+      allowEmpty={true}
     >
       <AutocompleteInput source="name" />
     </ReferenceInput>
     <TextInput
-      source="like_teams.principal_lastname"
-      label="resources.teams.fields.principal_lastname"
+      source="like_teams.mixt_university"
+      label="resources.teams.fields.mixt_university"
     />
     <TextInput
       source="like_teams.cnrs_mixity"
@@ -109,6 +114,7 @@ export const TeamsList = ({ ...props }) => (
         source="structure_code"
         reference="structures"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>
@@ -189,6 +195,7 @@ export const TeamsEdit = ({ ...props }) => (
         source="regional_delegation"
         reference="regionals_delegations"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>
@@ -206,28 +213,20 @@ export const TeamsEdit = ({ ...props }) => (
       <TextField source="dc_phone" label="resources.teams.fields.dc_phone" />
       <TextField source="dc_email" label="resources.teams.fields.dc_email" />
 
+      <TextInput
+        source="team_number"
+        label="resources.teams.fields.team_number"
+      />
       <TextInput source="name" label="resources.teams.fields.name" />
-
-      <ReferenceInput
-        label="resources.teams.fields.specialized_commission"
-        source="specialized_commission"
-        reference="section_cn"
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
 
       <ReferenceInput
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
+        allowEmpty={true}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
-
-      <TextInput
-        source="team_number"
-        label="resources.teams.fields.team_number"
-      />
 
       <TextInput
         source="principal_lastname"
@@ -246,8 +245,18 @@ export const TeamsEdit = ({ ...props }) => (
         label="resources.teams.fields.principal_it"
         source="principal_it"
         reference="institutes"
+        allowEmpty={true}
       >
         <AutocompleteInput optionText="code" />
+      </ReferenceInput>
+
+      <ReferenceInput
+        label="resources.teams.fields.specialized_commission"
+        source="specialized_commission"
+        reference="section_cn"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <TextInput
@@ -401,6 +410,7 @@ export const TeamsCreate = ({ ...props }) => (
         label="resources.teams.fields.specialized_commission"
         source="specialized_commission"
         reference="section_cn"
+        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -409,6 +419,7 @@ export const TeamsCreate = ({ ...props }) => (
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
+        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -435,6 +446,7 @@ export const TeamsCreate = ({ ...props }) => (
         label="resources.structures.fields.principal_it"
         source="principal_it"
         reference="institutes"
+        allowEmpty={true}
       >
         <AutocompleteInput optionText="code" />
       </ReferenceInput>
@@ -575,8 +587,28 @@ export const TeamsCreate = ({ ...props }) => (
         source="nb_personal_accounts"
         label="resources.teams.fields.nb_personal_accounts"
       />
+      <TextField
+        source="nb_structures_accounts"
+        label="resources.structures.fields.nb_structures_accounts"
+      />
+      <TextField
+        source="nb_teams_account"
+        label="resources.structures.fields.nb_teams_account"
+      />
+      <TextField
+        source="nb_personal_accounts"
+        label="resources.structures.fields.nb_personal_accounts"
+      />
       <BooleanInput source="active" label="resources.teams.fields.active" />
       <TextInput source="comment" label="resources.teams.fields.comment" />
+      <ReferenceField
+        label="resources.structures.fields.community"
+        reference="communities"
+        source="communities"
+        allowEmpty={true}
+      >
+        <TextField source="name" />
+      </ReferenceField>
     </SimpleForm>
   </Create>
 );

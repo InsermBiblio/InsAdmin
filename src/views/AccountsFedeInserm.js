@@ -26,54 +26,63 @@ import { ListAddActions, ListEditActions } from "../components/ListActions";
 const AccountsFedeInsermFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput source="uid" label="resources.accounts_fede_inserm.fields.uid" />
+    <TextInput
+      source="uid"
+      label="resources.individual_account_fede.fields.uid"
+    />
     <TextInput
       source="like_individual_account_fede.lastname"
-      label="resources.accounts_fede_inserm.fields.lastname"
+      label="resources.individual_account_fede.fields.lastname"
     />
     <TextInput
       source="like_individual_account_fede.firstname"
-      label="resources.accounts_fede_inserm.fields.firstname"
+      label="resources.individual_account_fede.fields.firstname"
     />
     <TextInput
       source="like_individual_account_fede.inserm_email"
-      label="resources.accounts_fede_inserm.fields.inserm_email"
+      label="resources.individual_account_fede.fields.inserm_email"
     />
     <TextInput
       source="like_individual_account_fede.email"
-      label="resources.accounts_fede_inserm.fields.email"
+      label="resources.individual_account_fede.fields.email"
     />
     <TextInput
       source="like_individual_account_fede.membership"
-      label="resources.accounts_fede_inserm.fields.membership"
+      label="resources.individual_account_fede.fields.membership"
     />
     <TextInput
-      source="like_structures.type_of_assigned_structure"
-      label="resources.accounts_fede_inserm.fields.type_of_assigned_structure"
+      source="like_individual_account_fede.type_of_assigned_structure"
+      label="resources.individual_account_fede.fields.type_of_assigned_structure"
     />
 
-    <TextInput
-      source="like_individual_account_fede.structure_code"
-      label="resources.accounts_fede_inserm.fields.structure_code"
-    />
+    <ReferenceInput
+      label="resources.individual_account_fede.fields.structure_code"
+      source="individual_account_fede.structure_code"
+      reference="structures"
+      allowEmpty={true}
+      perPage={350}
+      sort={{ field: "name", order: "ASC" }}
+    >
+      <AutocompleteInput source="code" />
+    </ReferenceInput>
     <TextInput
       source="like_individual_account_fede.team_number"
-      label="resources.accounts_fede_inserm.fields.team_number"
+      label="resources.individual_account_fede.fields.team_number"
     />
     <TextInput
       source="like_individual_account_fede.team_name"
-      label="resources.accounts_fede_inserm.fields.team_name"
+      label="resources.individual_account_fede.fields.team_name"
     />
     <TextInput
       source="like_individual_account_fede.second_team_code"
-      label="resources.accounts_fede_inserm.fields.second_team_code"
+      label="resources.individual_account_fede.fields.second_team_code"
     />
     <TextInput
       source="like_individual_account_fede.email"
-      label="resources.accounts_fede_inserm.fields.email"
+      label="resources.individual_account_fede.fields.email"
     />
     <ReferenceInput
-      label="resources.structures.fields.regional_delegation"
+      label="resources.individual_account_fede.fields.regional_delegation"
       source="individual_account_fede.regional_delegation"
       reference="regionals_delegations"
     >
@@ -81,11 +90,11 @@ const AccountsFedeInsermFilter = props => (
     </ReferenceInput>
     <TextInput
       source="like_individual_account_fede.site"
-      label="resources.accounts_fede_inserm.fields.site"
+      label="resources.individual_account_fede.fields.site"
     />
     <TextInput
       source="like_individual_account_fede.city"
-      label="resources.accounts_fede_inserm.fields.city"
+      label="resources.individual_account_fede.fields.city"
     />
   </Filter>
 );
@@ -95,31 +104,36 @@ export const AccountsFedeInsermList = props => (
     <Datagrid>
       <LinkEdit
         source="firstname"
-        label="resources.accounts_fede_inserm.fields.firstname"
+        label="resources.individual_account_fede.fields.firstname"
       />
       <EmailField
         source="inserm_email"
-        label="resources.accounts_fede_inserm.fields.inserm_email"
+        label="resources.individual_account_fede.fields.inserm_email"
       />
       <EmailField
         source="email"
-        label="resources.accounts_fede_inserm.fields.email"
+        label="resources.individual_account_fede.fields.email"
       />
-      <LinkEdit
+      <ReferenceField
+        label="resources.individual_account_fede.fields.structure_code"
         source="structure_code"
-        label="resources.accounts_fede_inserm.fields.structure_code"
-      />
+        reference="structures"
+        linkType="show"
+        allowEmpty={true}
+      >
+        <TextField source="code" />
+      </ReferenceField>
       <LinkEdit
         source="team_number"
-        label="resources.accounts_fede_inserm.fields.team_number"
+        label="resources.individual_account_fede.fields.team_number"
       />
       <LinkEdit
         source="team_name"
-        label="resources.accounts_fede_inserm.fields.team_name"
+        label="resources.individual_account_fede.fields.team_name"
       />
       <LinkEdit
         source="second_team_code"
-        label="resources.accounts_fede_inserm.fields.second_team_code"
+        label="resources.individual_account_fede.fields.second_team_code"
       />
       <ReferenceField
         label="resources.structures.fields.regional_delegation"
@@ -131,31 +145,31 @@ export const AccountsFedeInsermList = props => (
       </ReferenceField>
       <TextField
         source="site"
-        label="resources.accounts_fede_inserm.fields.site"
+        label="resources.individual_account_fede.fields.site"
       />
       <TextField
         source="city"
-        label="resources.accounts_fede_inserm.fields.city"
+        label="resources.individual_account_fede.fields.city"
       />
       <TextField
         source="membership"
-        label="resources.accounts_fede_inserm.fields.membership"
+        label="resources.individual_account_fede.fields.membership"
       />
       <TextField
         source="type_of_assigned_structure"
-        label="resources.accounts_fede_inserm.fields.type_of_assigned_structure"
+        label="resources.individual_account_fede.fields.type_of_assigned_structure"
       />
       <DateField
         source="register_date"
-        label="resources.accounts_fede_inserm.fields.register_date"
+        label="resources.individual_account_fede.fields.register_date"
       />
       <DateField
         source="last_connection"
-        label="resources.accounts_fede_inserm.fields.last_connection"
+        label="resources.individual_account_fede.fields.last_connection"
       />
       <BooleanField
         source="active"
-        label="resources.accounts_fede_inserm.fields.active"
+        label="resources.individual_account_fede.fields.active"
       />
       <EditButton />
       <DeleteButtonWithConfirmation />
@@ -176,39 +190,39 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
     <SimpleForm>
       <TextInput
         source="firstname"
-        label="resources.accounts_fede_inserm.fields.firstname"
+        label="resources.individual_account_fede.fields.firstname"
       />
       <TextInput
         source="inserm_email"
-        label="resources.accounts_fede_inserm.fields.inserm_email"
+        label="resources.individual_account_fede.fields.inserm_email"
       />
       <TextInput
         source="email"
-        label="resources.accounts_fede_inserm.fields.email"
+        label="resources.individual_account_fede.fields.email"
       />
       <TextInput
         source="structure_type"
-        label="resources.accounts_fede_inserm.fields.structure_type"
+        label="resources.individual_account_fede.fields.structure_type"
       />
       <TextInput
         source="structure_code"
-        label="resources.accounts_fede_inserm.fields.structure_code"
+        label="resources.individual_account_fede.fields.structure_code"
       />
       <TextInput
         source="structure_name"
-        label="resources.accounts_fede_inserm.fields.structure_name"
+        label="resources.individual_account_fede.fields.structure_name"
       />
       <TextInput
         source="team_number"
-        label="resources.accounts_fede_inserm.fields.team_number"
+        label="resources.individual_account_fede.fields.team_number"
       />
       <TextField
         source="team_name"
-        label="resources.accounts_fede_inserm.fields.team_name"
+        label="resources.individual_account_fede.fields.team_name"
       />
       <TextInput
         source="second_team_code"
-        label="resources.accounts_fede_inserm.fields.second_team_code"
+        label="resources.individual_account_fede.fields.second_team_code"
       />
       <ReferenceInput
         label="resources.structures.fields.regional_delegation"
@@ -219,15 +233,15 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
       </ReferenceInput>
       <TextInput
         source="site"
-        label="resources.accounts_fede_inserm.fields.site"
+        label="resources.individual_account_fede.fields.site"
       />
       <TextInput
         source="city"
-        label="resources.accounts_fede_inserm.fields.city"
+        label="resources.individual_account_fede.fields.city"
       />
       <TextInput
         source="itmo_principal"
-        label="resources.accounts_fede_inserm.fields.itmo_principal"
+        label="resources.individual_account_fede.fields.itmo_principal"
       />
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"
@@ -238,30 +252,30 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
       </ReferenceInput>
       <TextInput
         source="orcid_number"
-        label="resources.accounts_fede_inserm.fields.orcid_number"
+        label="resources.individual_account_fede.fields.orcid_number"
       />
       <TextInput
         source="researcher_id"
-        label="resources.accounts_fede_inserm.fields.researcher_id"
+        label="resources.individual_account_fede.fields.researcher_id"
       />
       <TextInput
         source="agent_status"
-        label="resources.accounts_fede_inserm.fields.agent_status"
+        label="resources.individual_account_fede.fields.agent_status"
       />
       <TextInput
         source="agent_function"
-        label="resources.accounts_fede_inserm.fields.agent_function"
+        label="resources.individual_account_fede.fields.agent_function"
       />
       <TextInput
         source="membership"
-        label="resources.accounts_fede_inserm.fields.membership"
+        label="resources.individual_account_fede.fields.membership"
       />
       <TextInput
         source="type_of_assigned_structure"
-        label="resources.accounts_fede_inserm.fields.type_of_assigned_structure"
+        label="resources.individual_account_fede.fields.type_of_assigned_structure"
       />
       <ReferenceInput
-        label="resources.accounts_fede_inserm.fields.community"
+        label="resources.individual_account_fede.fields.community"
         reference="communities"
         source="communities"
       >
@@ -269,17 +283,17 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
       </ReferenceInput>
       <DateInput
         source="register_date"
-        label="resources.accounts_fede_inserm.fields.register_date"
+        label="resources.individual_account_fede.fields.register_date"
         options={{ format: "MM-dd-yyyy" }}
       />
       <DateInput
         source="last_connection"
-        label="resources.accounts_fede_inserm.fields.last_connection"
+        label="resources.individual_account_fede.fields.last_connection"
         options={{ format: "MM-dd-yyyy" }}
       />
       <BooleanInput
         source="active"
-        label="resources.accounts_fede_inserm.fields.active"
+        label="resources.individual_account_fede.fields.active"
       />
       <LongTextInput source="comment" />
     </SimpleForm>
@@ -291,35 +305,35 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
     <SimpleForm redirect="list">
       <TextInput
         source="firstname"
-        label="resources.accounts_fede_inserm.fields.firstname"
+        label="resources.individual_account_fede.fields.firstname"
       />
       <TextInput
         source="inserm_email"
-        label="resources.accounts_fede_inserm.fields.inserm_email"
+        label="resources.individual_account_fede.fields.inserm_email"
       />
       <TextInput
         source="email"
-        label="resources.accounts_fede_inserm.fields.email"
+        label="resources.individual_account_fede.fields.email"
       />
       <TextInput
         source="structure_type"
-        label="resources.accounts_fede_inserm.fields.structure_type"
+        label="resources.individual_account_fede.fields.structure_type"
       />
       <TextInput
         source="structure_code"
-        label="resources.accounts_fede_inserm.fields.structure_code"
+        label="resources.individual_account_fede.fields.structure_code"
       />
       <TextInput
         source="structure_name"
-        label="resources.accounts_fede_inserm.fields.structure_name"
+        label="resources.individual_account_fede.fields.structure_name"
       />
       <TextInput
         source="team_number"
-        label="resources.accounts_fede_inserm.fields.team_number"
+        label="resources.individual_account_fede.fields.team_number"
       />
       <TextInput
         source="second_team_code"
-        label="resources.accounts_fede_inserm.fields.second_team_code"
+        label="resources.individual_account_fede.fields.second_team_code"
       />
       <ReferenceInput
         label="resources.structures.fields.regional_delegation"
@@ -330,15 +344,15 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
       </ReferenceInput>
       <TextInput
         source="site"
-        label="resources.accounts_fede_inserm.fields.site"
+        label="resources.individual_account_fede.fields.site"
       />
       <TextInput
         source="city"
-        label="resources.accounts_fede_inserm.fields.city"
+        label="resources.individual_account_fede.fields.city"
       />
       <TextInput
         source="itmo_principal"
-        label="resources.accounts_fede_inserm.fields.itmo_principal"
+        label="resources.individual_account_fede.fields.itmo_principal"
       />
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"
@@ -349,30 +363,30 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
       </ReferenceInput>
       <TextInput
         source="orcid_number"
-        label="resources.accounts_fede_inserm.fields.orcid_number"
+        label="resources.individual_account_fede.fields.orcid_number"
       />
       <TextInput
         source="researcher_id"
-        label="resources.accounts_fede_inserm.fields.researcher_id"
+        label="resources.individual_account_fede.fields.researcher_id"
       />
       <TextInput
         source="agent_status"
-        label="resources.accounts_fede_inserm.fields.agent_status"
+        label="resources.individual_account_fede.fields.agent_status"
       />
       <TextInput
         source="agent_function"
-        label="resources.accounts_fede_inserm.fields.agent_function"
+        label="resources.individual_account_fede.fields.agent_function"
       />
       <TextInput
         source="membership"
-        label="resources.accounts_fede_inserm.fields.membership"
+        label="resources.individual_account_fede.fields.membership"
       />
       <TextInput
         source="type_of_assigned_structure"
-        label="resources.accounts_fede_inserm.fields.type_of_assigned_structure"
+        label="resources.individual_account_fede.fields.type_of_assigned_structure"
       />
       <ReferenceInput
-        label="resources.accounts_fede_inserm.fields.community"
+        label="resources.individual_account_fede.fields.community"
         reference="communities"
         source="communities"
       >
@@ -380,17 +394,17 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
       </ReferenceInput>
       <DateInput
         source="register_date"
-        label="resources.accounts_fede_inserm.fields.register_date"
+        label="resources.individual_account_fede.fields.register_date"
         options={{ format: "MM-dd-yyyy" }}
       />
       <DateInput
         source="last_connection"
-        label="resources.accounts_fede_inserm.fields.last_connection"
+        label="resources.individual_account_fede.fields.last_connection"
         options={{ format: "MM-dd-yyyy" }}
       />
       <BooleanInput
         source="active"
-        label="resources.accounts_fede_inserm.fields.active"
+        label="resources.individual_account_fede.fields.active"
       />
       <LongTextInput source="comment" />
     </SimpleForm>
