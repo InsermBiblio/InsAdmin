@@ -27,7 +27,7 @@ const AccountsFedeInsermFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
     <TextInput
-      source="uid"
+      source="like_individual_account_fede.uid"
       label="resources.individual_account_fede.fields.uid"
     />
     <TextInput
@@ -63,15 +63,21 @@ const AccountsFedeInsermFilter = props => (
       perPage={350}
       sort={{ field: "name", order: "ASC" }}
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="code" />
+    </ReferenceInput>
+    <ReferenceInput
+      label="resources.individual_account_fede.fields.team_number"
+      source="team_number"
+      reference="teams"
+      linkType="show"
+      allowEmpty={true}
+    >
+      <AutocompleteInput optionText="code" />
+      <TextField optionText="code" />
     </ReferenceInput>
     <TextInput
-      source="like_individual_account_fede.team_number"
-      label="resources.individual_account_fede.fields.team_number"
-    />
-    <TextInput
-      source="like_individual_account_fede.team_name"
-      label="resources.individual_account_fede.fields.team_name"
+      source="like_individual_account_fede.name"
+      label="resources.individual_account_fede.fields.name"
     />
     <TextInput
       source="like_individual_account_fede.second_team_code"
@@ -103,6 +109,14 @@ export const AccountsFedeInsermList = props => (
   <List {...props} filters={<AccountsFedeInsermFilter />} perPage={10}>
     <Datagrid>
       <LinkEdit
+        source="uid"
+        label="resources.individual_account_fede.fields.uid"
+      />
+      <LinkEdit
+        source="lastname"
+        label="resources.individual_account_fede.fields.lastname"
+      />
+      <LinkEdit
         source="firstname"
         label="resources.individual_account_fede.fields.firstname"
       />
@@ -123,13 +137,18 @@ export const AccountsFedeInsermList = props => (
       >
         <TextField source="code" />
       </ReferenceField>
-      <LinkEdit
-        source="team_number"
+      <ReferenceField
         label="resources.individual_account_fede.fields.team_number"
-      />
+        source="team_number"
+        reference="teams"
+        linkType="show"
+        allowEmpty={true}
+      >
+        <TextField source="code" />
+      </ReferenceField>
       <LinkEdit
-        source="team_name"
-        label="resources.individual_account_fede.fields.team_name"
+        source="name"
+        label="resources.individual_account_fede.fields.name"
       />
       <LinkEdit
         source="second_team_code"
@@ -204,10 +223,14 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         source="structure_type"
         label="resources.individual_account_fede.fields.structure_type"
       />
-      <TextInput
-        source="structure_code"
+      <ReferenceInput
         label="resources.individual_account_fede.fields.structure_code"
-      />
+        source="structure_code"
+        reference="structures"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="code" />
+      </ReferenceInput>
       <TextInput
         source="structure_name"
         label="resources.individual_account_fede.fields.structure_name"
@@ -217,8 +240,8 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         label="resources.individual_account_fede.fields.team_number"
       />
       <TextField
-        source="team_name"
-        label="resources.individual_account_fede.fields.team_name"
+        source="name"
+        label="resources.individual_account_fede.fields.name"
       />
       <TextInput
         source="second_team_code"

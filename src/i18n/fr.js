@@ -70,7 +70,7 @@ export default {
         structure_name: "Intitulé de la structure",
         community: "Communauté",
         team_number: "Numéro d'équipe",
-        team_name: "Intitulé d'équipe",
+        name: "Intitulé d'équipe",
         regional_delegation: "Délégation régionale",
         specialized_commission: "Commission spécialisée",
         uinop_code: "Code uinop",
