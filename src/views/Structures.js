@@ -57,7 +57,7 @@ const StructuresFilter = props => (
       reference="institutes"
       allowEmpty={true}
     >
-      <AutocompleteInput source="name" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
 
     <ReferenceInput
@@ -66,7 +66,7 @@ const StructuresFilter = props => (
       reference="section_cn"
       allowEmpty={true}
     >
-      <AutocompleteInput source="name" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
 
     <TextInput
@@ -83,7 +83,7 @@ const StructuresFilter = props => (
       reference="regionals_delegations"
       allowEmpty={true}
     >
-      <AutocompleteInput source="name" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <TextInput
       source="like_structures.director_lastname"
@@ -237,7 +237,7 @@ export const StructuresEdit = ({ ...props }) => (
         reference="regionals_delegations"
         allowEmpty={true}
       >
-        <AutocompleteInput source="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceInput
@@ -246,7 +246,7 @@ export const StructuresEdit = ({ ...props }) => (
         reference="institutes"
         allowEmpty={true}
       >
-        <AutocompleteInput source="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceInput
@@ -255,7 +255,7 @@ export const StructuresEdit = ({ ...props }) => (
         reference="section_cn"
         allowEmpty={true}
       >
-        <AutocompleteInput source="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <TextInput source="site" label="resources.structures.fields.site" />
@@ -469,7 +469,7 @@ export const StructuresEdit = ({ ...props }) => (
         source="communities"
         allowEmpty={true}
       >
-        <AutocompleteInput source="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
   </Edit>
@@ -507,7 +507,7 @@ export const StructuresCreate = ({ ...props }) => (
         reference="regionals_delegations"
         allowEmpty={true}
       >
-        <AutocompleteInput source="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceInput
@@ -516,7 +516,7 @@ export const StructuresCreate = ({ ...props }) => (
         reference="institutes"
         allowEmpty={true}
       >
-        <AutocompleteInput source="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceInput
@@ -525,7 +525,7 @@ export const StructuresCreate = ({ ...props }) => (
         reference="section_cn"
         allowEmpty={true}
       >
-        <AutocompleteInput source="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <TextInput source="site" label="resources.structures.fields.site" />
@@ -739,7 +739,7 @@ export const StructuresCreate = ({ ...props }) => (
         source="communities"
         allowEmpty={true}
       >
-        <AutocompleteInput source="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
   </Create>

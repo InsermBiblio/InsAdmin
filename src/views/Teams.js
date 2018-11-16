@@ -33,7 +33,7 @@ const TeamsFilter = props => (
       reference="structures"
       allowEmpty={true}
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="code" />
     </ReferenceInput>
     <TextInput
       source="like_teams.team_number"
@@ -51,7 +51,7 @@ const TeamsFilter = props => (
       reference="institutes"
       allowEmpty={true}
     >
-      <AutocompleteInput source="name" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
 
     <ReferenceInput
@@ -60,7 +60,7 @@ const TeamsFilter = props => (
       reference="section_cn"
       allowEmpty={true}
     >
-      <AutocompleteInput source="name" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
 
     <TextInput
@@ -78,7 +78,7 @@ const TeamsFilter = props => (
       reference="regionals_delegations"
       allowEmpty={true}
     >
-      <AutocompleteInput source="name" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <TextInput
       source="like_teams.mixt_university"

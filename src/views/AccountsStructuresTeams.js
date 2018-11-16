@@ -252,14 +252,6 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
         label="resources.account_structures_teams.fields.password"
       />
       <SelectInput
-        source="type_of_code"
-        label="resources.account_structures_teams.fields.type_of_code"
-        choices={[
-          { id: "Structure", name: "Structure" },
-          { id: "Equipe", name: "Equipe" }
-        ]}
-      />
-      <SelectInput
         source="structure_type"
         label="resources.account_structures_teams.fields.structure_type"
         choices={[
@@ -275,23 +267,87 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
         reference="structures"
         allowEmpty={true}
       >
-        <AutocompleteInput source="code" />
+        <SelectInput optionText="code" />
       </ReferenceInput>
+
       <ReferenceInput
         label="resources.account_structures_teams.fields.team_number"
         source="team_number"
         reference="teams"
         allowEmpty={true}
       >
-        <AutocompleteInput source="code" />
+        <SelectInput optionText="code" />
       </ReferenceInput>
-      <ReferenceInput
-        label="resources.structures.fields.community"
-        source="community"
-        reference="communities"
+      <TextField
+        source="name"
+        label="resources.account_structures_teams.fields.name"
+      />
+
+      <SelectInput
+        source="type_of_code"
+        label="resources.account_structures_teams.fields.type_of_code"
+        choices={[
+          { id: "Structure", name: "Structure" },
+          { id: "Equipe", name: "Equipe" }
+        ]}
+      />
+
+      <TextField
+        source="principal_lastname"
+        label="resources.account_structures_teams.fields.principal_lastname"
+      />
+      <TextField
+        source="principal_firstname"
+        label="resources.account_structures_teams.fields.principal_firstname"
+      />
+      <TextField
+        source="principal_email"
+        label="resources.account_structures_teams.fields.principal_email"
+      />
+      <ReferenceField
+        label="resources.account_structures_teams.fields.regional_delegation"
+        source="regional_delegation"
+        reference="regionals_delegations"
+        allowEmpty={true}
       >
-        <AutocompleteInput source="code" />
-      </ReferenceInput>
+        <TextField source="code" />
+      </ReferenceField>
+      <TextField
+        source="site"
+        label="resources.account_structures_teams.fields.site"
+      />
+      <TextField
+        source="city"
+        label="resources.account_structures_teams.fields.city"
+      />
+      <TextField
+        source="mixt_university"
+        label="resources.account_structures_teams.fields.mixt_university"
+      />
+      <TextField
+        source="cnrs_mixity"
+        label="resources.account_structures_teams.fields.cnrs_mixity"
+      />
+      <TextField
+        source="other_mixity"
+        label="resources.account_structures_teams.fields.other_mixity"
+      />
+      <ReferenceField
+        label="resources.account_structures_teams.fields.principal_it"
+        source="principal_it"
+        reference="institutes"
+        allowEmpty={true}
+      >
+        <TextField source="name" />
+      </ReferenceField>
+      <ReferenceField
+        label="resources.account_structures_teams.fields.specialized_commission"
+        source="specialized_commission"
+        reference="section_cn"
+        allowEmpty={true}
+      >
+        <TextField source="name" />
+      </ReferenceField>
       <DateInput
         source="register_date"
         label="resources.account_structures_teams.fields.register_date"
@@ -302,11 +358,19 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
         label="resources.account_structures_teams.fields.expiration_date"
         options={{ format: "MM-dd-yyyy" }}
       />
+      <LongTextInput source="comment" />
+      <ReferenceField
+        label="resources.account_structures_teams.fields.community"
+        source="community"
+        reference="communities"
+        allowEmpty={true}
+      >
+        <TextField source="name" />
+      </ReferenceField>
       <BooleanInput
         source="active"
         label="resources.account_structures_teams.fields.active"
       />
-      <LongTextInput source="comment" />
     </SimpleForm>
   </Edit>
 );
@@ -323,14 +387,6 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         label="resources.account_structures_teams.fields.password"
       />
       <SelectInput
-        source="type_of_code"
-        label="resources.account_structures_teams.fields.type_of_code"
-        choices={[
-          { id: "Structure", name: "Structure" },
-          { id: "Equipe", name: "Equipe" }
-        ]}
-      />
-      <SelectInput
         source="structure_type"
         label="resources.account_structures_teams.fields.structure_type"
         choices={[
@@ -346,7 +402,7 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         reference="structures"
         allowEmpty={true}
       >
-        <AutocompleteInput source="code" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
       <ReferenceInput
         label="resources.account_structures_teams.fields.team_number"
@@ -354,14 +410,22 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         reference="teams"
         allowEmpty={true}
       >
-        <AutocompleteInput source="code" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
+      <SelectInput
+        source="type_of_code"
+        label="resources.account_structures_teams.fields.type_of_code"
+        choices={[
+          { id: "Structure", name: "Structure" },
+          { id: "Equipe", name: "Equipe" }
+        ]}
+      />
       <ReferenceInput
         label="resources.structures.fields.community"
         source="community"
         reference="communities"
       >
-        <AutocompleteInput source="code" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
       <DateInput
         source="register_date"

@@ -31,7 +31,7 @@ export default {
         login: "Identifiant",
         password: "Mot de passe",
         structure_type: "Type de structure",
-        structure_code: "Code structure",
+        structure_code: "Code de la structure",
         team_number: "Numéro d'équipe",
         name: "Intitulé d'équipe",
         type_of_code: "Type de code",
