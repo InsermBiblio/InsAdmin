@@ -50,8 +50,8 @@ export const FavorisList = ({ ...props }) => (
         </SingleFieldList>
       </ReferenceArrayField>
 
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );

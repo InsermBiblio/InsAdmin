@@ -8,41 +8,103 @@ import {
   Filter,
   SimpleForm,
   TextField,
-  ReferenceField,
-  ReferenceArrayField,
-  SingleFieldList,
   BooleanField,
-  ChipField,
   TextInput,
-  NumberInput,
+  ReferenceField,
   BooleanInput,
   ReferenceInput,
-  ReferenceArrayInput,
-  SelectInput,
-  SelectArrayInput,
-  LongTextInput,
   AutocompleteInput,
-  downloadCSV
+  downloadCSV,
+  SelectInput,
+  LongTextInput,
+  required
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import {
+  UrlSearchStructures,
+  UrlSearchTeams,
+  UrlSearchFedeInserm
+} from "../components/LinkAccount";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
 
 const StructuresFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    <TextInput
-      source="like_structures.name"
-      label="resources.structures.fields.name"
+
+    <SelectInput
+      source="structures.structure_type"
+      label="resources.structures.fields.structure_type"
+      choices={[
+        { id: "CIC", name: "CIC" },
+        { id: "IFR", name: "IFR" },
+        { id: "U", name: "U" },
+        { id: "US", name: "US" }
+      ]}
     />
     <TextInput
       source="like_structures.code"
       label="resources.structures.fields.code"
     />
     <TextInput
-      source="like_structures.structure_type"
-      label="resources.structures.fields.structure_type"
+      source="like_structures.name"
+      label="resources.structures.fields.name"
+    />
+
+    <ReferenceInput
+      label="resources.structures.fields.principal_it"
+      source="structures.principal_it"
+      reference="institutes"
+      allowEmpty={true}
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
+
+    <ReferenceInput
+      label="resources.structures.fields.specialized_commission"
+      source="structures.specialized_commission"
+      reference="section_cn"
+      allowEmpty={true}
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
+
+    <TextInput
+      source="like_structures.site"
+      label="resources.structures.fields.site"
+    />
+    <TextInput
+      source="like_structures.city"
+      label="resources.structures.fields.city"
+    />
+    <ReferenceInput
+      label="resources.structures.fields.regional_delegation"
+      source="structures.regional_delegation"
+      reference="regionals_delegations"
+      allowEmpty={true}
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
+    <TextInput
+      source="like_structures.director_lastname"
+      label="resources.structures.fields.director_lastname"
+    />
+    <TextInput
+      source="like_structures.mixt_university"
+      label="resources.structures.fields.mixt_university"
+    />
+    <TextInput
+      source="like_structures.cnrs_mixity"
+      label="resources.structures.fields.cnrs_mixity"
+    />
+    <TextInput
+      source="like_structures.other_mixity"
+      label="resources.structures.fields.other_mixity"
+    />
+    <BooleanInput
+      source="structures.active"
+      label="resources.structures.fields.active"
     />
   </Filter>
 );
@@ -55,28 +117,68 @@ const exporter = records => {
 };
 
 export const StructuresList = ({ ...props }) => (
-  <List {...props} filters={<StructuresFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<StructuresFilter />}
+    perPage={10}
+    exporter={exporter}
+  >
     <Datagrid>
+      <LinkEdit source="code" label="resources.structures.fields.code" />
       <LinkEdit source="name" label="resources.structures.fields.name" />
 
-      <LinkEdit source="code" label="resources.structures.fields.code" />
+      <ReferenceField
+        label="resources.structures.fields.regional_delegation"
+        source="regional_delegation"
+        reference="regionals_delegations"
+        linkType="show"
+        allowEmpty={true}
+      >
+        <TextField source="code" />
+      </ReferenceField>
 
+      <TextField source="site" label="resources.structures.fields.site" />
+      <TextField source="city" label="resources.structures.fields.city" />
       <TextField
-        source="structure_type"
-        label="resources.structures.fields.structure_type"
+        source="mixt_university"
+        label="resources.structures.fields.mixt_university"
+      />
+      <TextField
+        source="cnrs_mixity"
+        label="resources.structures.fields.cnrs_mixity"
+      />
+      <TextField
+        source="other_mixity"
+        label="resources.structures.fields.other_mixity"
       />
 
       <TextField
-        source="iunop_code"
-        label="resources.structures.fields.iunop_code"
+        source="total_etp_effectiv"
+        label="resources.structures.fields.total_etp_effectiv"
+      />
+      <TextField
+        source="number_of_certified_team"
+        label="resources.structures.fields.number_of_certified_team"
+      />
+      <UrlSearchStructures
+        source="nb_structure_account"
+        label="resources.structures.fields.nb_structure_account"
+      />
+      <UrlSearchTeams
+        source="nb_team_account"
+        label="resources.structures.fields.nb_team_account"
+      />
+      <UrlSearchFedeInserm
+        source="nb_individual_account"
+        label="resources.structures.fields.nb_individual_account"
       />
 
       <BooleanField
         source="active"
         label="resources.structures.fields.active"
       />
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -106,29 +208,66 @@ UrlSearchJanus.defaultProps = {
 
 export const StructuresEdit = ({ ...props }) => (
   <Edit title={<StructuresTitle />} {...props} actions={<ListEditActions />}>
-    <SimpleForm>
-      <TextInput source="name" label="resources.structures.fields.name" />
-      <BooleanInput
-        source="active"
-        label="resources.structures.fields.active"
+    <SimpleForm redirect="list">
+      <TextInput
+        source="code"
+        label="resources.structures.fields.code"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="name"
+        label="resources.structures.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
+
+      <SelectInput
+        source="structure_type"
+        label="resources.structures.fields.structure_type"
+        choices={[
+          { id: "CIC", name: "CIC" },
+          { id: "IFR", name: "IFR" },
+          { id: "U", name: "U" },
+          { id: "US", name: "US" }
+        ]}
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="iunop_code"
         label="resources.structures.fields.iunop_code"
       />
 
-      <TextInput source="code" label="resources.structures.fields.code" />
       <TextInput
         source="number_of_certified_team"
         label="resources.structures.fields.number_of_certified_team"
       />
+
       <ReferenceInput
         label="resources.structures.fields.regional_delegation"
-        source="structures.regional_delegation"
+        source="regional_delegation"
         reference="regionals_delegations"
+        allowEmpty={true}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
+
+      <ReferenceInput
+        label="resources.structures.fields.principal_it"
+        source="principal_it"
+        reference="institutes"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceInput
+        label="resources.structures.fields.specialized_commission"
+        source="specialized_commission"
+        reference="section_cn"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
+
       <TextInput source="site" label="resources.structures.fields.site" />
       <TextInput source="street" label="resources.structures.fields.street" />
       <TextInput
@@ -182,13 +321,6 @@ export const StructuresEdit = ({ ...props }) => (
         source="other_mixity"
         label="resources.structures.fields.other_mixity"
       />
-      <ReferenceInput
-        label="resources.structures.fields.principal_it"
-        source="structures.principal_it"
-        reference="institute"
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
       <TextInput
         source="total_etp_effectiv"
         label="resources.structures.fields.total_etp_effectiv"
@@ -321,19 +453,34 @@ export const StructuresEdit = ({ ...props }) => (
         source="nb_admin_etp"
         label="resources.structures.fields.nb_admin_etp"
       />
-      <TextInput
-        source="nb_structures_accounts"
-        label="resources.structures.fields.nb_structures_accounts"
+      <UrlSearchStructures
+        source="nb_structure_account"
+        label="resources.structures.fields.nb_structure_account"
       />
-      <TextInput
-        source="nb_teams_account"
-        label="resources.structures.fields.nb_teams_account"
+      <UrlSearchTeams
+        source="nb_team_account"
+        label="resources.structures.fields.nb_team_account"
       />
-      <TextInput
-        source="nb_personal_accounts"
-        label="resources.structures.fields.nb_personal_accounts"
+      <UrlSearchFedeInserm
+        source="nb_individual_account"
+        label="resources.structures.fields.nb_individual_account"
       />
-      <TextInput source="comment" label="resources.structures.fields.comment" />
+      <BooleanInput
+        source="active"
+        label="resources.structures.fields.active"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.structures.fields.comment"
+      />
+      <ReferenceInput
+        label="resources.structures.fields.community"
+        reference="communities"
+        source="communities"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
     </SimpleForm>
   </Edit>
 );
@@ -341,20 +488,65 @@ export const StructuresEdit = ({ ...props }) => (
 export const StructuresCreate = ({ ...props }) => (
   <Create {...props} redirect="list" actions={<ListAddActions />}>
     <SimpleForm redirect="list">
-      <TextInput source="name" label="resources.structures.fields.name" />
-      <BooleanInput
-        source="active"
-        label="resources.structures.fields.active"
+      <TextInput
+        source="code"
+        label="resources.structures.fields.code"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="name"
+        label="resources.structures.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
+
+      <SelectInput
+        source="structure_type"
+        label="resources.structures.fields.structure_type"
+        choices={[
+          { id: "CIC", name: "CIC" },
+          { id: "IFR", name: "IFR" },
+          { id: "U", name: "U" },
+          { id: "US", name: "US" }
+        ]}
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="iunop_code"
         label="resources.structures.fields.iunop_code"
       />
-      <TextInput source="code" label="resources.structures.fields.code" />
+
       <TextInput
         source="number_of_certified_team"
         label="resources.structures.fields.number_of_certified_team"
       />
+
+      <ReferenceInput
+        label="resources.structures.fields.regional_delegation"
+        source="regional_delegation"
+        reference="regionals_delegations"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceInput
+        label="resources.structures.fields.principal_it"
+        source="principal_it"
+        reference="institutes"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
+
+      <ReferenceInput
+        label="resources.structures.fields.specialized_commission"
+        source="specialized_commission"
+        reference="section_cn"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
+
       <TextInput source="site" label="resources.structures.fields.site" />
       <TextInput source="street" label="resources.structures.fields.street" />
       <TextInput
@@ -540,19 +732,34 @@ export const StructuresCreate = ({ ...props }) => (
         source="nb_admin_etp"
         label="resources.structures.fields.nb_admin_etp"
       />
-      <TextInput
+      <TextField
         source="nb_structures_accounts"
         label="resources.structures.fields.nb_structures_accounts"
       />
-      <TextInput
+      <TextField
         source="nb_teams_account"
         label="resources.structures.fields.nb_teams_account"
       />
-      <TextInput
+      <TextField
         source="nb_personal_accounts"
         label="resources.structures.fields.nb_personal_accounts"
       />
-      <TextInput source="comment" label="resources.structures.fields.comment" />
+      <BooleanInput
+        source="active"
+        label="resources.structures.fields.active"
+      />
+      <LongTextInput
+        source="comment"
+        label="resources.structures.fields.comment"
+      />
+      <ReferenceInput
+        label="resources.structures.fields.community"
+        reference="communities"
+        source="communities"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
     </SimpleForm>
   </Create>
 );

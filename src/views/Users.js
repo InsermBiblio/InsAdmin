@@ -9,7 +9,8 @@ import {
   SimpleForm,
   TextField,
   TextInput,
-  LongTextInput
+  LongTextInput,
+  required
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
@@ -30,8 +31,8 @@ export const UsersList = ({ ...props }) => (
     <Datagrid>
       <TextField source="id" label="resources.adminUsers.fields.id" />
       <TextField source="username" label="resources.adminUsers.fields.login" />
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -43,8 +44,15 @@ const UsersTitle = ({ record }) => {
 export const UsersEdit = ({ ...props }) => (
   <Edit title={<UsersTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm>
-      <TextInput source="username" />
-      <TextInput type="password" source="password" />
+      <TextInput
+        source="username"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        type="password"
+        source="password"
+        validate={required("Ce champ est requis!")}
+      />
       <LongTextInput source="comment" />
     </SimpleForm>
   </Edit>
@@ -53,8 +61,15 @@ export const UsersEdit = ({ ...props }) => (
 export const UsersCreate = ({ ...props }) => (
   <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
-      <TextInput source="username" />
-      <TextInput type="password" source="password" />
+      <TextInput
+        source="username"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        type="password"
+        source="password"
+        validate={required("Ce champ est requis!")}
+      />
       <LongTextInput source="comment" />
     </SimpleForm>
   </Create>

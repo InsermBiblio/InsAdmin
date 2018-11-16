@@ -4,6 +4,12 @@ body {
   font-family: sans-serif;
 }
 
+body main a,
+body main span,
+body main input {
+  font-size: 0.825rem !important;
+}
+
 /* increase menu size */
 main > div > div {
   width: initial !important;
@@ -29,8 +35,14 @@ a[role="menuitem"] span {
 
 /* determine size of input in form */
 form.simple-form > div > div > div,
+form.simple-form > div > div > div > span,
 form.simple-form > div > div > span > div {
   width: 90% !important;
+}
+
+.ra-input div div span,
+.ra-input div div a {
+  width: inherit;
 }
 
 div[role="combobox"] > div,

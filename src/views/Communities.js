@@ -7,7 +7,8 @@ import {
   List,
   Filter,
   SimpleForm,
-  TextInput
+  TextInput,
+  required
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -31,8 +32,8 @@ export const CommunitiesList = ({ ...props }) => (
 
       <LinkEdit source="gate" label="resources.communities.fields.gate" />
 
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -44,8 +45,16 @@ const CommunitiesTitle = ({ record }) => {
 export const CommunitiesEdit = ({ ...props }) => (
   <Edit title={<CommunitiesTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm>
-      <TextInput source="name" label="resources.communities.fields.name" />
-      <TextInput source="gate" label="resources.communities.fields.gate" />
+      <TextInput
+        source="name"
+        label="resources.communities.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="gate"
+        label="resources.communities.fields.gate"
+        validate={required("Ce champ est requis!")}
+      />
     </SimpleForm>
   </Edit>
 );
@@ -53,8 +62,16 @@ export const CommunitiesEdit = ({ ...props }) => (
 export const CommunitiesCreate = ({ ...props }) => (
   <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
-      <TextInput source="name" label="resources.communities.fields.name" />
-      <TextInput source="gate" label="resources.communities.fields.gate" />
+      <TextInput
+        source="name"
+        label="resources.communities.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="gate"
+        label="resources.communities.fields.gate"
+        validate={required("Ce champ est requis!")}
+      />
     </SimpleForm>
   </Create>
 );

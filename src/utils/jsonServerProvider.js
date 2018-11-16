@@ -52,28 +52,60 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
          * permet d'effectuer un tri (améliorer l'api pour supprimer cette portion de code)
          */
         switch (resource) {
-          case "inistAccounts":
-            field = `inist_account.${field}`;
-            break;
-          case "janusAccounts":
-            if (field !== "primary_unit" && field !== "primary_institute") {
-              field = `janus_account.${field}`;
+          case "account_structures_teams":
+            if (
+              [
+                "name",
+                "principal_lastname",
+                "principal_email",
+                "principal_it",
+                "specialized_commission"
+              ].includes(field)
+            ) {
+              field = `teams.${field}`;
+            } else if (
+              [
+                "regional_delegation",
+                "site",
+                "city",
+                "mixt_university",
+                "cnrs_mixity",
+                "other_mixity"
+              ].includes(field)
+            ) {
+              field = `structures.${field}`;
+            } else {
+              field = `account_structures_teams.${field}`;
             }
+
             break;
           case "institutes":
             field = `institute.${field}`;
             break;
-          case "units":
-            field = `unit.${field}`;
-            break;
-          case "databases":
-            field = `database.${field}`;
+          case "teams":
+            if (
+              [
+                "city",
+                "site",
+                "mixt_university",
+                "cnrs_mixity",
+                "other_mixity",
+                "total_etp_effectiv",
+                "nb_structures_accounts",
+                "nb_teams_account",
+                "nb_personal_accounts"
+              ].includes(field)
+            ) {
+              field = `structures.${field}`;
+            } else {
+              field = `teams.${field}`;
+            }
             break;
           case "section_cn":
             field = `section_cn.${field}`;
             break;
-          case "revues":
-            field = `revue.${field}`;
+          case "individual_account_fede":
+            field = `individual_account_fede.${field}`;
             break;
           default:
             break;
@@ -81,11 +113,13 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
         const query = {
           _page: page,
-          _perPage: perPage
+          _perPage: perPage || 10
         };
 
-        query._sortField = field;
-        query._sortDir = order || "ASC";
+        if (field !== "id") {
+          query._sortField = field;
+          query._sortDir = order || "ASC";
+        }
 
         if (Object.keys(filters).length > 0) {
           query._filters = JSON.stringify(filters);
@@ -160,13 +194,21 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     switch (type) {
       case GET_LIST:
       case GET_MANY_REFERENCE:
+        let data = json;
+        switch (resource) {
+          case "communities":
+            data = json.map(resource => ({ ...resource, id: resource.name }));
+            break;
+          default:
+            break;
+        }
         if (!headers.has("x-total-count")) {
           throw new Error(
             "The X-Total-Count header is missing in the HTTP Response. The jsonServer Data Provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?"
           );
         }
         return {
-          data: json,
+          data,
           total: parseInt(
             headers
               .get("x-total-count")

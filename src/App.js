@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Admin, Resource, fetchUtils, ListGuesser } from "react-admin";
+import { Admin, Resource, fetchUtils } from "react-admin";
 
 // provider
 import jsonServerProvider from "./utils/jsonServerProvider";
@@ -15,8 +15,16 @@ import FolderIcon from "@material-ui/icons/Folder";
 // import views
 import Dashboard from "./views/Dashboard";
 import { UsersList, UsersEdit, UsersCreate } from "./views/Users";
-import { InistList, InistEdit, InistCreate } from "./views/Inist";
-import { JanusList, JanusEdit } from "./views/Janus";
+import {
+  AccountsStructuresTeamsList,
+  AccountsStructuresTeamsEdit,
+  AccountsStructuresTeamsCreate
+} from "./views/AccountsStructuresTeams";
+import {
+  AccountsFedeInsermList,
+  AccountsFedeInsermEdit,
+  AccountsFedeInsermCreate
+} from "./views/AccountsFedeInserm";
 import {
   InstitutsList,
   InstitutsEdit,
@@ -119,16 +127,17 @@ class App extends Component {
           icon={FolderIcon}
         />
         <Resource
-          name="janusAccounts"
-          list={JanusList}
-          edit={JanusEdit}
+          name="individual_account_fede"
+          list={AccountsFedeInsermList}
+          create={AccountsFedeInsermCreate}
+          edit={AccountsFedeInsermEdit}
           icon={UserIcon}
         />
         <Resource
-          name="inistAccounts"
-          list={InistList}
-          create={InistCreate}
-          edit={InistEdit}
+          name="account_structures_teams"
+          list={AccountsStructuresTeamsList}
+          create={AccountsStructuresTeamsCreate}
+          edit={AccountsStructuresTeamsEdit}
           icon={UserIcon}
         />
         <Resource
