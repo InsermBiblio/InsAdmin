@@ -8,7 +8,8 @@ import {
   Filter,
   SimpleForm,
   TextInput,
-  downloadCSV
+  downloadCSV,
+  required
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -62,8 +63,8 @@ export const RegionalsDelegationsList = ({ ...props }) => (
         label="resources.regionals_delegations.fields.director"
       />
 
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -82,10 +83,12 @@ export const RegionalsDelegationsEdit = ({ ...props }) => (
       <TextInput
         source="code"
         label="resources.regionals_delegations.fields.code"
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="name"
         label="resources.regionals_delegations.fields.name"
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="address"
@@ -137,10 +140,12 @@ export const RegionalsDelegationsCreate = ({ ...props }) => (
       <TextInput
         source="code"
         label="resources.regionals_delegations.fields.code"
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="name"
         label="resources.regionals_delegations.fields.name"
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="address"

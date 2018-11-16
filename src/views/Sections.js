@@ -9,7 +9,8 @@ import {
   SimpleForm,
   TextInput,
   LongTextInput,
-  downloadCSV
+  downloadCSV,
+  required
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -24,8 +25,14 @@ import { ListAddActions, ListEditActions } from "../components/ListActions";
 const SectionsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
-    {/*<TextInput source="name" label="resources.section_cn.fields.name" />
-    <TextInput source="code" label="resources.section_cn.fields.code" />*/}
+    <TextInput
+      source="like_section_cn.name"
+      label="resources.section_cn.fields.name"
+    />
+    <TextInput
+      source="like_section_cn.code"
+      label="resources.section_cn.fields.code"
+    />
   </Filter>
 );
 
@@ -46,8 +53,8 @@ export const SectionsList = ({ ...props }) => (
     <Datagrid>
       <LinkEdit label="resources.section_cn.fields.name" source="name" />
       <LinkEdit label="resources.section_cn.fields.code" source="code" />
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -59,8 +66,16 @@ const SectionsTitle = ({ record }) => {
 export const SectionsEdit = ({ ...props }) => (
   <Edit title={<SectionsTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm>
-      <TextInput source="name" label="resources.section_cn.fields.name" />
-      <TextInput source="code" label="resources.section_cn.fields.code" />
+      <TextInput
+        source="name"
+        label="resources.section_cn.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="code"
+        label="resources.section_cn.fields.code"
+        validate={required("Ce champ est requis!")}
+      />
       <LongTextInput
         source="comment"
         label="resources.section_cn.fields.comment"
@@ -72,8 +87,16 @@ export const SectionsEdit = ({ ...props }) => (
 export const SectionsCreate = ({ ...props }) => (
   <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
-      <TextInput source="name" label="resources.section_cn.fields.name" />
-      <TextInput source="code" label="resources.section_cn.fields.code" />
+      <TextInput
+        source="name"
+        label="resources.section_cn.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="code"
+        label="resources.section_cn.fields.code"
+        validate={required("Ce champ est requis!")}
+      />
       <LongTextInput
         source="comment"
         label="resources.section_cn.fields.comment"

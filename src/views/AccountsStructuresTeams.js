@@ -16,7 +16,8 @@ import {
   LongTextInput,
   BooleanInput,
   ReferenceInput,
-  AutocompleteInput
+  AutocompleteInput,
+  required
 } from "react-admin";
 import { DateInput } from "react-admin-date-inputs";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -154,10 +155,12 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
       <LinkEdit
         source="login"
         label="resources.account_structures_teams.fields.login"
+        validate={required("Ce champ est requis!")}
       />
       <LinkEdit
         source="password"
         label="resources.account_structures_teams.fields.password"
+        validate={required("Ce champ est requis!")}
       />
       <ReferenceField
         label="resources.account_structures_teams.fields.structure_code"
@@ -175,7 +178,7 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
         linkType="show"
         allowEmpty={true}
       >
-        <TextField source="code" />
+        <TextField source="team_number" />
       </ReferenceField>
       <LinkEdit
         source="name"
@@ -226,8 +229,8 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
         source="active"
         label="resources.account_structures_teams.fields.active"
       />
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -246,10 +249,12 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
       <TextInput
         source="login"
         label="resources.account_structures_teams.fields.login"
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="password"
         label="resources.account_structures_teams.fields.password"
+        validate={required("Ce champ est requis!")}
       />
       <SelectInput
         source="structure_type"
@@ -276,7 +281,7 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
         reference="teams"
         allowEmpty={true}
       >
-        <SelectInput optionText="code" />
+        <AutocompleteInput optionText="team_number" />
       </ReferenceInput>
       <TextField
         source="name"
@@ -375,6 +380,11 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
   </Edit>
 );
 
+const passwordValue = Math.random()
+  .toString(36)
+  .slice(-6)
+  .toUpperCase();
+
 export const AccountsStructuresTeamsCreate = ({ ...props }) => (
   <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
@@ -385,6 +395,7 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
       <TextInput
         source="password"
         label="resources.account_structures_teams.fields.password"
+        defaultValue={passwordValue}
       />
       <SelectInput
         source="structure_type"
@@ -410,7 +421,7 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         reference="teams"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="team_number" />
       </ReferenceInput>
       <SelectInput
         source="type_of_code"

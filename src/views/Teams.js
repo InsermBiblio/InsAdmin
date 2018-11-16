@@ -13,7 +13,8 @@ import {
   BooleanInput,
   ReferenceInput,
   AutocompleteInput,
-  BooleanField
+  BooleanField,
+  required
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -156,8 +157,8 @@ export const TeamsList = ({ ...props }) => (
       />
       <BooleanField source="active" label="resources.teams.fields.active" />
 
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -209,14 +210,20 @@ export const TeamsEdit = ({ ...props }) => (
       <TextInput
         source="team_number"
         label="resources.teams.fields.team_number"
+        validate={required("Ce champ est requis!")}
       />
-      <TextInput source="name" label="resources.teams.fields.name" />
+      <TextInput
+        source="name"
+        label="resources.teams.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
 
       <ReferenceInput
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
         allowEmpty={true}
+        validate={required("Ce champ est requis!")}
       >
         <AutocompleteInput optionText="code" />
       </ReferenceInput>
@@ -405,30 +412,26 @@ export const TeamsEdit = ({ ...props }) => (
 export const TeamsCreate = ({ ...props }) => (
   <Create {...props}>
     <SimpleForm redirect="list">
-      <TextInput source="name" label="resources.teams.fields.name" />
-
-      <ReferenceInput
-        label="resources.teams.fields.specialized_commission"
-        source="specialized_commission"
-        reference="section_cn"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
+      <TextInput
+        source="team_number"
+        label="resources.teams.fields.team_number"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="name"
+        label="resources.teams.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
 
       <ReferenceInput
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
         allowEmpty={true}
+        validate={required("Ce champ est requis!")}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
-
-      <TextInput
-        source="team_number"
-        label="resources.teams.fields.team_number"
-      />
 
       <TextInput
         source="principal_lastname"
@@ -444,12 +447,21 @@ export const TeamsCreate = ({ ...props }) => (
       />
 
       <ReferenceInput
-        label="resources.structures.fields.principal_it"
+        label="resources.teams.fields.principal_it"
         source="principal_it"
         reference="institutes"
         allowEmpty={true}
       >
         <AutocompleteInput optionText="code" />
+      </ReferenceInput>
+
+      <ReferenceInput
+        label="resources.teams.fields.specialized_commission"
+        source="specialized_commission"
+        reference="section_cn"
+        allowEmpty={true}
+      >
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <TextInput
@@ -586,14 +598,6 @@ export const TeamsCreate = ({ ...props }) => (
       />
       <BooleanInput source="active" label="resources.teams.fields.active" />
       <TextInput source="comment" label="resources.teams.fields.comment" />
-      <ReferenceField
-        label="resources.structures.fields.community"
-        reference="communities"
-        source="communities"
-        allowEmpty={true}
-      >
-        <TextField source="name" />
-      </ReferenceField>
     </SimpleForm>
   </Create>
 );

@@ -16,7 +16,8 @@ import {
   AutocompleteInput,
   downloadCSV,
   SelectInput,
-  LongTextInput
+  LongTextInput,
+  required
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -176,8 +177,8 @@ export const StructuresList = ({ ...props }) => (
         source="active"
         label="resources.structures.fields.active"
       />
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -208,8 +209,16 @@ UrlSearchJanus.defaultProps = {
 export const StructuresEdit = ({ ...props }) => (
   <Edit title={<StructuresTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm redirect="list">
-      <TextInput source="code" label="resources.structures.fields.code" />
-      <TextInput source="name" label="resources.structures.fields.name" />
+      <TextInput
+        source="code"
+        label="resources.structures.fields.code"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="name"
+        label="resources.structures.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
 
       <SelectInput
         source="structure_type"
@@ -220,6 +229,7 @@ export const StructuresEdit = ({ ...props }) => (
           { id: "U", name: "U" },
           { id: "US", name: "US" }
         ]}
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="iunop_code"
@@ -478,8 +488,16 @@ export const StructuresEdit = ({ ...props }) => (
 export const StructuresCreate = ({ ...props }) => (
   <Create {...props} redirect="list" actions={<ListAddActions />}>
     <SimpleForm redirect="list">
-      <TextInput source="code" label="resources.structures.fields.code" />
-      <TextInput source="name" label="resources.structures.fields.name" />
+      <TextInput
+        source="code"
+        label="resources.structures.fields.code"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="name"
+        label="resources.structures.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
 
       <SelectInput
         source="structure_type"
@@ -490,6 +508,7 @@ export const StructuresCreate = ({ ...props }) => (
           { id: "U", name: "U" },
           { id: "US", name: "US" }
         ]}
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="iunop_code"

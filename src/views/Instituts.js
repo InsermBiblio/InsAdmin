@@ -8,7 +8,8 @@ import {
   Filter,
   SimpleForm,
   TextInput,
-  downloadCSV
+  downloadCSV,
+  required
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -47,8 +48,8 @@ export const InstitutsList = ({ ...props }) => (
     <Datagrid>
       <LinkEdit source="name" label="resources.institutes.fields.name" />
       <LinkEdit source="code" label="resources.institutes.fields.code" />
-      <EditButton />
-      <DeleteButtonWithConfirmation />
+      <EditButton label="" />
+      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -60,8 +61,16 @@ const InstitutsTitle = ({ record }) => {
 export const InstitutsEdit = ({ ...props }) => (
   <Edit title={<InstitutsTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm>
-      <TextInput source="code" label="resources.institutes.fields.code" />
-      <TextInput source="name" label="resources.institutes.fields.name" />
+      <TextInput
+        source="code"
+        label="resources.institutes.fields.code"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="name"
+        label="resources.institutes.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
       <TextInput source="mail" label="resources.institutes.fields.mail" />
@@ -80,8 +89,16 @@ export const InstitutsEdit = ({ ...props }) => (
 export const InstitutsCreate = ({ ...props }) => (
   <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
-      <TextInput source="code" label="resources.institutes.fields.code" />
-      <TextInput source="name" label="resources.institutes.fields.name" />
+      <TextInput
+        source="code"
+        label="resources.institutes.fields.code"
+        validate={required("Ce champ est requis!")}
+      />
+      <TextInput
+        source="name"
+        label="resources.institutes.fields.name"
+        validate={required("Ce champ est requis!")}
+      />
       <TextInput source="address" label="resources.institutes.fields.address" />
       <TextInput source="phone" label="resources.institutes.fields.phone" />
       <TextInput source="mail" label="resources.institutes.fields.mail" />

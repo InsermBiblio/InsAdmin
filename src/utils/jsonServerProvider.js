@@ -104,8 +104,8 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           case "section_cn":
             field = `section_cn.${field}`;
             break;
-          case "revues":
-            field = `revue.${field}`;
+          case "individual_account_fede":
+            field = `individual_account_fede.${field}`;
             break;
           default:
             break;
