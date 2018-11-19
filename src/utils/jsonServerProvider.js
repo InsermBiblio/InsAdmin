@@ -105,7 +105,11 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             field = `section_cn.${field}`;
             break;
           case "individual_account_fede":
-            field = `individual_account_fede.${field}`;
+            if (field === "name") {
+              field = `teams.${field}`;
+            } else {
+              field = `individual_account_fede.${field}`;
+            }
             break;
           default:
             break;

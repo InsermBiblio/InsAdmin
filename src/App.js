@@ -44,9 +44,9 @@ import {
   DatabasesList,
   DatabasesEdit,
   DatabasesCreate
-} from "./views/Databases";*/
+} from "./views/Databases";
+import { FavorisList, FavorisEdit, FavorisCreate } from "./views/Favoris";*/
 import { SectionsList, SectionsEdit, SectionsCreate } from "./views/Sections";
-import { FavorisList, FavorisEdit, FavorisCreate } from "./views/Favoris";
 import { TeamsList, TeamsEdit, TeamsCreate } from "./views/Teams";
 import {
   RegionalsDelegationsList,
@@ -174,14 +174,14 @@ class App extends Component {
           create={DatabasesCreate}
           edit={DatabasesEdit}
           icon={FolderIcon}
-        />*/}
+        />
         <Resource
           name="revues"
           list={FavorisList}
           create={FavorisCreate}
           edit={FavorisEdit}
           icon={FolderIcon}
-        />
+        />*/}
       </Admin>
     );
   }

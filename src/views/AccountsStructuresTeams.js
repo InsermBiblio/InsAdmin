@@ -63,7 +63,7 @@ const AccountsStructuresTeamsFilter = props => (
       reference="structures"
       allowEmpty={true}
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="code" />
     </ReferenceInput>
     <ReferenceInput
       label="resources.account_structures_teams.fields.team_number"
@@ -71,7 +71,7 @@ const AccountsStructuresTeamsFilter = props => (
       reference="teams"
       allowEmpty={true}
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="team_number" />
     </ReferenceInput>
     <TextInput
       source="like_teams.name"
@@ -82,7 +82,8 @@ const AccountsStructuresTeamsFilter = props => (
       label="resources.account_structures_teams.fields.type_of_code"
       choices={[
         { id: "Structure", name: "Structure" },
-        { id: "Equipe", name: "Equipe" }
+        { id: "Equipe", name: "Equipe" },
+        { id: "Autre", name: "Autre" }
       ]}
     />
     <ReferenceInput
@@ -114,7 +115,7 @@ const AccountsStructuresTeamsFilter = props => (
     />
     <ReferenceInput
       label="resources.account_structures_teams.fields.principal_it"
-      source="account_structures_teams.principal_it"
+      source="teams.principal_it"
       reference="institutes"
     >
       <AutocompleteInput source="code" />
@@ -180,11 +181,16 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
       >
         <TextField source="team_number" />
       </ReferenceField>
-      <LinkEdit
-        source="name"
-        label="resources.account_structures_teams.fields.name"
-      />
-      <LinkEdit
+      <ReferenceField
+        label="resources.account_structures_teams.fields.team_number"
+        source="team_number"
+        reference="teams"
+        linkType="show"
+        allowEmpty={true}
+      >
+        <TextField source="name" />
+      </ReferenceField>
+      <TextField
         source="type_of_code"
         label="resources.account_structures_teams.fields.type_of_code"
       />
@@ -293,7 +299,8 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
         label="resources.account_structures_teams.fields.type_of_code"
         choices={[
           { id: "Structure", name: "Structure" },
-          { id: "Equipe", name: "Equipe" }
+          { id: "Equipe", name: "Equipe" },
+          { id: "Autre", name: "Autre" }
         ]}
       />
 
@@ -428,7 +435,8 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         label="resources.account_structures_teams.fields.type_of_code"
         choices={[
           { id: "Structure", name: "Structure" },
-          { id: "Equipe", name: "Equipe" }
+          { id: "Equipe", name: "Equipe" },
+          { id: "Autre", name: "Autre" }
         ]}
       />
       <ReferenceInput
