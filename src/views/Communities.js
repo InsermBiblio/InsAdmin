@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Create,
   Datagrid,
   Edit,
   EditButton,
@@ -10,9 +9,8 @@ import {
   TextInput,
   required
 } from "react-admin";
-import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
-import { ListAddActions, ListEditActions } from "../components/ListActions";
+import { ListEditActions } from "../components/ListActions";
 
 const CommunitiesFilter = props => (
   <Filter {...props}>
@@ -33,7 +31,6 @@ export const CommunitiesList = ({ ...props }) => (
       <LinkEdit source="gate" label="resources.communities.fields.gate" />
 
       <EditButton label="" />
-      <DeleteButtonWithConfirmation label="" />
     </Datagrid>
   </List>
 );
@@ -57,21 +54,4 @@ export const CommunitiesEdit = ({ ...props }) => (
       />
     </SimpleForm>
   </Edit>
-);
-
-export const CommunitiesCreate = ({ ...props }) => (
-  <Create {...props} actions={<ListAddActions />}>
-    <SimpleForm redirect="list">
-      <TextInput
-        source="name"
-        label="resources.communities.fields.name"
-        validate={required("Ce champ est requis!")}
-      />
-      <TextInput
-        source="gate"
-        label="resources.communities.fields.gate"
-        validate={required("Ce champ est requis!")}
-      />
-    </SimpleForm>
-  </Create>
 );

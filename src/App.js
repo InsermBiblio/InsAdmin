@@ -35,17 +35,8 @@ import {
   StructuresEdit,
   StructuresCreate
 } from "./views/Structures";
-import {
-  CommunitiesList,
-  CommunitiesEdit,
-  CommunitiesCreate
-} from "./views/Communities";
-/*import {
-  DatabasesList,
-  DatabasesEdit,
-  DatabasesCreate
-} from "./views/Databases";
-import { FavorisList, FavorisEdit, FavorisCreate } from "./views/Favoris";*/
+import { CommunitiesList, CommunitiesEdit } from "./views/Communities";
+/*import { FavorisList, FavorisEdit, FavorisCreate } from "./views/Favoris";*/
 import { SectionsList, SectionsEdit, SectionsCreate } from "./views/Sections";
 import { TeamsList, TeamsEdit, TeamsCreate } from "./views/Teams";
 import {
@@ -122,7 +113,6 @@ class App extends Component {
         <Resource
           name="communities"
           list={CommunitiesList}
-          create={CommunitiesCreate}
           edit={CommunitiesEdit}
           icon={FolderIcon}
         />
@@ -168,13 +158,7 @@ class App extends Component {
           edit={StructuresEdit}
           icon={GroupIcon}
         />
-        {/*<Resource
-          name="databases"
-          list={DatabasesList}
-          create={DatabasesCreate}
-          edit={DatabasesEdit}
-          icon={FolderIcon}
-        />
+        {/*
         <Resource
           name="revues"
           list={FavorisList}
