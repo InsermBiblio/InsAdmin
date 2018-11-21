@@ -182,7 +182,7 @@ export default {
         iunop_code: "Code iunop",
         code: "Code de la structure",
         name: "Intitulé de la structure",
-        number_of_certified_team: "Nb d'équipes labélisée",
+        number_of_certified_team: "Nb d'équipes labélisées",
         regional_delegation: "Délégation régionale",
         community: "Communauté",
         site: "Site",
@@ -240,7 +240,7 @@ export default {
         nb_admin_etp: "Nb admin ETP",
         nb_structure_account: "Nb de comptes structure",
         nb_team_account: "Nb de comptes équipe",
-        nb_individual_account: "Nb de comptes individuel",
+        nb_individual_account: "Nb de comptes individuels",
         active: "Active",
         comment: "Commentaire"
       }
@@ -250,17 +250,17 @@ export default {
       fields: {
         id: "id",
         name: "Nom",
+        code: "code",
         address: "Adresse",
         phone: "Téléphone",
-        mail: "Email",
-        director: "Directeur",
-        director_mail: "Mail directeur",
-        rh: "RH",
-        rh_mail: "Mail RH",
-        rri: "RRI",
-        rri_mail: "Mail RRI",
-        website: "Site web",
-        code: "code"
+        dr_mail: "Email du directeur",
+        director_name: "Nom du directeur",
+        director_mail: "Mail du directeur",
+        rh_name: "Nom du RH",
+        rh_mail: "Mail du RH",
+        rri_name: "Nom du RRI",
+        rri_mail: "Mail du RRI",
+        website: "Site web"
       }
     },
     communities: {

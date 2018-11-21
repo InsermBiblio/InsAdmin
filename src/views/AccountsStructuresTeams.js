@@ -182,7 +182,7 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
         <TextField source="team_number" />
       </ReferenceField>
       <ReferenceField
-        label="resources.account_structures_teams.fields.team_number"
+        label="resources.account_structures_teams.fields.name"
         source="team_number"
         reference="teams"
         linkType="show"
