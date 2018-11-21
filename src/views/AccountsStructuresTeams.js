@@ -54,7 +54,10 @@ const AccountsStructuresTeamsFilter = props => (
         { id: "CIC", name: "CIC" },
         { id: "IFR", name: "IFR" },
         { id: "U", name: "U" },
-        { id: "US", name: "US" }
+        { id: "US", name: "US" },
+        { id: "ADR", name: "ADR" },
+        { id: "DEP", name: "DEP" },
+        { id: "ITMO", name: "ITMO" }
       ]}
     />
     <ReferenceInput
@@ -269,7 +272,10 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
           { id: "CIC", name: "CIC" },
           { id: "IFR", name: "IFR" },
           { id: "U", name: "U" },
-          { id: "US", name: "US" }
+          { id: "US", name: "US" },
+          { id: "ADR", name: "ADR" },
+          { id: "DEP", name: "DEP" },
+          { id: "ITMO", name: "ITMO" }
         ]}
       />
       <ReferenceInput
@@ -409,7 +415,10 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
           { id: "CIC", name: "CIC" },
           { id: "IFR", name: "IFR" },
           { id: "U", name: "U" },
-          { id: "US", name: "US" }
+          { id: "US", name: "US" },
+          { id: "ADR", name: "ADR" },
+          { id: "DEP", name: "DEP" },
+          { id: "ITMO", name: "ITMO" }
         ]}
       />
       <ReferenceInput

@@ -42,7 +42,10 @@ const StructuresFilter = props => (
         { id: "CIC", name: "CIC" },
         { id: "IFR", name: "IFR" },
         { id: "U", name: "U" },
-        { id: "US", name: "US" }
+        { id: "US", name: "US" },
+        { id: "ADR", name: "ADR" },
+        { id: "DEP", name: "DEP" },
+        { id: "ITMO", name: "ITMO" }
       ]}
     />
     <TextInput
@@ -210,7 +213,10 @@ export const StructuresEdit = ({ ...props }) => (
           { id: "CIC", name: "CIC" },
           { id: "IFR", name: "IFR" },
           { id: "U", name: "U" },
-          { id: "US", name: "US" }
+          { id: "US", name: "US" },
+          { id: "ADR", name: "ADR" },
+          { id: "DEP", name: "DEP" },
+          { id: "ITMO", name: "ITMO" }
         ]}
         validate={required("Ce champ est requis!")}
       />
@@ -498,7 +504,10 @@ export const StructuresCreate = ({ ...props }) => (
           { id: "CIC", name: "CIC" },
           { id: "IFR", name: "IFR" },
           { id: "U", name: "U" },
-          { id: "US", name: "US" }
+          { id: "US", name: "US" },
+          { id: "ADR", name: "ADR" },
+          { id: "DEP", name: "DEP" },
+          { id: "ITMO", name: "ITMO" }
         ]}
         validate={required("Ce champ est requis!")}
       />
