@@ -19,7 +19,7 @@ import {
   AutocompleteInput,
   required
 } from "react-admin";
-import { DateInput } from "react-admin-date-inputs";
+import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
@@ -127,19 +127,19 @@ const AccountsStructuresTeamsFilter = props => (
     >
       <AutocompleteInput source="code" />
     </ReferenceInput>
-    <DateInput
+    <FrenchDateInput
       source="to_account_structures_teams.register_date"
       label="resources.account_structures_teams.fields.register_date_before"
     />
-    <DateInput
+    <FrenchDateInput
       source="from_account_structures_teams.register_date"
       label="resources.account_structures_teams.fields.register_date_after"
     />
-    <DateInput
+    <FrenchDateInput
       source="to_account_structures_teams.expiration_date"
       label="resources.account_structures_teams.fields.expiration_date_before"
     />
-    <DateInput
+    <FrenchDateInput
       source="from_account_structures_teams.expiration_date"
       label="resources.account_structures_teams.fields.expiration_date_after"
     />
@@ -360,15 +360,13 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
       >
         <TextField source="name" />
       </ReferenceField>
-      <DateInput
+      <FrenchDateInput
         source="register_date"
         label="resources.account_structures_teams.fields.register_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput
+      <FrenchDateInput
         source="expiration_date"
         label="resources.account_structures_teams.fields.expiration_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
       <LongTextInput source="comment" />
       <ReferenceField
@@ -446,15 +444,13 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
       >
         <AutocompleteInput optionText="code" />
       </ReferenceInput>
-      <DateInput
+      <FrenchDateInput
         source="register_date"
         label="resources.account_structures_teams.fields.register_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput
+      <FrenchDateInput
         source="expiration_date"
         label="resources.account_structures_teams.fields.expiration_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
       <BooleanInput
         source="active"

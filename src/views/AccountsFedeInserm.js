@@ -20,7 +20,7 @@ import {
   SelectInput,
   required
 } from "react-admin";
-import { DateInput } from "react-admin-date-inputs";
+import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
@@ -131,19 +131,19 @@ const AccountsFedeInsermFilter = props => (
       source="like_individual_account_fede.agent_function"
       label="resources.individual_account_fede.fields.agent_function"
     />
-    <DateInput
+    <FrenchDateInput
       source="to_individual_account_fede.register_date"
       label="resources.individual_account_fede.fields.register_date_before"
     />
-    <DateInput
+    <FrenchDateInput
       source="from_individual_account_fede.register_date"
       label="resources.individual_account_fede.fields.register_date_after"
     />
-    <DateInput
+    <FrenchDateInput
       source="to_individual_account_fede.expiration_date"
       label="resources.individual_account_fede.fields.last_connection_before"
     />
-    <DateInput
+    <FrenchDateInput
       source="from_individual_account_fede.expiration_date"
       label="resources.individual_account_fede.fields.last_connection_after"
     />
@@ -383,12 +383,12 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         source="type_of_assigned_structure"
         label="resources.individual_account_fede.fields.type_of_assigned_structure"
       />
-      <DateInput
+      <FrenchDateInput
         source="register_date"
         label="resources.individual_account_fede.fields.register_date"
         options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput
+      <FrenchDateInput
         source="last_connection"
         label="resources.individual_account_fede.fields.last_connection"
         options={{ format: "MM-dd-yyyy" }}
@@ -530,12 +530,12 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         label="resources.individual_account_fede.fields.type_of_assigned_structure"
       />
 
-      <DateInput
+      <FrenchDateInput
         source="register_date"
         label="resources.individual_account_fede.fields.register_date"
         options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput
+      <FrenchDateInput
         source="last_connection"
         label="resources.individual_account_fede.fields.last_connection"
         options={{ format: "MM-dd-yyyy" }}

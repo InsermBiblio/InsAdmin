@@ -167,9 +167,9 @@ export default {
         nb_cdd_others_etp: "Nb CDD autres ETP",
         nb_admin_pp: "Nb admin PP",
         nb_admin_etp: "Nb admin ETP",
-        nb_structure_account: "Nb de comptes structure",
-        nb_team_account: "Nb de comptes équipe",
-        nb_individual_account: "Nb de comptes individuel",
+        nb_structure_account: "Nb de comptes structures",
+        nb_team_account: "Nb de comptes équipes",
+        nb_individual_account: "Nb de comptes individuels",
         active: "Active",
         comment: "Commentaire"
       }
@@ -238,8 +238,8 @@ export default {
         nb_cdd_others_etp: "Nb CDD autres ETP",
         nb_admin_pp: "Nb admin PP",
         nb_admin_etp: "Nb admin ETP",
-        nb_structure_account: "Nb de comptes structure",
-        nb_team_account: "Nb de comptes équipe",
+        nb_structure_account: "Nb de comptes structures",
+        nb_team_account: "Nb de comptes équipes",
         nb_individual_account: "Nb de comptes individuels",
         active: "Active",
         comment: "Commentaire"
