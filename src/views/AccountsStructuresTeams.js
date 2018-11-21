@@ -19,7 +19,7 @@ import {
   AutocompleteInput,
   required
 } from "react-admin";
-import { DateInput } from "react-admin-date-inputs";
+import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
@@ -54,7 +54,10 @@ const AccountsStructuresTeamsFilter = props => (
         { id: "CIC", name: "CIC" },
         { id: "IFR", name: "IFR" },
         { id: "U", name: "U" },
-        { id: "US", name: "US" }
+        { id: "US", name: "US" },
+        { id: "ADR", name: "ADR" },
+        { id: "DEP", name: "DEP" },
+        { id: "ITMO", name: "ITMO" }
       ]}
     />
     <ReferenceInput
@@ -63,7 +66,7 @@ const AccountsStructuresTeamsFilter = props => (
       reference="structures"
       allowEmpty={true}
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="code" />
     </ReferenceInput>
     <ReferenceInput
       label="resources.account_structures_teams.fields.team_number"
@@ -71,7 +74,7 @@ const AccountsStructuresTeamsFilter = props => (
       reference="teams"
       allowEmpty={true}
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="team_number" />
     </ReferenceInput>
     <TextInput
       source="like_teams.name"
@@ -82,7 +85,8 @@ const AccountsStructuresTeamsFilter = props => (
       label="resources.account_structures_teams.fields.type_of_code"
       choices={[
         { id: "Structure", name: "Structure" },
-        { id: "Equipe", name: "Equipe" }
+        { id: "Equipe", name: "Equipe" },
+        { id: "Autre", name: "Autre" }
       ]}
     />
     <ReferenceInput
@@ -114,7 +118,7 @@ const AccountsStructuresTeamsFilter = props => (
     />
     <ReferenceInput
       label="resources.account_structures_teams.fields.principal_it"
-      source="account_structures_teams.principal_it"
+      source="teams.principal_it"
       reference="institutes"
     >
       <AutocompleteInput source="code" />
@@ -126,19 +130,19 @@ const AccountsStructuresTeamsFilter = props => (
     >
       <AutocompleteInput source="code" />
     </ReferenceInput>
-    <DateInput
+    <FrenchDateInput
       source="to_account_structures_teams.register_date"
       label="resources.account_structures_teams.fields.register_date_before"
     />
-    <DateInput
+    <FrenchDateInput
       source="from_account_structures_teams.register_date"
       label="resources.account_structures_teams.fields.register_date_after"
     />
-    <DateInput
+    <FrenchDateInput
       source="to_account_structures_teams.expiration_date"
       label="resources.account_structures_teams.fields.expiration_date_before"
     />
-    <DateInput
+    <FrenchDateInput
       source="from_account_structures_teams.expiration_date"
       label="resources.account_structures_teams.fields.expiration_date_after"
     />
@@ -180,11 +184,16 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
       >
         <TextField source="team_number" />
       </ReferenceField>
-      <LinkEdit
-        source="name"
+      <ReferenceField
         label="resources.account_structures_teams.fields.name"
-      />
-      <LinkEdit
+        source="team_number"
+        reference="teams"
+        linkType="show"
+        allowEmpty={true}
+      >
+        <TextField source="name" />
+      </ReferenceField>
+      <TextField
         source="type_of_code"
         label="resources.account_structures_teams.fields.type_of_code"
       />
@@ -263,7 +272,10 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
           { id: "CIC", name: "CIC" },
           { id: "IFR", name: "IFR" },
           { id: "U", name: "U" },
-          { id: "US", name: "US" }
+          { id: "US", name: "US" },
+          { id: "ADR", name: "ADR" },
+          { id: "DEP", name: "DEP" },
+          { id: "ITMO", name: "ITMO" }
         ]}
       />
       <ReferenceInput
@@ -293,7 +305,8 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
         label="resources.account_structures_teams.fields.type_of_code"
         choices={[
           { id: "Structure", name: "Structure" },
-          { id: "Equipe", name: "Equipe" }
+          { id: "Equipe", name: "Equipe" },
+          { id: "Autre", name: "Autre" }
         ]}
       />
 
@@ -353,15 +366,13 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
       >
         <TextField source="name" />
       </ReferenceField>
-      <DateInput
+      <FrenchDateInput
         source="register_date"
         label="resources.account_structures_teams.fields.register_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput
+      <FrenchDateInput
         source="expiration_date"
         label="resources.account_structures_teams.fields.expiration_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
       <LongTextInput source="comment" />
       <ReferenceField
@@ -404,7 +415,10 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
           { id: "CIC", name: "CIC" },
           { id: "IFR", name: "IFR" },
           { id: "U", name: "U" },
-          { id: "US", name: "US" }
+          { id: "US", name: "US" },
+          { id: "ADR", name: "ADR" },
+          { id: "DEP", name: "DEP" },
+          { id: "ITMO", name: "ITMO" }
         ]}
       />
       <ReferenceInput
@@ -428,7 +442,8 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         label="resources.account_structures_teams.fields.type_of_code"
         choices={[
           { id: "Structure", name: "Structure" },
-          { id: "Equipe", name: "Equipe" }
+          { id: "Equipe", name: "Equipe" },
+          { id: "Autre", name: "Autre" }
         ]}
       />
       <ReferenceInput
@@ -438,15 +453,13 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
       >
         <AutocompleteInput optionText="code" />
       </ReferenceInput>
-      <DateInput
+      <FrenchDateInput
         source="register_date"
         label="resources.account_structures_teams.fields.register_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
-      <DateInput
+      <FrenchDateInput
         source="expiration_date"
         label="resources.account_structures_teams.fields.expiration_date"
-        options={{ format: "MM-dd-yyyy" }}
       />
       <BooleanInput
         source="active"

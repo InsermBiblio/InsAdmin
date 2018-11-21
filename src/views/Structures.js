@@ -14,6 +14,8 @@ import {
   BooleanInput,
   ReferenceInput,
   AutocompleteInput,
+  ReferenceArrayInput,
+  SelectArrayInput,
   downloadCSV,
   SelectInput,
   LongTextInput,
@@ -40,7 +42,10 @@ const StructuresFilter = props => (
         { id: "CIC", name: "CIC" },
         { id: "IFR", name: "IFR" },
         { id: "U", name: "U" },
-        { id: "US", name: "US" }
+        { id: "US", name: "US" },
+        { id: "ADR", name: "ADR" },
+        { id: "DEP", name: "DEP" },
+        { id: "ITMO", name: "ITMO" }
       ]}
     />
     <TextInput
@@ -187,25 +192,6 @@ const StructuresTitle = ({ record }) => {
   return record.name;
 };
 
-/*
-const UrlSearchInist = ({ source, record = {} }) => {
-  const url = `#/inistAccounts/list?search={"main_unit.id":${record.id}}`;
-  return <a href={url}>{record.nb_inist_account}</a>;
-};
-
-UrlSearchInist.defaultProps = {
-  addLabel: true
-};
-
-const UrlSearchJanus = ({ source, record = {} }) => {
-  const url = `#/janusAccounts/list?search={"main_unit.id":${record.id}}`;
-  return <a href={url}>{record.nb_janus_account}</a>;
-};
-
-UrlSearchJanus.defaultProps = {
-  addLabel: true
-};*/
-
 export const StructuresEdit = ({ ...props }) => (
   <Edit title={<StructuresTitle />} {...props} actions={<ListEditActions />}>
     <SimpleForm redirect="list">
@@ -227,7 +213,10 @@ export const StructuresEdit = ({ ...props }) => (
           { id: "CIC", name: "CIC" },
           { id: "IFR", name: "IFR" },
           { id: "U", name: "U" },
-          { id: "US", name: "US" }
+          { id: "US", name: "US" },
+          { id: "ADR", name: "ADR" },
+          { id: "DEP", name: "DEP" },
+          { id: "ITMO", name: "ITMO" }
         ]}
         validate={required("Ce champ est requis!")}
       />
@@ -258,6 +247,15 @@ export const StructuresEdit = ({ ...props }) => (
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
+
+      <ReferenceArrayInput
+        label="resources.structures.fields.secondary_it"
+        source="secondary_it"
+        reference="institutes"
+        allowEmpty={true}
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
 
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"
@@ -476,7 +474,7 @@ export const StructuresEdit = ({ ...props }) => (
       <ReferenceInput
         label="resources.structures.fields.community"
         reference="communities"
-        source="communities"
+        source="community"
         allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
@@ -506,7 +504,10 @@ export const StructuresCreate = ({ ...props }) => (
           { id: "CIC", name: "CIC" },
           { id: "IFR", name: "IFR" },
           { id: "U", name: "U" },
-          { id: "US", name: "US" }
+          { id: "US", name: "US" },
+          { id: "ADR", name: "ADR" },
+          { id: "DEP", name: "DEP" },
+          { id: "ITMO", name: "ITMO" }
         ]}
         validate={required("Ce champ est requis!")}
       />
@@ -537,6 +538,15 @@ export const StructuresCreate = ({ ...props }) => (
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
+
+      <ReferenceArrayInput
+        label="resources.structures.fields.secondary_it"
+        source="secondary_it"
+        reference="institutes"
+        allowEmpty={true}
+      >
+        <SelectArrayInput optionText="name" />
+      </ReferenceArrayInput>
 
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"
@@ -732,18 +742,6 @@ export const StructuresCreate = ({ ...props }) => (
         source="nb_admin_etp"
         label="resources.structures.fields.nb_admin_etp"
       />
-      <TextField
-        source="nb_structures_accounts"
-        label="resources.structures.fields.nb_structures_accounts"
-      />
-      <TextField
-        source="nb_teams_account"
-        label="resources.structures.fields.nb_teams_account"
-      />
-      <TextField
-        source="nb_personal_accounts"
-        label="resources.structures.fields.nb_personal_accounts"
-      />
       <BooleanInput
         source="active"
         label="resources.structures.fields.active"
@@ -755,7 +753,7 @@ export const StructuresCreate = ({ ...props }) => (
       <ReferenceInput
         label="resources.structures.fields.community"
         reference="communities"
-        source="communities"
+        source="community"
         allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />

@@ -9,6 +9,7 @@ import {
   SimpleForm,
   TextField,
   ReferenceField,
+  SelectInput,
   TextInput,
   BooleanInput,
   ReferenceInput,
@@ -33,13 +34,25 @@ const TeamsFilter = props => (
       source="teams.structure_code"
       reference="structures"
       allowEmpty={true}
+      perPage={50}
     >
       <AutocompleteInput optionText="code" />
     </ReferenceInput>
-    <TextInput
-      source="like_teams.team_number"
-      label="resources.teams.fields.team_number"
+
+    <SelectInput
+      source="structures.structure_type"
+      label="resources.account_structures_teams.fields.structure_type"
+      choices={[
+        { id: "CIC", name: "CIC" },
+        { id: "IFR", name: "IFR" },
+        { id: "U", name: "U" },
+        { id: "US", name: "US" },
+        { id: "ADR", name: "ADR" },
+        { id: "DEP", name: "DEP" },
+        { id: "ITMO", name: "ITMO" }
+      ]}
     />
+
     <TextInput source="like_teams.name" label="resources.teams.fields.name" />
     <TextInput
       source="like_teams.principal_lastname"
@@ -75,22 +88,22 @@ const TeamsFilter = props => (
 
     <ReferenceInput
       label="resources.teams.fields.regional_delegation"
-      source="teams.regional_delegation"
+      source="structures.regional_delegation"
       reference="regionals_delegations"
       allowEmpty={true}
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <TextInput
-      source="like_teams.mixt_university"
+      source="like_structures.mixt_university"
       label="resources.teams.fields.mixt_university"
     />
     <TextInput
-      source="like_teams.cnrs_mixity"
+      source="like_structures.cnrs_mixity"
       label="resources.teams.fields.cnrs_mixity"
     />
     <TextInput
-      source="like_teams.other_mixity"
+      source="like_structures.other_mixity"
       label="resources.teams.fields.other_mixity"
     />
     <BooleanInput source="teams.active" label="resources.teams.fields.active" />

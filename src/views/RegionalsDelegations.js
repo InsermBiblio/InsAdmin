@@ -28,15 +28,18 @@ const RegionalsDelegationsFilter = props => (
       label="resources.regionals_delegations.fields.name"
     />
     <TextInput
-      source="like_regionals_delegations.director"
-      label="resources.regionals_delegations.fields.director"
+      source="like_regionals_delegations.director_name"
+      label="resources.regionals_delegations.fields.director_name"
     />
   </Filter>
 );
 
 const exporter = records => {
   const csv = convertToCSV(records, {
-    delimiter: "|"
+    delimiter: ";",
+    quotes: true,
+    quoteChar: '"',
+    encoding: "ISO-8859-1"
   });
   downloadCSV(csv, "regionals_delegations");
 };
@@ -59,8 +62,8 @@ export const RegionalsDelegationsList = ({ ...props }) => (
         label="resources.regionals_delegations.fields.name"
       />
       <LinkEdit
-        source="director"
-        label="resources.regionals_delegations.fields.director"
+        source="director_name"
+        label="resources.regionals_delegations.fields.director_name"
       />
 
       <EditButton label="" />
@@ -99,28 +102,24 @@ export const RegionalsDelegationsEdit = ({ ...props }) => (
         label="resources.regionals_delegations.fields.phone"
       />
       <TextInput
-        source="mail"
-        label="resources.regionals_delegations.fields.mail"
-      />
-      <TextInput
-        source="director"
-        label="resources.regionals_delegations.fields.director"
+        source="director_name"
+        label="resources.regionals_delegations.fields.director_name"
       />
       <TextInput
         source="director_mail"
         label="resources.regionals_delegations.fields.director_mail"
       />
       <TextInput
-        source="rh"
-        label="resources.regionals_delegations.fields.rh"
+        source="rh_name"
+        label="resources.regionals_delegations.fields.rh_name"
       />
       <TextInput
         source="rh_mail"
         label="resources.regionals_delegations.fields.rh_mail"
       />
       <TextInput
-        source="rri"
-        label="resources.regionals_delegations.fields.rri"
+        source="rri_name"
+        label="resources.regionals_delegations.fields.rri_name"
       />
       <TextInput
         source="rri_mail"
@@ -156,28 +155,24 @@ export const RegionalsDelegationsCreate = ({ ...props }) => (
         label="resources.regionals_delegations.fields.phone"
       />
       <TextInput
-        source="mail"
-        label="resources.regionals_delegations.fields.mail"
-      />
-      <TextInput
-        source="director"
-        label="resources.regionals_delegations.fields.director"
+        source="director_name"
+        label="resources.regionals_delegations.fields.director_name"
       />
       <TextInput
         source="director_mail"
         label="resources.regionals_delegations.fields.director_mail"
       />
       <TextInput
-        source="rh"
-        label="resources.regionals_delegations.fields.rh"
+        source="rh_name"
+        label="resources.regionals_delegations.fields.rh_name"
       />
       <TextInput
         source="rh_mail"
         label="resources.regionals_delegations.fields.rh_mail"
       />
       <TextInput
-        source="rri"
-        label="resources.regionals_delegations.fields.rri"
+        source="rri_name"
+        label="resources.regionals_delegations.fields.rri_name"
       />
       <TextInput
         source="rri_mail"

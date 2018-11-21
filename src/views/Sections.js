@@ -38,9 +38,12 @@ const SectionsFilter = props => (
 
 const exporter = records => {
   const csv = convertToCSV(records, {
-    delimiter: "|"
+    delimiter: ";",
+    quotes: true,
+    quoteChar: '"',
+    encoding: "ISO-8859-1"
   });
-  downloadCSV(csv, "sections");
+  downloadCSV(csv, "section_cn");
 };
 
 export const SectionsList = ({ ...props }) => (

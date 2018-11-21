@@ -32,8 +32,12 @@ const InstitutsFilter = props => (
 
 const exporter = records => {
   const csv = convertToCSV(records, {
-    delimiter: "|"
+    delimiter: ";",
+    quotes: true,
+    quoteChar: '"',
+    encoding: "ISO-8859-1"
   });
+  console.log(csv);
   downloadCSV(csv, "instituts");
 };
 
