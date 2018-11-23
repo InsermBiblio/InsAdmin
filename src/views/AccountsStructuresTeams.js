@@ -40,10 +40,6 @@ const AccountsStructuresTeamsFilter = props => (
       label="resources.account_structures_teams.fields.principal_lastname"
     />
     <TextInput
-      source="like_teams.principal_firstname"
-      label="resources.account_structures_teams.fields.principal_firstname"
-    />
-    <TextInput
       source="like_teams.principal_email"
       label="resources.account_structures_teams.fields.principal_email"
     />
