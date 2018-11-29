@@ -170,13 +170,13 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
       <LinkRelational
         label="resources.account_structures_teams.fields.team_number"
         page="teams"
-        relationalId="team_number"
+        relationalId="id"
         source="team_number"
       />
       <LinkRelational
         label="resources.account_structures_teams.fields.name"
         page="teams"
-        relationalId="team_number"
+        relationalId="id"
         source="name"
       />
       <TextField
