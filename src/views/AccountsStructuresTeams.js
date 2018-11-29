@@ -22,6 +22,7 @@ import {
 import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import LinkRelational from "../components/LinkRelational";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
 
 const AccountsStructuresTeamsFilter = props => (
@@ -38,10 +39,6 @@ const AccountsStructuresTeamsFilter = props => (
     <TextInput
       source="like_teams.principal_lastname"
       label="resources.account_structures_teams.fields.principal_lastname"
-    />
-    <TextInput
-      source="like_teams.principal_firstname"
-      label="resources.account_structures_teams.fields.principal_firstname"
     />
     <TextInput
       source="like_teams.principal_email"
@@ -159,40 +156,29 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
       <LinkEdit
         source="login"
         label="resources.account_structures_teams.fields.login"
-        validate={required("Ce champ est requis!")}
       />
       <LinkEdit
         source="password"
         label="resources.account_structures_teams.fields.password"
-        validate={required("Ce champ est requis!")}
       />
-      <ReferenceField
+      <LinkRelational
         label="resources.account_structures_teams.fields.structure_code"
-        source="structure_code"
-        reference="structures"
-        linkType="show"
-        allowEmpty={true}
-      >
-        <TextField source="code" />
-      </ReferenceField>
-      <ReferenceField
+        page="structures"
+        relationalId="structure_code"
+        source="code"
+      />
+      <LinkRelational
         label="resources.account_structures_teams.fields.team_number"
+        page="teams"
+        relationalId="team_number"
         source="team_number"
-        reference="teams"
-        linkType="show"
-        allowEmpty={true}
-      >
-        <TextField source="team_number" />
-      </ReferenceField>
-      <ReferenceField
+      />
+      <LinkRelational
         label="resources.account_structures_teams.fields.name"
-        source="team_number"
-        reference="teams"
-        linkType="show"
-        allowEmpty={true}
-      >
-        <TextField source="name" />
-      </ReferenceField>
+        page="teams"
+        relationalId="team_number"
+        source="name"
+      />
       <TextField
         source="type_of_code"
         label="resources.account_structures_teams.fields.type_of_code"
@@ -402,11 +388,13 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
       <TextInput
         source="login"
         label="resources.account_structures_teams.fields.login"
+        validate={required("Ce champ est requis!")}
       />
       <TextInput
         source="password"
         label="resources.account_structures_teams.fields.password"
         defaultValue={passwordValue}
+        validate={required("Ce champ est requis!")}
       />
       <SelectInput
         source="structure_type"

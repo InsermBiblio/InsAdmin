@@ -75,14 +75,10 @@ const AccountsFedeInsermFilter = props => (
     >
       <AutocompleteInput optionText="team_number" />
     </ReferenceInput>
-    <ReferenceInput
-      label="resources.individual_account_fede.fields.team_name"
-      source="teams.name"
-      reference="teams"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+    <TextInput
+      source="like_individual_account_fede.name"
+      label="resources.individual_account_fede.fields.name"
+    />
     <TextInput
       source="like_individual_account_fede.second_team_code"
       label="resources.individual_account_fede.fields.second_team_code"

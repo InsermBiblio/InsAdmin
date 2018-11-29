@@ -56,6 +56,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             if (
               [
                 "name",
+                "team_number",
                 "principal_lastname",
                 "principal_email",
                 "principal_it",
@@ -65,6 +66,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
               field = `teams.${field}`;
             } else if (
               [
+                "code",
                 "regional_delegation",
                 "site",
                 "city",
@@ -85,6 +87,8 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           case "teams":
             if (
               [
+                "code",
+                "regional_delegation",
                 "city",
                 "site",
                 "mixt_university",
