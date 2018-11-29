@@ -85,6 +85,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           case "teams":
             if (
               [
+                "regional_delegation",
                 "city",
                 "site",
                 "mixt_university",
