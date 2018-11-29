@@ -19,6 +19,7 @@ import {
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import LinkRelational from "../components/LinkRelational";
 import {
   UrlSearchStructures,
   UrlSearchTeams,
@@ -113,15 +114,12 @@ const TeamsFilter = props => (
 export const TeamsList = ({ ...props }) => (
   <List {...props} filters={<TeamsFilter />} perPage={10}>
     <Datagrid>
-      <ReferenceField
+      <LinkRelational
         label="resources.teams.fields.structure_code"
-        source="structure_code"
-        reference="structures"
-        linkType="show"
-        allowEmpty={true}
-      >
-        <TextField source="code" />
-      </ReferenceField>
+        page="structures"
+        relationalId="structure_code"
+        source="code"
+      />
 
       <LinkEdit
         source="team_number"
