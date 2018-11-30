@@ -76,12 +76,12 @@ const AccountsFedeInsermFilter = props => (
       <AutocompleteInput optionText="team_number" />
     </ReferenceInput>
     <TextInput
-      source="like_individual_account_fede.name"
-      label="resources.individual_account_fede.fields.name"
+      source="like_individual_account_fede.team_name"
+      label="resources.individual_account_fede.fields.team_name"
     />
     <TextInput
-      source="like_individual_account_fede.second_team_code"
-      label="resources.individual_account_fede.fields.second_team_code"
+      source="like_individual_account_fede.secondary_team_code"
+      label="resources.individual_account_fede.fields.secondary_team_code"
     />
     <ReferenceInput
       label="resources.individual_account_fede.fields.regional_delegation"
@@ -195,9 +195,9 @@ export const AccountsFedeInsermList = props => (
         label="resources.individual_account_fede.fields.team_name"
         source="name"
       />
-      <LinkEdit
-        source="second_team_code"
-        label="resources.individual_account_fede.fields.second_team_code"
+      <TextField
+        source="secondary_team_code"
+        label="resources.individual_account_fede.fields.secondary_team_code"
       />
       <ReferenceField
         label="resources.structures.fields.regional_delegation"
