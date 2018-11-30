@@ -35,7 +35,7 @@ import {
   StructuresEdit,
   StructuresCreate
 } from "./views/Structures";
-import { CommunitiesList, CommunitiesEdit } from "./views/Communities";
+import { CommunitiesList } from "./views/Communities";
 /*import { FavorisList, FavorisEdit, FavorisCreate } from "./views/Favoris";*/
 import { SectionsList, SectionsEdit, SectionsCreate } from "./views/Sections";
 import { TeamsList, TeamsEdit, TeamsCreate } from "./views/Teams";
@@ -110,12 +110,7 @@ class App extends Component {
           edit={SectionsEdit}
           icon={FolderIcon}
         />
-        <Resource
-          name="communities"
-          list={CommunitiesList}
-          edit={CommunitiesEdit}
-          icon={FolderIcon}
-        />
+        <Resource name="communities" list={CommunitiesList} icon={FolderIcon} />
         <Resource
           name="individual_account_fede"
           list={AccountsFedeInsermList}
