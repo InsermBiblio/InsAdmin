@@ -37,7 +37,7 @@ const TeamsFilter = props => (
       allowEmpty={true}
       perPage={50}
     >
-      <AutocompleteInput optionText="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
 
     <SelectInput
@@ -236,7 +236,7 @@ export const TeamsEdit = ({ ...props }) => (
         allowEmpty={true}
         validate={required("Ce champ est requis!")}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <TextInput
@@ -258,7 +258,7 @@ export const TeamsEdit = ({ ...props }) => (
         reference="institutes"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceInput
@@ -441,7 +441,7 @@ export const TeamsCreate = ({ ...props }) => (
         allowEmpty={true}
         validate={required("Ce champ est requis!")}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <TextInput
@@ -463,7 +463,7 @@ export const TeamsCreate = ({ ...props }) => (
         reference="institutes"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceInput

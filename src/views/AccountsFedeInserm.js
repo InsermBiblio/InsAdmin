@@ -65,7 +65,7 @@ const AccountsFedeInsermFilter = props => (
       perPage={350}
       sort={{ field: "name", order: "ASC" }}
     >
-      <AutocompleteInput optionText="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <ReferenceInput
       label="resources.individual_account_fede.fields.team_number"
@@ -88,7 +88,7 @@ const AccountsFedeInsermFilter = props => (
       source="individual_account_fede.regional_delegation"
       reference="regionals_delegations"
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
 
     <TextInput
@@ -105,7 +105,7 @@ const AccountsFedeInsermFilter = props => (
       reference="institutes"
       allowEmpty={true}
     >
-      <AutocompleteInput optionText="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <ReferenceInput
       label="resources.individual_account_fede.fields.specialized_commission"
@@ -113,7 +113,7 @@ const AccountsFedeInsermFilter = props => (
       reference="section_cn"
       allowEmpty={true}
     >
-      <AutocompleteInput optionText="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <TextInput
       source="like_individual_account_fede.orcid_number"
@@ -299,7 +299,7 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         reference="structures"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <TextField
         source="structure_name"
@@ -327,7 +327,7 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         source="regional_delegation"
         reference="regionals_delegations"
       >
-        <AutocompleteInput source="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <TextInput
@@ -349,14 +349,14 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         reference="institutes"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"
         source="specialized_commission"
         reference="section_cn"
       >
-        <AutocompleteInput source="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <TextInput
         source="orcid_number"
@@ -398,7 +398,7 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         reference="communities"
         source="community"
       >
-        <AutocompleteInput source="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <BooleanInput
@@ -459,7 +459,7 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         reference="structures"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput
         label="resources.individual_account_fede.fields.team_number"
@@ -475,7 +475,7 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         source="regional_delegation"
         reference="regionals_delegations"
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <TextInput
@@ -497,14 +497,14 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         reference="institutes"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"
         source="specialized_commission"
         reference="section_cn"
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
 
       <TextInput
