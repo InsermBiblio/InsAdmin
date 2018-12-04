@@ -331,8 +331,8 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
       </ReferenceInput>
 
       <TextInput
-        source="second_team_code"
-        label="resources.individual_account_fede.fields.second_team_code"
+        source="secondary_team_code"
+        label="resources.individual_account_fede.fields.secondary_team_code"
       />
 
       <TextInput
@@ -479,8 +479,8 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
       </ReferenceInput>
 
       <TextInput
-        source="second_team_code"
-        label="resources.individual_account_fede.fields.second_team_code"
+        source="secondary_team_code"
+        label="resources.individual_account_fede.fields.secondary_team_code"
       />
 
       <TextInput
