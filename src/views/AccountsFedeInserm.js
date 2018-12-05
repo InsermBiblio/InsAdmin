@@ -299,7 +299,7 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         reference="structures"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
       <TextField
         source="structure_name"
@@ -459,7 +459,7 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         reference="structures"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
       <ReferenceInput
         label="resources.individual_account_fede.fields.team_number"
