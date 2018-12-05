@@ -30,6 +30,7 @@ import {
   UrlSearchFedeInserm
 } from "../components/LinkAccount";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
+import { renameKeys } from "../utils/utils";
 
 const StructuresFilter = props => (
   <Filter {...props}>
@@ -114,9 +115,29 @@ const StructuresFilter = props => (
   </Filter>
 );
 
-const exporter = records => {
-  const csv = convertToCSV(records, {
-    delimiter: "|"
+const exporter = async (records, fetchRelatedRecords) => {
+  const listSpecializedCommission = await fetchRelatedRecords(
+    records,
+    "specialized_commission",
+    "section_cn"
+  );
+  const listRegionalDelegation = await fetchRelatedRecords(
+    records,
+    "regional_delegation",
+    "regionals_delegations"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    specialized_commission:
+      listSpecializedCommission[record.specialized_commission] &&
+      listSpecializedCommission[record.specialized_commission].name,
+    regional_delegation:
+      listRegionalDelegation[record.regional_delegation] &&
+      listRegionalDelegation[record.regional_delegation].name
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "structures"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
   });
   downloadCSV(csv, "structures");
 };

@@ -15,6 +15,7 @@ import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
+import langFr from "../i18n/fr";
 
 const RegionalsDelegationsFilter = props => (
   <Filter {...props}>
@@ -35,7 +36,19 @@ const RegionalsDelegationsFilter = props => (
 );
 
 const exporter = records => {
-  const csv = convertToCSV(records, {
+  const fields = langFr.resources.regionals_delegations.fields;
+  const recordsToExport = records.map(record => {
+    let result = Object.create({});
+    for (var fields_keys in Object.keys(fields))
+      for (var record_keys in Object.keys(record))
+        if (
+          Object.keys(fields)[fields_keys] == Object.keys(record)[record_keys]
+        )
+          result[fields[Object.keys(fields)[fields_keys]]] =
+            record[Object.keys(record)[record_keys]];
+    return result;
+  });
+  const csv = convertToCSV(recordsToExport, {
     delimiter: ";",
     quotes: true,
     quoteChar: '"',
