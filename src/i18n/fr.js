@@ -75,7 +75,7 @@ export default {
         regional_delegation: "Délégation régionale",
         specialized_commission: "Commission spécialisée",
         uinop_code: "Code uinop",
-        second_team_code: "Code équipe secondaire",
+        secondary_team_code: "Code équipe secondaire",
         site: "Site",
         city: "Ville",
         itmo_principal: "ITMO principal",

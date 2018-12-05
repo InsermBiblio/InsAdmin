@@ -63,7 +63,7 @@ const AccountsStructuresTeamsFilter = props => (
       reference="structures"
       allowEmpty={true}
     >
-      <AutocompleteInput optionText="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <ReferenceInput
       label="resources.account_structures_teams.fields.team_number"
@@ -91,7 +91,7 @@ const AccountsStructuresTeamsFilter = props => (
       source="structures.regional_delegation"
       reference="regionals_delegations"
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <TextInput
       source="like_structures.site"
@@ -118,14 +118,14 @@ const AccountsStructuresTeamsFilter = props => (
       source="teams.principal_it"
       reference="institutes"
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <ReferenceInput
       label="resources.account_structures_teams.fields.specialized_commission"
       source="teams.specialized_commission"
       reference="section_cn"
     >
-      <AutocompleteInput source="code" />
+      <AutocompleteInput optionText="name" />
     </ReferenceInput>
     <FrenchDateInput
       source="to_account_structures_teams.register_date"
@@ -170,13 +170,13 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
       <LinkRelational
         label="resources.account_structures_teams.fields.team_number"
         page="teams"
-        relationalId="team_number"
+        relationalId="id"
         source="team_number"
       />
       <LinkRelational
         label="resources.account_structures_teams.fields.name"
         page="teams"
-        relationalId="team_number"
+        relationalId="id"
         source="name"
       />
       <TextField
@@ -270,7 +270,7 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
         reference="structures"
         allowEmpty={true}
       >
-        <SelectInput optionText="code" />
+        <SelectInput optionText="name" />
       </ReferenceInput>
 
       <ReferenceInput
@@ -415,7 +415,7 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         reference="structures"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput
         label="resources.account_structures_teams.fields.team_number"
@@ -439,7 +439,7 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         source="community"
         reference="communities"
       >
-        <AutocompleteInput optionText="code" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <FrenchDateInput
         source="register_date"
