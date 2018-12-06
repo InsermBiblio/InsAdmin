@@ -87,6 +87,7 @@ const AccountsFedeInsermFilter = props => (
       label="resources.individual_account_fede.fields.regional_delegation"
       source="individual_account_fede.regional_delegation"
       reference="regionals_delegations"
+      allowEmpty={true}
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
@@ -204,6 +205,7 @@ export const AccountsFedeInsermList = props => (
         source="regional_delegation"
         reference="regionals_delegations"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>
@@ -326,6 +328,7 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         label="resources.structures.fields.regional_delegation"
         source="regional_delegation"
         reference="regionals_delegations"
+        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -474,6 +477,7 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         label="resources.structures.fields.regional_delegation"
         source="regional_delegation"
         reference="regionals_delegations"
+        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
