@@ -268,11 +268,7 @@ export default {
       fields: {
         id: "id",
         name: "Nom",
-        gate: "Portail ezproxy",
-        user_id: "User Id",
-        password: "Password",
-        profile: "Profil",
-        ebsco: "Ebsco"
+        gate: "Portail ezproxy"
       }
     },
     databases: {

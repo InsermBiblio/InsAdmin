@@ -31,9 +31,9 @@ run-prod: ## run InsAdmin for production make sure env INSAPI_HOST and INSADMIN_
 
 build-docker: ## args: <version> build insermbiblio/insadmin:<version> docker image default <version> to latest
 ifdef COMMAND_ARGS
-	docker build --no-cache -t vsnexus.intra.inist.fr:8083/insermbiblio/insadmin:$(COMMAND_ARGS) .
+	docker build --no-cache -t vsnexus-registry.intra.inist.fr:8083/insermbiblio/insadmin:$(COMMAND_ARGS) .
 else
-	docker build --no-cache -t vsnexus.intra.inist.fr:8083/insermbiblio/insadmin:latest .
+	docker build --no-cache -t vsnexus-registry.intra.inist.fr:8083/insermbiblio/insadmin:latest .
 endif
 
 build-script: ## build javascript and css for production make sure env REACT_APP_INSAPI_HOST and REACT_APP_INSADMIN_HOST are set

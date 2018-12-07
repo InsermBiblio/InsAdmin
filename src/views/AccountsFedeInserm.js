@@ -385,16 +385,6 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         source="type_of_assigned_structure"
         label="resources.individual_account_fede.fields.type_of_assigned_structure"
       />
-      <FrenchDateInput
-        source="register_date"
-        label="resources.individual_account_fede.fields.register_date"
-        options={{ format: "MM-dd-yyyy" }}
-      />
-      <FrenchDateInput
-        source="last_connection"
-        label="resources.individual_account_fede.fields.last_connection"
-        options={{ format: "MM-dd-yyyy" }}
-      />
       <LongTextInput source="comment" />
       <ReferenceInput
         label="resources.individual_account_fede.fields.community"
@@ -535,18 +525,6 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         source="type_of_assigned_structure"
         label="resources.individual_account_fede.fields.type_of_assigned_structure"
       />
-
-      <FrenchDateInput
-        source="register_date"
-        label="resources.individual_account_fede.fields.register_date"
-        options={{ format: "MM-dd-yyyy" }}
-      />
-      <FrenchDateInput
-        source="last_connection"
-        label="resources.individual_account_fede.fields.last_connection"
-        options={{ format: "MM-dd-yyyy" }}
-      />
-
       <LongTextInput source="comment" />
       <ReferenceInput
         label="resources.individual_account_fede.fields.community"
