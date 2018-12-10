@@ -13,6 +13,7 @@ import {
   DateField,
   BooleanField,
   TextInput,
+  downloadCSV,
   BooleanInput,
   LongTextInput,
   ReferenceInput,
@@ -20,6 +21,8 @@ import {
   SelectInput,
   required
 } from "react-admin";
+import { renameKeys } from "../utils/utils";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -151,8 +154,61 @@ const AccountsFedeInsermFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const listStructures = await fetchRelatedRecords(
+    records,
+    "structure_code",
+    "structures"
+  );
+  const listTeams = await fetchRelatedRecords(records, "team_number", "teams");
+  const listSpecializedCommission = await fetchRelatedRecords(
+    records,
+    "specialized_commission",
+    "section_cn"
+  );
+  const listRegionalDelegation = await fetchRelatedRecords(
+    records,
+    "regional_delegation",
+    "regionals_delegations"
+  );
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "itmo_principal",
+    "institutes"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    structure_code:
+      listStructures[record.structure_code] &&
+      listStructures[record.structure_code].name,
+    team_number:
+      listTeams[record.team_number] && listTeams[record.team_number].name,
+    specialized_commission:
+      listSpecializedCommission[record.specialized_commission] &&
+      listSpecializedCommission[record.specialized_commission].name,
+    regional_delegation:
+      listRegionalDelegation[record.regional_delegation] &&
+      listRegionalDelegation[record.regional_delegation].name,
+    itmo_principal:
+      listPrincipalIt[record.itmo_principal] &&
+      listPrincipalIt[record.itmo_principal].name
+  }));
+  const data = dataWithRelation.map(record =>
+    renameKeys(record, "individual_account_fede")
+  );
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "comptes_individuel_fede");
+};
+
 export const AccountsFedeInsermList = props => (
-  <List {...props} filters={<AccountsFedeInsermFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<AccountsFedeInsermFilter />}
+    perPage={10}
+    exporter={exporter}
+  >
     <Datagrid>
       <LinkEdit
         source="uid"

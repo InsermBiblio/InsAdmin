@@ -15,8 +15,10 @@ import {
   ReferenceInput,
   AutocompleteInput,
   BooleanField,
+  downloadCSV,
   required
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import LinkRelational from "../components/LinkRelational";
@@ -25,6 +27,7 @@ import {
   UrlSearchTeams,
   UrlSearchFedeInserm
 } from "../components/LinkAccount";
+import { renameKeys } from "../utils/utils";
 
 const TeamsFilter = props => (
   <Filter {...props}>
@@ -37,7 +40,7 @@ const TeamsFilter = props => (
       allowEmpty={true}
       perPage={50}
     >
-      <AutocompleteInput optionText="name" />
+      <AutocompleteInput optionText="code" />
     </ReferenceInput>
 
     <SelectInput
@@ -111,8 +114,43 @@ const TeamsFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const listSpecializedCommission = await fetchRelatedRecords(
+    records,
+    "specialized_commission",
+    "section_cn"
+  );
+  const listStructures = await fetchRelatedRecords(
+    records,
+    "structure_code",
+    "structures"
+  );
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "principal_it",
+    "institutes"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    specialized_commission:
+      listSpecializedCommission[record.specialized_commission] &&
+      listSpecializedCommission[record.specialized_commission].name,
+    structure_code:
+      listStructures[record.structure_code] &&
+      listStructures[record.structure_code].name,
+    principal_it:
+      listPrincipalIt[record.principal_it] &&
+      listPrincipalIt[record.principal_it].name
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "teams"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "teams");
+};
+
 export const TeamsList = ({ ...props }) => (
-  <List {...props} filters={<TeamsFilter />} perPage={10}>
+  <List {...props} filters={<TeamsFilter />} perPage={10} exporter={exporter}>
     <Datagrid>
       <LinkRelational
         label="resources.teams.fields.structure_code"
@@ -236,7 +274,7 @@ export const TeamsEdit = ({ ...props }) => (
         allowEmpty={true}
         validate={required("Ce champ est requis!")}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <TextInput
@@ -258,7 +296,7 @@ export const TeamsEdit = ({ ...props }) => (
         reference="institutes"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <ReferenceInput
@@ -441,7 +479,7 @@ export const TeamsCreate = ({ ...props }) => (
         allowEmpty={true}
         validate={required("Ce champ est requis!")}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <TextInput
@@ -463,7 +501,7 @@ export const TeamsCreate = ({ ...props }) => (
         reference="institutes"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <ReferenceInput

@@ -126,6 +126,11 @@ const exporter = async (records, fetchRelatedRecords) => {
     "regional_delegation",
     "regionals_delegations"
   );
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "principal_it",
+    "institutes"
+  );
   const dataWithRelation = records.map(record => ({
     ...record,
     specialized_commission:
@@ -133,7 +138,10 @@ const exporter = async (records, fetchRelatedRecords) => {
       listSpecializedCommission[record.specialized_commission].name,
     regional_delegation:
       listRegionalDelegation[record.regional_delegation] &&
-      listRegionalDelegation[record.regional_delegation].name
+      listRegionalDelegation[record.regional_delegation].name,
+    principal_it:
+      listPrincipalIt[record.principal_it] &&
+      listPrincipalIt[record.principal_it].name
   }));
   const data = dataWithRelation.map(record => renameKeys(record, "structures"));
   const csv = convertToCSV(data, {

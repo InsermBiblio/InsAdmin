@@ -16,7 +16,7 @@ import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
-import langFr from "../i18n/fr";
+import { renameKeys } from "../utils/utils";
 
 /**
  * Anciennement nommé "Sections du comité national"
@@ -37,24 +37,13 @@ const SectionsFilter = props => (
   </Filter>
 );
 
-const exporter = records => {
-  const fields = langFr.resources.section_cn.fields;
-  const recordsToExport = records.map(record => {
-    let result = Object.create({});
-    for (var fields_keys in Object.keys(fields))
-      for (var record_keys in Object.keys(record))
-        if (
-          Object.keys(fields)[fields_keys] == Object.keys(record)[record_keys]
-        )
-          result[fields[Object.keys(fields)[fields_keys]]] =
-            record[Object.keys(record)[record_keys]];
-    return result;
-  });
-  const csv = convertToCSV(recordsToExport, {
-    delimiter: ";",
-    quotes: true,
-    quoteChar: '"',
-    encoding: "ISO-8859-1"
+const exporter = async records => {
+  const dataWithRelation = records.map(record => ({
+    ...record
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "section_cn"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
   });
   downloadCSV(csv, "section_cn");
 };

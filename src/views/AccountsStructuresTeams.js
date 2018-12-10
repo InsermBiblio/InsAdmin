@@ -13,12 +13,15 @@ import {
   DateField,
   BooleanField,
   TextInput,
+  downloadCSV,
   LongTextInput,
   BooleanInput,
   ReferenceInput,
   AutocompleteInput,
   required
 } from "react-admin";
+import { renameKeys } from "../utils/utils";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -150,8 +153,34 @@ const AccountsStructuresTeamsFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const listStructures = await fetchRelatedRecords(
+    records,
+    "structure_code",
+    "structures"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    structure_code:
+      listStructures[record.structure_code] &&
+      listStructures[record.structure_code].name
+  }));
+  const data = dataWithRelation.map(record =>
+    renameKeys(record, "account_structures_teams")
+  );
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "comptes_structures_equipes");
+};
+
 export const AccountsStructuresTeamsList = ({ ...props }) => (
-  <List {...props} filters={<AccountsStructuresTeamsFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<AccountsStructuresTeamsFilter />}
+    perPage={10}
+    exporter={exporter}
+  >
     <Datagrid>
       <LinkEdit
         source="login"
