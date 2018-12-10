@@ -87,6 +87,7 @@ const AccountsFedeInsermFilter = props => (
       label="resources.individual_account_fede.fields.regional_delegation"
       source="individual_account_fede.regional_delegation"
       reference="regionals_delegations"
+      allowEmpty={true}
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
@@ -204,6 +205,7 @@ export const AccountsFedeInsermList = props => (
         source="regional_delegation"
         reference="regionals_delegations"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>
@@ -326,6 +328,7 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         label="resources.structures.fields.regional_delegation"
         source="regional_delegation"
         reference="regionals_delegations"
+        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -381,16 +384,6 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
       <TextInput
         source="type_of_assigned_structure"
         label="resources.individual_account_fede.fields.type_of_assigned_structure"
-      />
-      <FrenchDateInput
-        source="register_date"
-        label="resources.individual_account_fede.fields.register_date"
-        options={{ format: "MM-dd-yyyy" }}
-      />
-      <FrenchDateInput
-        source="last_connection"
-        label="resources.individual_account_fede.fields.last_connection"
-        options={{ format: "MM-dd-yyyy" }}
       />
       <LongTextInput source="comment" />
       <ReferenceInput
@@ -474,6 +467,7 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         label="resources.structures.fields.regional_delegation"
         source="regional_delegation"
         reference="regionals_delegations"
+        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -531,18 +525,6 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         source="type_of_assigned_structure"
         label="resources.individual_account_fede.fields.type_of_assigned_structure"
       />
-
-      <FrenchDateInput
-        source="register_date"
-        label="resources.individual_account_fede.fields.register_date"
-        options={{ format: "MM-dd-yyyy" }}
-      />
-      <FrenchDateInput
-        source="last_connection"
-        label="resources.individual_account_fede.fields.last_connection"
-        options={{ format: "MM-dd-yyyy" }}
-      />
-
       <LongTextInput source="comment" />
       <ReferenceInput
         label="resources.individual_account_fede.fields.community"
