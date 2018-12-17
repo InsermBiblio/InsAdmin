@@ -27,6 +27,7 @@ import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirma
 import LinkEdit from "../components/LinkEdit";
 import LinkRelational from "../components/LinkRelational";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
+import { emphasize } from "@material-ui/core/styles/colorManipulator";
 
 const AccountsStructuresTeamsFilter = props => (
   <Filter {...props}>
@@ -154,20 +155,54 @@ const AccountsStructuresTeamsFilter = props => (
 );
 
 const exporter = async (records, fetchRelatedRecords) => {
+  const listSpecializedCommission = await fetchRelatedRecords(
+    records,
+    "specialized_commission",
+    "section_cn"
+  );
   const listStructures = await fetchRelatedRecords(
     records,
     "structure_code",
     "structures"
   );
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "principal_it",
+    "institutes"
+  );
+  const listRegionalDelegation = await fetchRelatedRecords(
+    records,
+    "regional_delegation",
+    "regionals_delegations"
+  );
   const dataWithRelation = records.map(record => ({
     ...record,
     structure_code:
       listStructures[record.structure_code] &&
-      listStructures[record.structure_code].name
+      listStructures[record.structure_code].name,
+    principal_it:
+      listPrincipalIt[record.principal_it] &&
+      listPrincipalIt[record.principal_it].name,
+    specialized_commission:
+      listSpecializedCommission[record.specialized_commission] &&
+      listSpecializedCommission[record.specialized_commission].name,
+    regional_delegation:
+      listRegionalDelegation[record.regional_delegation] &&
+      listRegionalDelegation[record.regional_delegation].name
   }));
   const data = dataWithRelation.map(record =>
     renameKeys(record, "account_structures_teams")
   );
+  data.forEach(element => {
+    element["Date d'inscription"] = element["Date d'inscription"]
+      .replace(/T/, " ")
+      .replace(/\..+/, "");
+    element["Intitulé de la structure"] = element["Code de la structure"];
+    delete element["Code de la structure"];
+    element["Code de la structure"] = element.code;
+    delete element.code;
+  });
+
   const csv = convertToCSV(data, {
     delimiter: ";"
   });

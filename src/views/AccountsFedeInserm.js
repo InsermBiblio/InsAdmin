@@ -180,9 +180,10 @@ const exporter = async (records, fetchRelatedRecords) => {
     ...record,
     structure_code:
       listStructures[record.structure_code] &&
-      listStructures[record.structure_code].name,
+      listStructures[record.structure_code].code,
     team_number:
-      listTeams[record.team_number] && listTeams[record.team_number].name,
+      listTeams[record.team_number] &&
+      listTeams[record.team_number].team_number,
     specialized_commission:
       listSpecializedCommission[record.specialized_commission] &&
       listSpecializedCommission[record.specialized_commission].name,
@@ -193,9 +194,17 @@ const exporter = async (records, fetchRelatedRecords) => {
       listPrincipalIt[record.itmo_principal] &&
       listPrincipalIt[record.itmo_principal].name
   }));
+
   const data = dataWithRelation.map(record =>
     renameKeys(record, "individual_account_fede")
   );
+  data.forEach(element => {
+    element["Intitulé d'équipe"] = element.name;
+    delete element.name;
+    element["Première connexion"] = element["Première connexion"]
+      .replace(/T/, " ")
+      .replace(/\..+/, "");
+  });
   const csv = convertToCSV(data, {
     delimiter: ";"
   });
