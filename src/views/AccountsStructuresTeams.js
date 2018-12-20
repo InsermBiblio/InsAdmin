@@ -27,7 +27,7 @@ import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirma
 import LinkEdit from "../components/LinkEdit";
 import LinkRelational from "../components/LinkRelational";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
-import { emphasize } from "@material-ui/core/styles/colorManipulator";
+import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
 const AccountsStructuresTeamsFilter = props => (
   <Filter {...props}>
@@ -61,22 +61,26 @@ const AccountsStructuresTeamsFilter = props => (
         { id: "ITMO", name: "ITMO" }
       ]}
     />
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.account_structures_teams.fields.structure_code"
-      source="account_structures_teams.structure_code"
+      element="account_structures_teams.structure_code"
+      source="structure_code"
       reference="structures"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
-    <ReferenceInput
+      field="structures"
+      optionText="code"
+      isFilter={true}
+    />
+
+    <AutoCompleteReferenceInput
       label="resources.account_structures_teams.fields.team_number"
-      source="account_structures_teams.team_number"
+      element="account_structures_teams.team_number"
+      source="team_number"
       reference="teams"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="team_number" />
-    </ReferenceInput>
+      field="teams"
+      optionText="team_number"
+      isFilter={true}
+    />
+
     <TextInput
       source="like_teams.name"
       label="resources.account_structures_teams.fields.name"
@@ -90,13 +94,16 @@ const AccountsStructuresTeamsFilter = props => (
         { id: "Autre", name: "Autre" }
       ]}
     />
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.account_structures_teams.fields.regional_delegation"
-      source="structures.regional_delegation"
+      element="structures.regional_delegation"
+      source="regional_delegation"
       reference="regionals_delegations"
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="regionals_delegations"
+      optionText="code"
+      isFilter={true}
+    />
+
     <TextInput
       source="like_structures.site"
       label="resources.account_structures_teams.fields.site"
@@ -117,20 +124,27 @@ const AccountsStructuresTeamsFilter = props => (
       source="like_structures.other_mixity"
       label="resources.account_structures_teams.fields.other_mixity"
     />
-    <ReferenceInput
+
+    <AutoCompleteReferenceInput
       label="resources.account_structures_teams.fields.principal_it"
-      source="teams.principal_it"
+      element="teams.principal_it"
+      source="principal_it"
       reference="institutes"
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
-    <ReferenceInput
+      field="institutes"
+      optionText="name"
+      isFilter={true}
+    />
+
+    <AutoCompleteReferenceInput
       label="resources.account_structures_teams.fields.specialized_commission"
-      source="teams.specialized_commission"
+      element="teams.specialized_commission"
+      source="specialized_commission"
       reference="section_cn"
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="section_cn"
+      optionText="name"
+      isFilter={true}
+    />
+
     <FrenchDateInput
       source="to_account_structures_teams.register_date"
       label="resources.account_structures_teams.fields.register_date_before"

@@ -27,6 +27,7 @@ import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
+import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
 const AccountsFedeInsermFilter = props => (
   <Filter {...props}>
@@ -60,24 +61,26 @@ const AccountsFedeInsermFilter = props => (
       label="resources.individual_account_fede.fields.type_of_assigned_structure"
     />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.individual_account_fede.fields.structure_code"
-      source="individual_account_fede.structure_code"
+      element="individual_account_fede.structure_code"
+      source="structure_code"
       reference="structures"
-      allowEmpty={true}
-      perPage={350}
-      sort={{ field: "name", order: "ASC" }}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
-    <ReferenceInput
+      field="structures"
+      optionText="code"
+      isFilter={true}
+    />
+
+    <AutoCompleteReferenceInput
       label="resources.individual_account_fede.fields.team_number"
-      source="like_individual_account_fede.team_number"
+      element="individual_account_fede.team_number"
+      source="team_number"
       reference="teams"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="team_number" />
-    </ReferenceInput>
+      field="teams"
+      optionText="team_number"
+      isFilter={true}
+    />
+
     <TextInput
       source="like_individual_account_fede.team_name"
       label="resources.individual_account_fede.fields.team_name"
@@ -86,14 +89,16 @@ const AccountsFedeInsermFilter = props => (
       source="like_individual_account_fede.secondary_team_code"
       label="resources.individual_account_fede.fields.secondary_team_code"
     />
-    <ReferenceInput
+
+    <AutoCompleteReferenceInput
       label="resources.individual_account_fede.fields.regional_delegation"
-      source="individual_account_fede.regional_delegation"
+      element="individual_account_fede.regional_delegation"
+      source="regional_delegation"
       reference="regionals_delegations"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="regionals_delegations"
+      optionText="code"
+      isFilter={true}
+    />
 
     <TextInput
       source="like_individual_account_fede.site"
@@ -103,22 +108,27 @@ const AccountsFedeInsermFilter = props => (
       source="like_individual_account_fede.city"
       label="resources.individual_account_fede.fields.city"
     />
-    <ReferenceInput
+
+    <AutoCompleteReferenceInput
       label="resources.individual_account_fede.fields.principal_it"
-      source="individual_account_fede.itmo_principal"
+      element="individual_account_fede.principal_it"
+      source="institutes"
       reference="institutes"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
-    <ReferenceInput
+      field="institutes"
+      optionText="name"
+      isFilter={true}
+    />
+
+    <AutoCompleteReferenceInput
       label="resources.individual_account_fede.fields.specialized_commission"
-      source="like_individual_account_fede.specialized_commission"
+      element="individual_account_fede.specialized_commission"
+      source="section_cn"
       reference="section_cn"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="section_cn"
+      optionText="name"
+      isFilter={true}
+    />
+
     <TextInput
       source="like_individual_account_fede.orcid_number"
       label="resources.individual_account_fede.fields.orcid_number"
@@ -150,6 +160,9 @@ const AccountsFedeInsermFilter = props => (
     <BooleanInput
       source="individual_account_fede.active"
       label="resources.individual_account_fede.fields.active"
+      options={{
+        checked: "checked"
+      }}
     />
   </Filter>
 );

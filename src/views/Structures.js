@@ -31,6 +31,7 @@ import {
 } from "../components/LinkAccount";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
 import { renameKeys } from "../utils/utils";
+import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
 const StructuresFilter = props => (
   <Filter {...props}>
@@ -58,23 +59,25 @@ const StructuresFilter = props => (
       label="resources.structures.fields.name"
     />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.structures.fields.principal_it"
-      source="structures.principal_it"
+      element="structures.principal_it"
+      source="principal_it"
       reference="institutes"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="institutes"
+      optionText="name"
+      isFilter={true}
+    />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.structures.fields.specialized_commission"
-      source="structures.specialized_commission"
+      element="structures.specialized_commission"
+      source="specialized_commission"
       reference="section_cn"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="section_cn"
+      optionText="name"
+      isFilter={true}
+    />
 
     <TextInput
       source="like_structures.site"
@@ -84,14 +87,16 @@ const StructuresFilter = props => (
       source="like_structures.city"
       label="resources.structures.fields.city"
     />
-    <ReferenceInput
+
+    <AutoCompleteReferenceInput
       label="resources.structures.fields.regional_delegation"
-      source="structures.regional_delegation"
+      element="structures.regional_delegation"
+      source="regional_delegation"
       reference="regionals_delegations"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="regionals_delegations"
+      optionText="code"
+      isFilter={true}
+    />
     <TextInput
       source="like_structures.director_lastname"
       label="resources.structures.fields.director_lastname"

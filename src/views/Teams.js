@@ -28,24 +28,25 @@ import {
   UrlSearchFedeInserm
 } from "../components/LinkAccount";
 import { renameKeys } from "../utils/utils";
+import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
 const TeamsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.teams.fields.structure_code"
-      source="teams.structure_code"
+      element="teams.structure_code"
+      source="structure_code"
       reference="structures"
-      allowEmpty={true}
-      perPage={50}
-    >
-      <AutocompleteInput optionText="code" />
-    </ReferenceInput>
+      field="structures"
+      optionText="code"
+      isFilter={true}
+    />
 
     <SelectInput
       source="structures.structure_type"
-      label="resources.account_structures_teams.fields.structure_type"
+      label="resources.teams.fields.structure_type"
       choices={[
         { id: "CIC", name: "CIC" },
         { id: "IFR", name: "IFR" },
@@ -63,23 +64,25 @@ const TeamsFilter = props => (
       label="resources.teams.fields.principal_lastname"
     />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.teams.fields.principal_it"
-      source="teams.principal_it"
+      element="teams.principal_it"
+      source="principal_it"
       reference="institutes"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="institutes"
+      optionText="name"
+      isFilter={true}
+    />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.teams.fields.specialized_commission"
-      source="teams.specialized_commission"
+      element="teams.specialized_commission"
+      source="specialized_commission"
       reference="section_cn"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="section_cn"
+      optionText="name"
+      isFilter={true}
+    />
 
     <TextInput
       source="like_structures.site"
@@ -90,14 +93,16 @@ const TeamsFilter = props => (
       label="resources.teams.fields.city"
     />
 
-    <ReferenceInput
+    <AutoCompleteReferenceInput
       label="resources.teams.fields.regional_delegation"
-      source="structures.regional_delegation"
+      element="structures.regional_delegation"
+      source="regional_delegation"
       reference="regionals_delegations"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="regionals_delegations"
+      optionText="code"
+      isFilter={true}
+    />
+
     <TextInput
       source="like_structures.mixt_university"
       label="resources.teams.fields.mixt_university"
