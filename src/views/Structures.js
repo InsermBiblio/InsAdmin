@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -19,7 +19,9 @@ import {
   downloadCSV,
   SelectInput,
   LongTextInput,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -156,12 +158,19 @@ const exporter = async (records, fetchRelatedRecords) => {
   downloadCSV(csv, "structures");
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const StructuresList = ({ ...props }) => (
   <List
     {...props}
     filters={<StructuresFilter />}
     perPage={10}
     exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit source="code" label="resources.structures.fields.code" />
@@ -227,9 +236,15 @@ const StructuresTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const StructuresEdit = ({ ...props }) => (
   <Edit title={<StructuresTitle />} {...props} actions={<ListEditActions />}>
-    <SimpleForm redirect="list">
+    <SimpleForm redirect="list" toolbar={<PostEditToolbar />}>
       <TextInput
         source="code"
         label="resources.structures.fields.code"

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Datagrid, List, Filter, TextInput, downloadCSV } from "react-admin";
 import LinkEdit from "../components/LinkEdit";
 import { renameKeys } from "../utils/utils";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
+import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 
 const CommunitiesFilter = props => (
   <Filter {...props}>
@@ -18,6 +19,11 @@ const exporter = async records => {
   downloadCSV(csv, "communities");
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
 
 export const CommunitiesList = ({ ...props }) => (
   <List
@@ -26,6 +32,7 @@ export const CommunitiesList = ({ ...props }) => (
     filters={<CommunitiesFilter />}
     perPage={10}
     sort={{ field: "id", order: "ASC" }}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit source="name" label="resources.communities.fields.name" />

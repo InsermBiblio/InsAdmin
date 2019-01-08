@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -19,7 +19,9 @@ import {
   ReferenceInput,
   AutocompleteInput,
   SelectInput,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { renameKeys } from "../utils/utils";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
@@ -224,12 +226,19 @@ const exporter = async (records, fetchRelatedRecords) => {
   downloadCSV(csv, "comptes_individuel_fede");
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const AccountsFedeInsermList = props => (
   <List
     {...props}
     filters={<AccountsFedeInsermFilter />}
     perPage={10}
     exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit
@@ -325,13 +334,19 @@ const AccountsFedeInsermTitle = ({ record }) => {
   return record.firstname;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const AccountsFedeInsermEdit = ({ ...props }) => (
   <Edit
     title={<AccountsFedeInsermTitle />}
     {...props}
     actions={<ListEditActions />}
   >
-    <SimpleForm>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput
         source="uid"
         label="resources.individual_account_fede.fields.uid"
