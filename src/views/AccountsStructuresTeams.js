@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -18,7 +18,9 @@ import {
   BooleanInput,
   ReferenceInput,
   AutocompleteInput,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { renameKeys } from "../utils/utils";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
@@ -223,12 +225,19 @@ const exporter = async (records, fetchRelatedRecords) => {
   downloadCSV(csv, "comptes_structures_equipes");
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const AccountsStructuresTeamsList = ({ ...props }) => (
   <List
     {...props}
     filters={<AccountsStructuresTeamsFilter />}
     perPage={10}
     exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit
@@ -312,13 +321,19 @@ const AccountsStructuresTeamsTitle = ({ record }) => {
   return record.login;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const AccountsStructuresTeamsEdit = ({ ...props }) => (
   <Edit
     title={<AccountsStructuresTeamsTitle />}
     {...props}
     actions={<ListEditActions />}
   >
-    <SimpleForm>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput
         source="login"
         label="resources.account_structures_teams.fields.login"

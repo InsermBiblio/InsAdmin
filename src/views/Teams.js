@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -16,11 +16,14 @@ import {
   AutocompleteInput,
   BooleanField,
   downloadCSV,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import { ListAddActions, ListEditActions } from "../components/ListActions";
 import LinkRelational from "../components/LinkRelational";
 import {
   UrlSearchStructures,
@@ -162,8 +165,20 @@ const exporter = async (records, fetchRelatedRecords) => {
   downloadCSV(csv, "teams");
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const TeamsList = ({ ...props }) => (
-  <List {...props} filters={<TeamsFilter />} perPage={10} exporter={exporter}>
+  <List
+    {...props}
+    filters={<TeamsFilter />}
+    perPage={10}
+    exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
+  >
     <Datagrid>
       <LinkRelational
         label="resources.teams.fields.structure_code"
@@ -229,9 +244,15 @@ const TeamsTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const TeamsEdit = ({ ...props }) => (
-  <Edit title={<TeamsTitle />} {...props}>
-    <SimpleForm>
+  <Edit title={<TeamsTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextField
         source="structure_type"
         label="resources.teams.fields.structure_type"

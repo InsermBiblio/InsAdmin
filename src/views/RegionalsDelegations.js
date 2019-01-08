@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -9,7 +9,9 @@ import {
   SimpleForm,
   TextInput,
   downloadCSV,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -48,6 +50,12 @@ const exporter = async records => {
   downloadCSV(csv, "regionals_delegations");
 };
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const RegionalsDelegationsList = ({ ...props }) => (
   <List
     {...props}
@@ -55,6 +63,7 @@ export const RegionalsDelegationsList = ({ ...props }) => (
     filters={<RegionalsDelegationsFilter />}
     perPage={10}
     sort={{ field: "id", order: "ASC" }}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit
@@ -80,13 +89,19 @@ const RegionalsDelegationsTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const RegionalsDelegationsEdit = ({ ...props }) => (
   <Edit
     title={<RegionalsDelegationsTitle />}
     {...props}
     actions={<ListEditActions />}
   >
-    <SimpleForm>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput
         source="code"
         label="resources.regionals_delegations.fields.code"

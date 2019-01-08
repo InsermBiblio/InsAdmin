@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -10,7 +10,9 @@ import {
   TextField,
   TextInput,
   LongTextInput,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
@@ -21,12 +23,19 @@ const UsersFilter = props => (
   </Filter>
 );
 
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const UsersList = ({ ...props }) => (
   <List
     {...props}
     filters={<UsersFilter />}
     perPage={25}
     sort={{ field: "id", order: "ASC" }}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <TextField source="id" label="resources.adminUsers.fields.id" />
@@ -41,9 +50,15 @@ const UsersTitle = ({ record }) => {
   return record.username;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const UsersEdit = ({ ...props }) => (
   <Edit title={<UsersTitle />} {...props} actions={<ListEditActions />}>
-    <SimpleForm>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput
         source="username"
         validate={required("Ce champ est requis!")}
