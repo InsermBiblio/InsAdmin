@@ -82,7 +82,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
 
             break;
           case "institutes":
-            field = `institute.${field}`;
+            field = `${field}`;
             break;
           case "teams":
             if (
@@ -94,7 +94,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
                 "mixt_university",
                 "cnrs_mixity",
                 "other_mixity",
-                "total_etp_effectiv",
                 "nb_structures_accounts",
                 "nb_teams_account",
                 "nb_personal_accounts"
@@ -106,7 +105,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
             }
             break;
           case "section_cn":
-            field = `section_cn.${field}`;
+            field = `${field}`;
             break;
           case "individual_account_fede":
             if (field === "name") {
