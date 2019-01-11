@@ -33,7 +33,6 @@ import {
 } from "../components/LinkAccount";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
 import { renameKeys } from "../utils/utils";
-import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 
 const StructuresFilter = props => (
   <Filter {...props}>
@@ -61,25 +60,23 @@ const StructuresFilter = props => (
       label="resources.structures.fields.name"
     />
 
-    <AutoCompleteReferenceInput
+    <ReferenceInput
       label="resources.structures.fields.principal_it"
-      element="structures.principal_it"
-      source="principal_it"
+      source="structures.principal_it"
       reference="institutes"
-      field="institutes"
-      optionText="name"
-      isFilter={true}
-    />
+      allowEmpty={true}
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
 
-    <AutoCompleteReferenceInput
+    <ReferenceInput
       label="resources.structures.fields.specialized_commission"
-      element="structures.specialized_commission"
-      source="specialized_commission"
+      source="structures.specialized_commission"
       reference="section_cn"
-      field="section_cn"
-      optionText="name"
-      isFilter={true}
-    />
+      allowEmpty={true}
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
 
     <TextInput
       source="like_structures.site"
@@ -90,15 +87,15 @@ const StructuresFilter = props => (
       label="resources.structures.fields.city"
     />
 
-    <AutoCompleteReferenceInput
+    <ReferenceInput
       label="resources.structures.fields.regional_delegation"
-      element="structures.regional_delegation"
-      source="regional_delegation"
+      source="structures.regional_delegation"
       reference="regionals_delegations"
-      field="regionals_delegations"
-      optionText="code"
-      isFilter={true}
-    />
+      allowEmpty={true}
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
+
     <TextInput
       source="like_structures.director_lastname"
       label="resources.structures.fields.director_lastname"

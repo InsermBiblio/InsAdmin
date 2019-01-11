@@ -77,7 +77,7 @@ class AutoCompleteReferenceInput extends React.Component {
     const { optionText, record, element, reference } = this.props;
     if (record[element]) {
       const { data } = await axios({
-        url: `${process.env.REACT_APP_BIBAPI_HOST}/${reference}/${
+        url: `${process.env.REACT_APP_INSAPI_HOST}/${reference}/${
           record[element]
         }`,
         headers: {

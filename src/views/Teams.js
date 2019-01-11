@@ -32,19 +32,19 @@ import {
 } from "../components/LinkAccount";
 import { renameKeys } from "../utils/utils";
 import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const TeamsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
 
-    <AutoCompleteReferenceInput
+    <AutoCompleteInput
       label="resources.teams.fields.structure_code"
-      element="teams.structure_code"
+      filter="teams.structure_code"
       source="structure_code"
       reference="structures"
       field="structures"
       optionText="code"
-      isFilter={true}
     />
 
     <SelectInput
@@ -301,15 +301,12 @@ export const TeamsEdit = ({ ...props }) => (
         validate={required("Ce champ est requis!")}
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.teams.fields.structure_code"
         source="structure_code"
-        reference="structures"
-        allowEmpty={true}
-        validate={required("Ce champ est requis!")}
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
+        reference="teams"
+        optionText="code"
+      />
 
       <TextInput
         source="principal_lastname"
@@ -493,7 +490,7 @@ export const TeamsEdit = ({ ...props }) => (
 );
 
 export const TeamsCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
       <TextInput
         source="team_number"
@@ -506,15 +503,13 @@ export const TeamsCreate = ({ ...props }) => (
         validate={required("Ce champ est requis!")}
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
-        allowEmpty={true}
-        validate={required("Ce champ est requis!")}
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
+        field="structures"
+        optionText="code"
+      />
 
       <TextInput
         source="principal_lastname"
