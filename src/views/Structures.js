@@ -89,11 +89,11 @@ const StructuresFilter = props => (
 
     <ReferenceInput
       label="resources.structures.fields.regional_delegation"
-      source="structures.regional_delegation"
+      source="regional_delegation"
       reference="regionals_delegations"
       allowEmpty={true}
     >
-      <AutocompleteInput optionText="name" />
+      <AutocompleteInput optionText="code" />
     </ReferenceInput>
 
     <TextInput
@@ -146,7 +146,9 @@ const exporter = async (records, fetchRelatedRecords) => {
     principal_it:
       listPrincipalIt[record.principal_it] &&
       listPrincipalIt[record.principal_it].name,
-    secondary_it: record.secondary_it.map(n => listPrincipalIt[n].name)
+    secondary_it: record.secondary_it
+      ? record.secondary_it.map(n => listPrincipalIt[n].name)
+      : []
   }));
   const data = dataWithRelation.map(record => renameKeys(record, "structures"));
   const csv = convertToCSV(data, {

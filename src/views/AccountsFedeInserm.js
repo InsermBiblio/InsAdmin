@@ -29,7 +29,7 @@ import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
-import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const AccountsFedeInsermFilter = props => (
   <Filter {...props}>
@@ -63,24 +63,22 @@ const AccountsFedeInsermFilter = props => (
       label="resources.individual_account_fede.fields.type_of_assigned_structure"
     />
 
-    <AutoCompleteReferenceInput
+    <AutoCompleteInput
       label="resources.individual_account_fede.fields.structure_code"
-      element="individual_account_fede.structure_code"
       source="structure_code"
       reference="structures"
       field="structures"
       optionText="code"
-      isFilter={true}
+      filter="individual_account_fede.structure_code"
     />
 
-    <AutoCompleteReferenceInput
+    <AutoCompleteInput
       label="resources.individual_account_fede.fields.team_number"
-      element="individual_account_fede.team_number"
       source="team_number"
       reference="teams"
       field="teams"
       optionText="team_number"
-      isFilter={true}
+      filter="individual_account_fede.team_number"
     />
 
     <TextInput
@@ -92,15 +90,14 @@ const AccountsFedeInsermFilter = props => (
       label="resources.individual_account_fede.fields.secondary_team_code"
     />
 
-    <AutoCompleteReferenceInput
+    <ReferenceInput
       label="resources.individual_account_fede.fields.regional_delegation"
-      element="individual_account_fede.regional_delegation"
-      source="regional_delegation"
+      source="individual_account_fede.regional_delegation"
       reference="regionals_delegations"
-      field="regionals_delegations"
-      optionText="code"
-      isFilter={true}
-    />
+      allowEmpty={true}
+    >
+      <AutocompleteInput optionText="code" />
+    </ReferenceInput>
 
     <TextInput
       source="like_individual_account_fede.site"
@@ -111,25 +108,22 @@ const AccountsFedeInsermFilter = props => (
       label="resources.individual_account_fede.fields.city"
     />
 
-    <AutoCompleteReferenceInput
+    <AutoCompleteInput
       label="resources.individual_account_fede.fields.principal_it"
-      element="individual_account_fede.principal_it"
       source="institutes"
       reference="institutes"
       field="institutes"
       optionText="name"
-      isFilter={true}
+      filter="individual_account_fede.principal_it"
     />
 
-    <AutoCompleteReferenceInput
+    <ReferenceInput
       label="resources.individual_account_fede.fields.specialized_commission"
-      element="individual_account_fede.specialized_commission"
-      source="section_cn"
+      source="individual_account_fede.specialized_commission"
       reference="section_cn"
-      field="section_cn"
-      optionText="name"
-      isFilter={true}
-    />
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
 
     <TextInput
       source="like_individual_account_fede.orcid_number"
@@ -162,9 +156,6 @@ const AccountsFedeInsermFilter = props => (
     <BooleanInput
       source="individual_account_fede.active"
       label="resources.individual_account_fede.fields.active"
-      options={{
-        checked: "checked"
-      }}
     />
   </Filter>
 );
@@ -283,10 +274,10 @@ export const AccountsFedeInsermList = props => (
         label="resources.individual_account_fede.fields.team_name"
         source="name"
       />
-      <TextField
+      {/*<TextField
         source="secondary_team_code"
         label="resources.individual_account_fede.fields.secondary_team_code"
-      />
+      />*/}
       <ReferenceField
         label="resources.structures.fields.regional_delegation"
         source="regional_delegation"
@@ -388,26 +379,24 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         ]}
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.individual_account_fede.fields.structure_code"
         source="structure_code"
         reference="structures"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
+        field="structures"
+        optionText="code"
+      />
       <TextField
         source="structure_name"
         label="resources.individual_account_fede.fields.structure_name"
       />
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.individual_account_fede.fields.team_number"
         source="team_number"
         reference="teams"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="team_number" />
-      </ReferenceInput>
+        field="teams"
+        optionText="team_number"
+      />
       <ReferenceField
         label="resources.individual_account_fede.fields.team_name"
         source="team_number"
@@ -416,6 +405,15 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
       >
         <TextField source="name" />
       </ReferenceField>
+
+      <AutoCompleteInput
+        label="resources.individual_account_fede.fields.secondary_team_code"
+        source="secondary_team_code"
+        reference="teams"
+        field="teams"
+        optionText="team_number"
+        isMulti={true}
+      />
 
       <ReferenceInput
         label="resources.structures.fields.regional_delegation"
@@ -427,11 +425,6 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
       </ReferenceInput>
 
       <TextInput
-        source="secondary_team_code"
-        label="resources.individual_account_fede.fields.secondary_team_code"
-      />
-
-      <TextInput
         source="site"
         label="resources.individual_account_fede.fields.site"
       />
@@ -439,14 +432,13 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         source="city"
         label="resources.individual_account_fede.fields.city"
       />
-      <ReferenceInput
+
+      <AutoCompleteInput
         label="resources.individual_account_fede.fields.itmo_principal"
         source="itmo_principal"
         reference="institutes"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
+        field="institutes"
+      />
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"
         source="specialized_commission"
@@ -539,36 +531,38 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         ]}
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.individual_account_fede.fields.structure_code"
         source="structure_code"
         reference="structures"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
-      <ReferenceInput
+        field="structures"
+        optionText="code"
+      />
+
+      <AutoCompleteInput
         label="resources.individual_account_fede.fields.team_number"
         source="team_number"
         reference="teams"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="team_number" />
-      </ReferenceInput>
+        field="teams"
+        optionText="team_number"
+      />
+
+      <AutoCompleteInput
+        label="resources.individual_account_fede.fields.secondary_team_code"
+        source="secondary_team_code"
+        reference="teams"
+        field="teams"
+        optionText="team_number"
+      />
 
       <ReferenceInput
-        label="resources.structures.fields.regional_delegation"
+        label="resources.individual_account_fede.fields.regional_delegation"
         source="regional_delegation"
         reference="regionals_delegations"
         allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
-
-      <TextInput
-        source="secondary_team_code"
-        label="resources.individual_account_fede.fields.secondary_team_code"
-      />
 
       <TextInput
         source="site"
@@ -578,14 +572,14 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         source="city"
         label="resources.individual_account_fede.fields.city"
       />
-      <ReferenceInput
+
+      <AutoCompleteInput
         label="resources.individual_account_fede.fields.itmo_principal"
         source="itmo_principal"
         reference="institutes"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
+        field="institutes"
+      />
+
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"
         source="specialized_commission"

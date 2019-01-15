@@ -265,21 +265,42 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     }
 
     const { url, options } = convertDataRequestToHTTP(type, resource, params);
-    if (options.body && options.body.image) {
-      return convertFileToBase64(options.body.image).then(image => {
-        options.body.image = image;
-        options.body = JSON.stringify(options.body);
-        return httpClient(url, options).then(response =>
-          convertHTTPResponse(response, type, resource, params)
-        );
-      });
-    } else {
-      if (options.body) {
-        options.body = JSON.stringify(options.body);
+    if (options.body) {
+      const principal_it = sessionStorage.getItem("principal_it");
+      const structure_code = sessionStorage.getItem("structure_code");
+      const team_number = sessionStorage.getItem("team_number");
+      const secondary_team_code = sessionStorage.getItem("secondary_team_code");
+      const itmo_principal = sessionStorage.getItem("itmo_principal");
+      if (principal_it) {
+        options.body.principal_it = principal_it;
+        sessionStorage.removeItem("principal_it");
       }
-      return httpClient(url, options).then(response =>
-        convertHTTPResponse(response, type, resource, params)
-      );
+      if (structure_code) {
+        options.body.structure_code = structure_code;
+        sessionStorage.removeItem("structure_code");
+      }
+      if (team_number) {
+        options.body.team_number = team_number;
+        sessionStorage.removeItem("team_number");
+      }
+      if (secondary_team_code) {
+        options.body.secondary_team_code = secondary_team_code;
+        sessionStorage.removeItem("secondary_team_code");
+      }
+      if (itmo_principal) {
+        options.body.itmo_principal = itmo_principal;
+        sessionStorage.removeItem("itmo_principal");
+      }
+      sessionStorage.clear();
+      if (options.body.image) {
+        return convertFileToBase64(options.body.image).then(image => {
+          options.body.image = image;
+        });
+      }
+      options.body = JSON.stringify(options.body);
     }
+    return httpClient(url, options).then(response =>
+      convertHTTPResponse(response, type, resource, params)
+    );
   };
 };

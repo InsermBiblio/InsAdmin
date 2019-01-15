@@ -9,11 +9,11 @@ import {
   SimpleForm,
   TextField,
   ReferenceField,
+  ReferenceInput,
+  AutocompleteInput,
   SelectInput,
   TextInput,
   BooleanInput,
-  ReferenceInput,
-  AutocompleteInput,
   BooleanField,
   downloadCSV,
   required,
@@ -31,7 +31,6 @@ import {
   UrlSearchFedeInserm
 } from "../components/LinkAccount";
 import { renameKeys } from "../utils/utils";
-import { AutoCompleteReferenceInput } from "../components/AutoCompleteReferenceInput";
 import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const TeamsFilter = props => (
@@ -40,11 +39,11 @@ const TeamsFilter = props => (
 
     <AutoCompleteInput
       label="resources.teams.fields.structure_code"
-      filter="teams.structure_code"
       source="structure_code"
       reference="structures"
-      field="structures"
+      field="teams"
       optionText="code"
+      filter="teams.structure_code"
     />
 
     <SelectInput
@@ -67,25 +66,21 @@ const TeamsFilter = props => (
       label="resources.teams.fields.principal_lastname"
     />
 
-    <AutoCompleteReferenceInput
+    <AutoCompleteInput
       label="resources.teams.fields.principal_it"
-      element="teams.principal_it"
       source="principal_it"
       reference="institutes"
       field="institutes"
-      optionText="name"
-      isFilter={true}
+      filter="teams.principal_it"
     />
 
-    <AutoCompleteReferenceInput
+    <ReferenceInput
       label="resources.teams.fields.specialized_commission"
-      element="teams.specialized_commission"
       source="specialized_commission"
       reference="section_cn"
-      field="section_cn"
-      optionText="name"
-      isFilter={true}
-    />
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
 
     <TextInput
       source="like_structures.site"
@@ -96,15 +91,14 @@ const TeamsFilter = props => (
       label="resources.teams.fields.city"
     />
 
-    <AutoCompleteReferenceInput
-      label="resources.teams.fields.regional_delegation"
-      element="structures.regional_delegation"
-      source="regional_delegation"
+    <ReferenceInput
+      label="resources.structures.fields.regional_delegation"
+      source="structures.regional_delegation"
       reference="regionals_delegations"
-      field="regionals_delegations"
-      optionText="code"
-      isFilter={true}
-    />
+      allowEmpty={true}
+    >
+      <AutocompleteInput optionText="code" />
+    </ReferenceInput>
 
     <TextInput
       source="like_structures.mixt_university"
@@ -304,7 +298,8 @@ export const TeamsEdit = ({ ...props }) => (
       <AutoCompleteInput
         label="resources.teams.fields.structure_code"
         source="structure_code"
-        reference="teams"
+        reference="structures"
+        field="teams"
         optionText="code"
       />
 
@@ -321,20 +316,17 @@ export const TeamsEdit = ({ ...props }) => (
         label="resources.teams.fields.principal_email"
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.teams.fields.principal_it"
         source="principal_it"
         reference="institutes"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
+        field="institutes"
+      />
 
       <ReferenceInput
         label="resources.teams.fields.specialized_commission"
         source="specialized_commission"
         reference="section_cn"
-        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -507,7 +499,7 @@ export const TeamsCreate = ({ ...props }) => (
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
-        field="structures"
+        field="teams"
         optionText="code"
       />
 
@@ -524,20 +516,17 @@ export const TeamsCreate = ({ ...props }) => (
         label="resources.teams.fields.principal_email"
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.teams.fields.principal_it"
         source="principal_it"
         reference="institutes"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="code" />
-      </ReferenceInput>
+        field="institutes"
+      />
 
       <ReferenceInput
         label="resources.teams.fields.specialized_commission"
         source="specialized_commission"
         reference="section_cn"
-        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
