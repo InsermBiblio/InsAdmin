@@ -295,6 +295,10 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       if (options.body.image) {
         return convertFileToBase64(options.body.image).then(image => {
           options.body.image = image;
+          options.body = JSON.stringify(options.body);
+          return httpClient(url, options).then(response =>
+            convertHTTPResponse(response, type, resource, params)
+          );
         });
       }
       options.body = JSON.stringify(options.body);
