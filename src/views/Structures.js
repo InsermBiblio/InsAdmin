@@ -89,7 +89,7 @@ const StructuresFilter = props => (
 
     <ReferenceInput
       label="resources.structures.fields.regional_delegation"
-      source="regional_delegation"
+      source="structures.regional_delegation"
       reference="regionals_delegations"
       allowEmpty={true}
     >

@@ -78,7 +78,7 @@ const AccountsStructuresTeamsFilter = props => (
       reference="teams"
       field="teams"
       optionText="team_number"
-      filter="account_structures_teams.team_number"
+      filter="teams.team_number"
     />
 
     <TextInput
@@ -125,13 +125,13 @@ const AccountsStructuresTeamsFilter = props => (
       label="resources.account_structures_teams.fields.other_mixity"
     />
 
-    <AutoCompleteInput
+    <ReferenceInput
       label="resources.account_structures_teams.fields.principal_it"
-      source="principal_it"
+      source="teams.principal_it"
       reference="institutes"
-      field="institutes"
-      filter="teams.principal_it"
-    />
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
 
     <ReferenceInput
       label="resources.account_structures_teams.fields.specialized_commission"

@@ -66,13 +66,13 @@ const TeamsFilter = props => (
       label="resources.teams.fields.principal_lastname"
     />
 
-    <AutoCompleteInput
+    <ReferenceInput
       label="resources.teams.fields.principal_it"
-      source="principal_it"
+      source="teams.principal_it"
       reference="institutes"
-      field="institutes"
-      filter="teams.principal_it"
-    />
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
 
     <ReferenceInput
       label="resources.teams.fields.specialized_commission"
@@ -316,12 +316,13 @@ export const TeamsEdit = ({ ...props }) => (
         label="resources.teams.fields.principal_email"
       />
 
-      <AutoCompleteInput
+      <ReferenceInput
         label="resources.teams.fields.principal_it"
         source="principal_it"
         reference="institutes"
-        field="institutes"
-      />
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
 
       <ReferenceInput
         label="resources.teams.fields.specialized_commission"
@@ -516,12 +517,13 @@ export const TeamsCreate = ({ ...props }) => (
         label="resources.teams.fields.principal_email"
       />
 
-      <AutoCompleteInput
+      <ReferenceInput
         label="resources.teams.fields.principal_it"
         source="principal_it"
         reference="institutes"
-        field="institutes"
-      />
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
 
       <ReferenceInput
         label="resources.teams.fields.specialized_commission"
