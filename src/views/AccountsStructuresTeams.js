@@ -78,7 +78,7 @@ const AccountsStructuresTeamsFilter = props => (
       reference="teams"
       field="teams"
       optionText="team_number"
-      filter="teams.team_number"
+      filter="account_structures_teams.team_number"
     />
 
     <TextInput
@@ -252,7 +252,7 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
         label="resources.account_structures_teams.fields.team_number"
         page="teams"
         relationalId="id"
-        source="team_number"
+        source="team_code"
       />
       <LinkRelational
         label="resources.account_structures_teams.fields.name"

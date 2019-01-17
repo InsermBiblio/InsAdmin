@@ -51,71 +51,72 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         /**
          * permet d'effectuer un tri (améliorer l'api pour supprimer cette portion de code)
          */
-        switch (resource) {
-          case "account_structures_teams":
-            if (
-              [
-                "name",
-                "team_number",
-                "principal_lastname",
-                "principal_email",
-                "principal_it",
-                "specialized_commission"
-              ].includes(field)
-            ) {
-              field = `teams.${field}`;
-            } else if (
-              [
-                "code",
-                "regional_delegation",
-                "site",
-                "city",
-                "mixt_university",
-                "cnrs_mixity",
-                "other_mixity"
-              ].includes(field)
-            ) {
-              field = `structures.${field}`;
-            } else {
-              field = `account_structures_teams.${field}`;
-            }
-
-            break;
-          case "institutes":
-            field = `${field}`;
-            break;
-          case "teams":
-            if (
-              [
-                "code",
-                "regional_delegation",
-                "city",
-                "site",
-                "mixt_university",
-                "cnrs_mixity",
-                "other_mixity",
-                "nb_structures_accounts",
-                "nb_teams_account",
-                "nb_personal_accounts"
-              ].includes(field)
-            ) {
-              field = `structures.${field}`;
-            } else {
-              field = `teams.${field}`;
-            }
-            break;
-          case "section_cn":
-            field = `${field}`;
-            break;
-          case "individual_account_fede":
-            if (field === "name") {
-              field = `teams.${field}`;
-            } else {
-              field = `individual_account_fede.${field}`;
-            }
-            break;
-          default:
-            break;
+        if (field) {
+          switch (resource) {
+            case "account_structures_teams":
+              if (
+                [
+                  "name",
+                  "team_number",
+                  "principal_lastname",
+                  "principal_email",
+                  "principal_it",
+                  "specialized_commission"
+                ].includes(field)
+              ) {
+                field = `teams.${field}`;
+              } else if (
+                [
+                  "code",
+                  "regional_delegation",
+                  "site",
+                  "city",
+                  "mixt_university",
+                  "cnrs_mixity",
+                  "other_mixity"
+                ].includes(field)
+              ) {
+                field = `structures.${field}`;
+              } else {
+                field = `account_structures_teams.${field}`;
+              }
+              break;
+            case "institutes":
+              field = `${field}`;
+              break;
+            case "teams":
+              if (
+                [
+                  "code",
+                  "regional_delegation",
+                  "city",
+                  "site",
+                  "mixt_university",
+                  "cnrs_mixity",
+                  "other_mixity",
+                  "nb_structures_accounts",
+                  "nb_teams_account",
+                  "nb_personal_accounts"
+                ].includes(field)
+              ) {
+                field = `structures.${field}`;
+              } else {
+                field = `teams.${field}`;
+              }
+              break;
+            case "section_cn":
+              field = `${field}`;
+              break;
+            case "individual_account_fede":
+              if (field === "name") {
+                field = `teams.${field}`;
+              } else {
+                field = `individual_account_fede.${field}`;
+              }
+              break;
+            default:
+              break;
+          }
         }
 
         const query = {
@@ -123,7 +124,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
           _perPage: perPage || 10
         };
 
-        query._sortField = field;
+        query._sortField = field || "id";
         query._sortDir = order || "ASC";
 
         if (Object.keys(filters).length > 0) {
