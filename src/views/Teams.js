@@ -76,7 +76,7 @@ const TeamsFilter = props => (
 
     <ReferenceInput
       label="resources.teams.fields.specialized_commission"
-      source="specialized_commission"
+      source="teams.specialized_commission"
       reference="section_cn"
     >
       <AutocompleteInput optionText="name" />

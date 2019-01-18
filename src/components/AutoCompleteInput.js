@@ -40,9 +40,9 @@ class AutoCompleteInput extends React.Component {
             const newUrl = Object.assign(query, JSON.parse(newFilter));
             document.location.href = `#/${resource}?filter=${JSON.stringify(
               newUrl
-            )}`;
+            )}&_perPage=10&_page=1`;
           } else {
-            document.location.href = `#/${resource}?filter=${newFilter}`;
+            document.location.href = `#/${resource}?filter=${newFilter}&_perPage=10&_page=1`;
           }
         }
       }
@@ -69,7 +69,9 @@ class AutoCompleteInput extends React.Component {
         filter = `{"like_${optionText}":"${value}"}`;
       }
       const data = await fetchApi(
-        `${process.env.REACT_APP_INSAPI_HOST}/${reference}?_filters=${filter}`
+        `${
+          process.env.REACT_APP_INSAPI_HOST
+        }/${reference}?_filters=${filter}&_perPage=10&_page=1`
       );
       if (data) {
         const selectedOption = data.map(n => ({

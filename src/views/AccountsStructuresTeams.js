@@ -13,6 +13,7 @@ import {
   DateField,
   BooleanField,
   TextInput,
+  ExportButton,
   downloadCSV,
   LongTextInput,
   BooleanInput,
@@ -217,6 +218,11 @@ const exporter = async (records, fetchRelatedRecords) => {
     delimiter: ";"
   });
   downloadCSV(csv, "comptes_structures_equipes");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
 };
 
 const PostBulkActionButtons = props => (

@@ -13,6 +13,7 @@ import {
   DateField,
   BooleanField,
   TextInput,
+  ExportButton,
   downloadCSV,
   BooleanInput,
   LongTextInput,
@@ -82,7 +83,7 @@ const AccountsFedeInsermFilter = props => (
     />
 
     <TextInput
-      source="like_individual_account_fede.team_name"
+      source="like_teams.name"
       label="resources.individual_account_fede.fields.team_name"
     />
     <TextInput
@@ -108,14 +109,13 @@ const AccountsFedeInsermFilter = props => (
       label="resources.individual_account_fede.fields.city"
     />
 
-    <AutoCompleteInput
+    <ReferenceInput
       label="resources.individual_account_fede.fields.principal_it"
-      source="institutes"
+      source="individual_account_fede.itmo_principal"
       reference="institutes"
-      field="institutes"
-      optionText="name"
-      filter="individual_account_fede.principal_it"
-    />
+    >
+      <AutocompleteInput optionText="name" />
+    </ReferenceInput>
 
     <ReferenceInput
       label="resources.individual_account_fede.fields.specialized_commission"
@@ -207,14 +207,21 @@ const exporter = async (records, fetchRelatedRecords) => {
   data.forEach(element => {
     element["Intitulé d'équipe"] = element.name;
     delete element.name;
-    element["Première connexion"] = element["Première connexion"]
-      .replace(/T/, " ")
-      .replace(/\..+/, "");
+    if (element["Première connexion"]) {
+      element["Première connexion"] = element["Première connexion"]
+        .replace(/T/, " ")
+        .replace(/\..+/, "");
+    }
   });
   const csv = convertToCSV(data, {
     delimiter: ";"
   });
   downloadCSV(csv, "comptes_individuel_fede");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
 };
 
 const PostBulkActionButtons = props => (
@@ -274,10 +281,6 @@ export const AccountsFedeInsermList = props => (
         label="resources.individual_account_fede.fields.team_name"
         source="name"
       />
-      {/*<TextField
-        source="secondary_team_code"
-        label="resources.individual_account_fede.fields.secondary_team_code"
-      />*/}
       <ReferenceField
         label="resources.structures.fields.regional_delegation"
         source="regional_delegation"
@@ -433,12 +436,13 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         label="resources.individual_account_fede.fields.city"
       />
 
-      <AutoCompleteInput
-        label="resources.individual_account_fede.fields.itmo_principal"
+      <ReferenceInput
+        label="resources.individual_account_fede.fields.principal_it"
         source="itmo_principal"
         reference="institutes"
-        field="institutes"
-      />
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"
         source="specialized_commission"
@@ -573,12 +577,13 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         label="resources.individual_account_fede.fields.city"
       />
 
-      <AutoCompleteInput
-        label="resources.individual_account_fede.fields.itmo_principal"
+      <ReferenceInput
+        label="resources.individual_account_fede.fields.principal_it"
         source="itmo_principal"
         reference="institutes"
-        field="institutes"
-      />
+      >
+        <AutocompleteInput optionText="name" />
+      </ReferenceInput>
 
       <ReferenceInput
         label="resources.structures.fields.specialized_commission"

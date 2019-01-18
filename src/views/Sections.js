@@ -9,6 +9,7 @@ import {
   SimpleForm,
   TextInput,
   LongTextInput,
+  ExportButton,
   downloadCSV,
   required,
   SaveButton,
@@ -48,6 +49,11 @@ const exporter = async records => {
     delimiter: ";"
   });
   downloadCSV(csv, "section_cn");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
 };
 
 const PostBulkActionButtons = props => (

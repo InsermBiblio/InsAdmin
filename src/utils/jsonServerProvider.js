@@ -120,7 +120,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         }
 
         const query = {
-          _page: page,
+          _page: page || 1,
           _perPage: perPage || 10
         };
 

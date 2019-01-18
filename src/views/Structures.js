@@ -16,6 +16,7 @@ import {
   AutocompleteInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  ExportButton,
   downloadCSV,
   SelectInput,
   LongTextInput,
@@ -155,6 +156,11 @@ const exporter = async (records, fetchRelatedRecords) => {
     delimiter: ";"
   });
   downloadCSV(csv, "structures");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
 };
 
 const PostBulkActionButtons = props => (

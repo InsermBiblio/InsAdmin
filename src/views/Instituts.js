@@ -8,6 +8,7 @@ import {
   Filter,
   SimpleForm,
   TextInput,
+  ExportButton,
   downloadCSV,
   required,
   SaveButton,
@@ -39,6 +40,11 @@ const exporter = async records => {
     delimiter: ";"
   });
   downloadCSV(csv, "institutes");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
 };
 
 const PostBulkActionButtons = props => (
