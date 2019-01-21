@@ -205,8 +205,6 @@ const exporter = async (records, fetchRelatedRecords) => {
     renameKeys(record, "individual_account_fede")
   );
   data.forEach(element => {
-    element["Intitulé d'équipe"] = element.name;
-    delete element.name;
     if (element["Première connexion"]) {
       element["Première connexion"] = element["Première connexion"]
         .replace(/T/, " ")

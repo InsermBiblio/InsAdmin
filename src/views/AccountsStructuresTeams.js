@@ -205,11 +205,10 @@ const exporter = async (records, fetchRelatedRecords) => {
     renameKeys(record, "account_structures_teams")
   );
   data.forEach(element => {
-    element["Date d'inscription"] = element["Date d'inscription"]
-      .replace(/T/, " ")
-      .replace(/\..+/, "");
-    element["Intitulé de la structure"] = element["Code de la structure"];
-    delete element["Code de la structure"];
+    if (element["Date d'inscription"])
+      element["Date d'inscription"] = element["Date d'inscription"]
+        .replace(/T/, " ")
+        .replace(/\..+/, "");
     element["Code de la structure"] = element.code;
     delete element.code;
   });
