@@ -6,13 +6,17 @@ import axios from "axios";
 
 // get data on api
 const fetchApi = async url => {
-  const { data } = await axios({
-    url,
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`
-    }
-  });
-  return data;
+  try {
+    const { data } = await axios({
+      url,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
+    });
+    return data;
+  } catch (error) {
+    window.location.reload();
+  }
 };
 
 class AutoCompleteInput extends React.Component {
@@ -60,7 +64,7 @@ class AutoCompleteInput extends React.Component {
 
   // Autosuggest will call this function every time you need to update suggestions. (async query)
   promiseOptions = async value => {
-    const { reference, field, optionText } = this.props;
+    const { reference, field, optionText, fieldValue } = this.props;
     if (value.length > 1) {
       let filter = "";
       if (field) {
@@ -76,7 +80,7 @@ class AutoCompleteInput extends React.Component {
       if (data) {
         const selectedOption = data.map(n => ({
           label: n[optionText],
-          value: n.id
+          value: n[fieldValue]
         }));
         return selectedOption;
       }
@@ -89,7 +93,14 @@ class AutoCompleteInput extends React.Component {
     //clear autocomplete in temp database
     sessionStorage.clear();
 
-    const { record, source, reference, filter, optionText } = this.props;
+    const {
+      record,
+      source,
+      reference,
+      filter,
+      optionText,
+      fieldValue
+    } = this.props;
     const url = decodeURI(window.location.hash).split(/({.*})/)[1];
     if (record && record[source]) {
       let previousValue = record[source];
@@ -97,11 +108,11 @@ class AutoCompleteInput extends React.Component {
         previousValue = [previousValue];
       }
       const listData = await Promise.all(
-        previousValue.map(element => {
-          return fetchApi(
+        previousValue.map(element =>
+          fetchApi(
             `${process.env.REACT_APP_INSAPI_HOST}/${reference}/${element}`
-          );
-        })
+          )
+        )
       );
       const selectedOption = listData.map(n => ({
         value: n.id,
@@ -122,7 +133,7 @@ class AutoCompleteInput extends React.Component {
         if (data) {
           this.setState({
             selectedOption: {
-              value: data.id,
+              value: data[fieldValue],
               label: data[optionText]
             }
           });
@@ -177,7 +188,8 @@ AutoCompleteInput.propTypes = {
   field: PropTypes.string,
   isMulti: PropTypes.bool,
   filter: PropTypes.string,
-  optionText: PropTypes.string
+  optionText: PropTypes.string,
+  fieldValue: PropTypes.string
 };
 
 AutoCompleteInput.defaultProps = {
@@ -188,7 +200,8 @@ AutoCompleteInput.defaultProps = {
   field: "",
   isMulti: false,
   filter: "",
-  optionText: "name"
+  optionText: "name",
+  fieldValue: "id"
 };
 
 export default AutoCompleteInput;

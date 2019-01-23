@@ -276,19 +276,15 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
       }
       if (structure_code) {
         options.body.structure_code = structure_code;
-        sessionStorage.removeItem("structure_code");
       }
       if (team_number) {
         options.body.team_number = team_number;
-        sessionStorage.removeItem("team_number");
       }
       if (secondary_team_code) {
         options.body.secondary_team_code = secondary_team_code;
-        sessionStorage.removeItem("secondary_team_code");
       }
       if (itmo_principal) {
         options.body.itmo_principal = itmo_principal;
-        sessionStorage.removeItem("itmo_principal");
       }
       sessionStorage.clear();
       if (options.body.image) {

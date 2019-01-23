@@ -79,7 +79,8 @@ const AccountsStructuresTeamsFilter = props => (
       reference="teams"
       field="teams"
       optionText="team_number"
-      filter="account_structures_teams.team_number"
+      filter="teams.team_number"
+      fieldValue="team_number"
     />
 
     <TextInput
@@ -253,12 +254,7 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
         relationalId="structure_code"
         source="code"
       />
-      <LinkRelational
-        label="resources.account_structures_teams.fields.team_number"
-        page="teams"
-        relationalId="id"
-        source="team_code"
-      />
+      <TextField source="team_number" />
       <LinkRelational
         label="resources.account_structures_teams.fields.name"
         page="teams"
@@ -367,6 +363,7 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
         label="resources.account_structures_teams.fields.team_number"
         source="team_number"
         reference="teams"
+        field="teams"
         optionText="team_number"
       />
       <TextField
@@ -509,6 +506,7 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         label="resources.account_structures_teams.fields.team_number"
         source="team_number"
         reference="teams"
+        field="teams"
         optionText="team_number"
       />
       <SelectInput

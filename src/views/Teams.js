@@ -39,11 +39,12 @@ const TeamsFilter = props => (
 
     <AutoCompleteInput
       label="resources.teams.fields.structure_code"
-      source="structure_code"
+      source="code"
       reference="structures"
-      field="teams"
+      field="structures"
       optionText="code"
-      filter="teams.structure_code"
+      filter="structures.code"
+      fieldValue="code"
     />
 
     <SelectInput
@@ -299,7 +300,7 @@ export const TeamsEdit = ({ ...props }) => (
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
-        field="teams"
+        field="structures"
         optionText="code"
       />
 
@@ -500,7 +501,7 @@ export const TeamsCreate = ({ ...props }) => (
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
-        field="teams"
+        field="structures"
         optionText="code"
       />
 

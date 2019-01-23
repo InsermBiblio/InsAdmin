@@ -387,10 +387,14 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         field="structures"
         optionText="code"
       />
-      <TextField
-        source="structure_name"
+      <ReferenceField
         label="resources.individual_account_fede.fields.structure_name"
-      />
+        source="structure_code"
+        reference="structures"
+        allowEmpty={true}
+      >
+        <TextField source="name" />
+      </ReferenceField>
       <AutoCompleteInput
         label="resources.individual_account_fede.fields.team_number"
         source="team_number"
@@ -413,7 +417,6 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         reference="teams"
         field="teams"
         optionText="team_number"
-        isMulti={true}
       />
 
       <ReferenceInput
