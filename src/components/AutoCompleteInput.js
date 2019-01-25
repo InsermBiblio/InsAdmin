@@ -15,7 +15,8 @@ const fetchApi = async url => {
     });
     return data;
   } catch (error) {
-    window.location.reload();
+    console.error(error);
+    // window.location.reload();
   }
 };
 

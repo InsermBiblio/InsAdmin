@@ -86,9 +86,14 @@ const AccountsFedeInsermFilter = props => (
       source="like_teams.name"
       label="resources.individual_account_fede.fields.team_name"
     />
-    <TextInput
-      source="like_individual_account_fede.secondary_team_code"
+
+    <AutoCompleteInput
       label="resources.individual_account_fede.fields.secondary_team_code"
+      source="secondary_team_code"
+      reference="teams"
+      field="teams"
+      optionText="team_number"
+      filter="individual_account_fede.secondary_team_code"
     />
 
     <ReferenceInput
@@ -182,11 +187,15 @@ const exporter = async (records, fetchRelatedRecords) => {
     "itmo_principal",
     "institutes"
   );
+
   const dataWithRelation = records.map(record => ({
     ...record,
     structure_code:
       listStructures[record.structure_code] &&
       listStructures[record.structure_code].code,
+    structure_name:
+      listStructures[record.structure_name] &&
+      listStructures[record.structure_name].name,
     team_number:
       listTeams[record.team_number] &&
       listTeams[record.team_number].team_number,
@@ -198,9 +207,11 @@ const exporter = async (records, fetchRelatedRecords) => {
       listRegionalDelegation[record.regional_delegation].name,
     itmo_principal:
       listPrincipalIt[record.itmo_principal] &&
-      listPrincipalIt[record.itmo_principal].name
+      listPrincipalIt[record.itmo_principal].name,
+    secondary_team_code:
+      listTeams[record.secondary_team_code] &&
+      listTeams[record.secondary_team_code].team_number
   }));
-
   const data = dataWithRelation.map(record =>
     renameKeys(record, "individual_account_fede")
   );
@@ -280,6 +291,16 @@ export const AccountsFedeInsermList = props => (
         source="name"
       />
       <ReferenceField
+        label="resources.individual_account_fede.fields.secondary_team_code"
+        source="secondary_team_code"
+        reference="teams"
+        linkType="show"
+        allowEmpty={true}
+      >
+        <TextField source="team_number" />
+      </ReferenceField>
+
+      <ReferenceField
         label="resources.structures.fields.regional_delegation"
         source="regional_delegation"
         reference="regionals_delegations"
@@ -288,6 +309,7 @@ export const AccountsFedeInsermList = props => (
       >
         <TextField source="code" />
       </ReferenceField>
+
       <TextField
         source="site"
         label="resources.individual_account_fede.fields.site"
@@ -420,7 +442,7 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
       />
 
       <ReferenceInput
-        label="resources.structures.fields.regional_delegation"
+        label="resources.individual_account_fede.fields.regional_delegation"
         source="regional_delegation"
         reference="regionals_delegations"
         allowEmpty={true}

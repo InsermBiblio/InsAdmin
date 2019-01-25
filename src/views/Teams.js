@@ -193,6 +193,7 @@ export const TeamsList = ({ ...props }) => (
         source="regional_delegation"
         reference="regionals_delegations"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>
