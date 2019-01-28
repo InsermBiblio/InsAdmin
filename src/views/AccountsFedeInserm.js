@@ -194,8 +194,8 @@ const exporter = async (records, fetchRelatedRecords) => {
       listStructures[record.structure_code] &&
       listStructures[record.structure_code].code,
     structure_name:
-      listStructures[record.structure_name] &&
-      listStructures[record.structure_name].name,
+      listStructures[record.structure_code] &&
+      listStructures[record.structure_code].name,
     team_number:
       listTeams[record.team_number] &&
       listTeams[record.team_number].team_number,

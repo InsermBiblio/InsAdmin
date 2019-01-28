@@ -143,6 +143,9 @@ const exporter = async (records, fetchRelatedRecords) => {
     specialized_commission:
       listSpecializedCommission[record.specialized_commission] &&
       listSpecializedCommission[record.specialized_commission].name,
+    structure_name:
+      listStructures[record.structure_code] &&
+      listStructures[record.structure_code].name,
     structure_code:
       listStructures[record.structure_code] &&
       listStructures[record.structure_code].name,
