@@ -51,11 +51,9 @@ class AutoCompleteInput extends React.Component {
           }
         }
       }
+      sessionStorage.setItem(source, listValue);
     } else {
       this.componentWillUnmount();
-    }
-    if (record) {
-      sessionStorage.setItem(source, listValue);
     }
     this.setState({
       selectedOption,
@@ -91,9 +89,6 @@ class AutoCompleteInput extends React.Component {
 
   // for edit add previous value in autocomplete
   async componentWillMount() {
-    //clear autocomplete in temp database
-    sessionStorage.clear();
-
     const {
       record,
       source,
@@ -107,6 +102,9 @@ class AutoCompleteInput extends React.Component {
       let previousValue = record[source];
       if (!Array.isArray(record[source])) {
         previousValue = [previousValue];
+      }
+      if (previousValue.length > 0) {
+        sessionStorage.setItem(source, previousValue.join(","));
       }
       const listData = await Promise.all(
         previousValue.map(element =>
