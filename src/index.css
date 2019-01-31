@@ -65,3 +65,7 @@ table th,
 table td {
   padding: 0 6px !important;
 }
+
+.width-200 {
+  width: 200px;
+}

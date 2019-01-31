@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -9,13 +9,17 @@ import {
   SimpleForm,
   TextInput,
   LongTextInput,
+  ExportButton,
   downloadCSV,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
+import { renameKeys } from "../utils/utils";
 
 /**
  * Anciennement nommé "Sections du comité national"
@@ -36,15 +40,27 @@ const SectionsFilter = props => (
   </Filter>
 );
 
-const exporter = records => {
-  const csv = convertToCSV(records, {
-    delimiter: ";",
-    quotes: true,
-    quoteChar: '"',
-    encoding: "ISO-8859-1"
+const exporter = async records => {
+  const dataWithRelation = records.map(record => ({
+    ...record
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "section_cn"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
   });
   downloadCSV(csv, "section_cn");
 };
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
+};
+
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
 
 export const SectionsList = ({ ...props }) => (
   <List
@@ -52,6 +68,7 @@ export const SectionsList = ({ ...props }) => (
     exporter={exporter}
     filters={<SectionsFilter />}
     perPage={10}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit label="resources.section_cn.fields.name" source="name" />
@@ -66,9 +83,15 @@ const SectionsTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const SectionsEdit = ({ ...props }) => (
   <Edit title={<SectionsTitle />} {...props} actions={<ListEditActions />}>
-    <SimpleForm>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput
         source="name"
         label="resources.section_cn.fields.name"

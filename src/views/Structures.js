@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -16,10 +16,13 @@ import {
   AutocompleteInput,
   ReferenceArrayInput,
   SelectArrayInput,
+  ExportButton,
   downloadCSV,
   SelectInput,
   LongTextInput,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -84,14 +87,16 @@ const StructuresFilter = props => (
       source="like_structures.city"
       label="resources.structures.fields.city"
     />
+
     <ReferenceInput
       label="resources.structures.fields.regional_delegation"
       source="structures.regional_delegation"
       reference="regionals_delegations"
       allowEmpty={true}
     >
-      <AutocompleteInput optionText="name" />
+      <AutocompleteInput optionText="code" />
     </ReferenceInput>
+
     <TextInput
       source="like_structures.director_lastname"
       label="resources.structures.fields.director_lastname"
@@ -126,6 +131,11 @@ const exporter = async (records, fetchRelatedRecords) => {
     "regional_delegation",
     "regionals_delegations"
   );
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "principal_it",
+    "institutes"
+  );
   const dataWithRelation = records.map(record => ({
     ...record,
     specialized_commission:
@@ -133,7 +143,13 @@ const exporter = async (records, fetchRelatedRecords) => {
       listSpecializedCommission[record.specialized_commission].name,
     regional_delegation:
       listRegionalDelegation[record.regional_delegation] &&
-      listRegionalDelegation[record.regional_delegation].name
+      listRegionalDelegation[record.regional_delegation].name,
+    principal_it:
+      listPrincipalIt[record.principal_it] &&
+      listPrincipalIt[record.principal_it].name,
+    secondary_it: record.secondary_it
+      ? record.secondary_it.map(n => listPrincipalIt[n].name)
+      : []
   }));
   const data = dataWithRelation.map(record => renameKeys(record, "structures"));
   const csv = convertToCSV(data, {
@@ -142,12 +158,24 @@ const exporter = async (records, fetchRelatedRecords) => {
   downloadCSV(csv, "structures");
 };
 
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
+};
+
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const StructuresList = ({ ...props }) => (
   <List
     {...props}
     filters={<StructuresFilter />}
     perPage={10}
     exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit source="code" label="resources.structures.fields.code" />
@@ -213,9 +241,15 @@ const StructuresTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const StructuresEdit = ({ ...props }) => (
   <Edit title={<StructuresTitle />} {...props} actions={<ListEditActions />}>
-    <SimpleForm redirect="list">
+    <SimpleForm redirect="list" toolbar={<PostEditToolbar />}>
       <TextInput
         source="code"
         label="resources.structures.fields.code"

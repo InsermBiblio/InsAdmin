@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -8,13 +8,17 @@ import {
   Filter,
   SimpleForm,
   TextInput,
+  ExportButton,
   downloadCSV,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
+import { renameKeys } from "../utils/utils";
 
 const RegionalsDelegationsFilter = props => (
   <Filter {...props}>
@@ -34,15 +38,29 @@ const RegionalsDelegationsFilter = props => (
   </Filter>
 );
 
-const exporter = records => {
-  const csv = convertToCSV(records, {
-    delimiter: ";",
-    quotes: true,
-    quoteChar: '"',
-    encoding: "ISO-8859-1"
+const exporter = async records => {
+  const dataWithRelation = records.map(record => ({
+    ...record
+  }));
+  const data = dataWithRelation.map(record =>
+    renameKeys(record, "regionals_delegations")
+  );
+  const csv = convertToCSV(data, {
+    delimiter: ";"
   });
   downloadCSV(csv, "regionals_delegations");
 };
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
+};
+
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
 
 export const RegionalsDelegationsList = ({ ...props }) => (
   <List
@@ -51,6 +69,7 @@ export const RegionalsDelegationsList = ({ ...props }) => (
     filters={<RegionalsDelegationsFilter />}
     perPage={10}
     sort={{ field: "id", order: "ASC" }}
+    bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
       <LinkEdit
@@ -76,13 +95,19 @@ const RegionalsDelegationsTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const RegionalsDelegationsEdit = ({ ...props }) => (
   <Edit
     title={<RegionalsDelegationsTitle />}
     {...props}
     actions={<ListEditActions />}
   >
-    <SimpleForm>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput
         source="code"
         label="resources.regionals_delegations.fields.code"

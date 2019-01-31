@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -13,17 +13,24 @@ import {
   DateField,
   BooleanField,
   TextInput,
+  ExportButton,
+  downloadCSV,
   LongTextInput,
   BooleanInput,
   ReferenceInput,
   AutocompleteInput,
-  required
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
+import { renameKeys } from "../utils/utils";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import LinkRelational from "../components/LinkRelational";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const AccountsStructuresTeamsFilter = props => (
   <Filter {...props}>
@@ -57,22 +64,15 @@ const AccountsStructuresTeamsFilter = props => (
         { id: "ITMO", name: "ITMO" }
       ]}
     />
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.account_structures_teams.fields.structure_code"
-      source="account_structures_teams.structure_code"
+      source="structure_code"
       reference="structures"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
-    <ReferenceInput
-      label="resources.account_structures_teams.fields.team_number"
-      source="account_structures_teams.team_number"
-      reference="teams"
-      allowEmpty={true}
-    >
-      <AutocompleteInput optionText="team_number" />
-    </ReferenceInput>
+      field="structures"
+      optionText="code"
+      filter="account_structures_teams.structure_code"
+    />
+
     <TextInput
       source="like_teams.name"
       label="resources.account_structures_teams.fields.name"
@@ -86,13 +86,16 @@ const AccountsStructuresTeamsFilter = props => (
         { id: "Autre", name: "Autre" }
       ]}
     />
+
     <ReferenceInput
       label="resources.account_structures_teams.fields.regional_delegation"
       source="structures.regional_delegation"
       reference="regionals_delegations"
+      allowEmpty={true}
     >
-      <AutocompleteInput optionText="name" />
+      <AutocompleteInput optionText="code" />
     </ReferenceInput>
+
     <TextInput
       source="like_structures.site"
       label="resources.account_structures_teams.fields.site"
@@ -113,6 +116,7 @@ const AccountsStructuresTeamsFilter = props => (
       source="like_structures.other_mixity"
       label="resources.account_structures_teams.fields.other_mixity"
     />
+
     <ReferenceInput
       label="resources.account_structures_teams.fields.principal_it"
       source="teams.principal_it"
@@ -120,6 +124,7 @@ const AccountsStructuresTeamsFilter = props => (
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
+
     <ReferenceInput
       label="resources.account_structures_teams.fields.specialized_commission"
       source="teams.specialized_commission"
@@ -127,6 +132,7 @@ const AccountsStructuresTeamsFilter = props => (
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
+
     <FrenchDateInput
       source="to_account_structures_teams.register_date"
       label="resources.account_structures_teams.fields.register_date_before"
@@ -150,8 +156,79 @@ const AccountsStructuresTeamsFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const listSpecializedCommission = await fetchRelatedRecords(
+    records,
+    "specialized_commission",
+    "section_cn"
+  );
+  const listStructures = await fetchRelatedRecords(
+    records,
+    "structure_code",
+    "structures"
+  );
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "principal_it",
+    "institutes"
+  );
+  const listRegionalDelegation = await fetchRelatedRecords(
+    records,
+    "regional_delegation",
+    "regionals_delegations"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    structure_code:
+      listStructures[record.structure_code] &&
+      listStructures[record.structure_code].name,
+    principal_it:
+      listPrincipalIt[record.principal_it] &&
+      listPrincipalIt[record.principal_it].name,
+    specialized_commission:
+      listSpecializedCommission[record.specialized_commission] &&
+      listSpecializedCommission[record.specialized_commission].name,
+    regional_delegation:
+      listRegionalDelegation[record.regional_delegation] &&
+      listRegionalDelegation[record.regional_delegation].name
+  }));
+  const data = dataWithRelation.map(record =>
+    renameKeys(record, "account_structures_teams")
+  );
+  data.forEach(element => {
+    if (element["Date d'inscription"])
+      element["Date d'inscription"] = element["Date d'inscription"]
+        .replace(/T/, " ")
+        .replace(/\..+/, "");
+    element["Code de la structure"] = element.code;
+    delete element.code;
+  });
+
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "comptes_structures_equipes");
+};
+
+ExportButton.defaultProps = {
+  label: "ra.action.export",
+  maxResults: 100000
+};
+
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const AccountsStructuresTeamsList = ({ ...props }) => (
-  <List {...props} filters={<AccountsStructuresTeamsFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<AccountsStructuresTeamsFilter />}
+    perPage={10}
+    exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
+  >
     <Datagrid>
       <LinkEdit
         source="login"
@@ -167,18 +244,24 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
         relationalId="structure_code"
         source="code"
       />
-      <LinkRelational
+      <ReferenceField
         label="resources.account_structures_teams.fields.team_number"
-        page="teams"
-        relationalId="id"
+        reference="teams"
         source="team_number"
-      />
-      <LinkRelational
+        linkType="show"
+        allowEmpty={true}
+      >
+        <TextField source="team_number" />
+      </ReferenceField>
+      <ReferenceField
         label="resources.account_structures_teams.fields.name"
-        page="teams"
-        relationalId="id"
-        source="name"
-      />
+        reference="teams"
+        source="team_number"
+        linkType="show"
+        allowEmpty={true}
+      >
+        <TextField source="name" />
+      </ReferenceField>
       <TextField
         source="type_of_code"
         label="resources.account_structures_teams.fields.type_of_code"
@@ -234,13 +317,19 @@ const AccountsStructuresTeamsTitle = ({ record }) => {
   return record.login;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const AccountsStructuresTeamsEdit = ({ ...props }) => (
   <Edit
     title={<AccountsStructuresTeamsTitle />}
     {...props}
     actions={<ListEditActions />}
   >
-    <SimpleForm>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextInput
         source="login"
         label="resources.account_structures_teams.fields.login"
@@ -264,23 +353,20 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
           { id: "ITMO", name: "ITMO" }
         ]}
       />
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.account_structures_teams.fields.structure_code"
         source="structure_code"
         reference="structures"
-        allowEmpty={true}
-      >
-        <SelectInput optionText="name" />
-      </ReferenceInput>
-
-      <ReferenceInput
+        field="structures"
+        optionText="code"
+      />
+      <AutoCompleteInput
         label="resources.account_structures_teams.fields.team_number"
         source="team_number"
         reference="teams"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="team_number" />
-      </ReferenceInput>
+        field="teams"
+        optionText="team_number"
+      />
       <TextField
         source="name"
         label="resources.account_structures_teams.fields.name"
@@ -409,22 +495,21 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
           { id: "ITMO", name: "ITMO" }
         ]}
       />
-      <ReferenceInput
+
+      <AutoCompleteInput
         label="resources.account_structures_teams.fields.structure_code"
         source="structure_code"
         reference="structures"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
-      <ReferenceInput
+        field="structures"
+        optionText="code"
+      />
+      <AutoCompleteInput
         label="resources.account_structures_teams.fields.team_number"
         source="team_number"
         reference="teams"
-        allowEmpty={true}
-      >
-        <AutocompleteInput optionText="team_number" />
-      </ReferenceInput>
+        field="teams"
+        optionText="team_number"
+      />
       <SelectInput
         source="type_of_code"
         label="resources.account_structures_teams.fields.type_of_code"

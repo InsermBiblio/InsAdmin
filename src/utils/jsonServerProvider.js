@@ -51,83 +51,81 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
         /**
          * permet d'effectuer un tri (améliorer l'api pour supprimer cette portion de code)
          */
-        switch (resource) {
-          case "account_structures_teams":
-            if (
-              [
-                "name",
-                "team_number",
-                "principal_lastname",
-                "principal_email",
-                "principal_it",
-                "specialized_commission"
-              ].includes(field)
-            ) {
-              field = `teams.${field}`;
-            } else if (
-              [
-                "code",
-                "regional_delegation",
-                "site",
-                "city",
-                "mixt_university",
-                "cnrs_mixity",
-                "other_mixity"
-              ].includes(field)
-            ) {
-              field = `structures.${field}`;
-            } else {
-              field = `account_structures_teams.${field}`;
-            }
-
-            break;
-          case "institutes":
-            field = `institute.${field}`;
-            break;
-          case "teams":
-            if (
-              [
-                "code",
-                "regional_delegation",
-                "city",
-                "site",
-                "mixt_university",
-                "cnrs_mixity",
-                "other_mixity",
-                "total_etp_effectiv",
-                "nb_structures_accounts",
-                "nb_teams_account",
-                "nb_personal_accounts"
-              ].includes(field)
-            ) {
-              field = `structures.${field}`;
-            } else {
-              field = `teams.${field}`;
-            }
-            break;
-          case "section_cn":
-            field = `section_cn.${field}`;
-            break;
-          case "individual_account_fede":
-            if (field === "name") {
-              field = `teams.${field}`;
-            } else {
-              field = `individual_account_fede.${field}`;
-            }
-            break;
-          default:
-            break;
+        if (field) {
+          switch (resource) {
+            case "account_structures_teams":
+              if (
+                [
+                  "name",
+                  "team_number",
+                  "principal_lastname",
+                  "principal_email",
+                  "principal_it",
+                  "specialized_commission"
+                ].includes(field)
+              ) {
+                field = `teams.${field}`;
+              } else if (
+                [
+                  "code",
+                  "regional_delegation",
+                  "site",
+                  "city",
+                  "mixt_university",
+                  "cnrs_mixity",
+                  "other_mixity"
+                ].includes(field)
+              ) {
+                field = `structures.${field}`;
+              } else {
+                field = `account_structures_teams.${field}`;
+              }
+              break;
+            case "institutes":
+              field = `${field}`;
+              break;
+            case "teams":
+              if (
+                [
+                  "code",
+                  "regional_delegation",
+                  "city",
+                  "site",
+                  "mixt_university",
+                  "cnrs_mixity",
+                  "other_mixity",
+                  "nb_structures_accounts",
+                  "nb_teams_account",
+                  "nb_personal_accounts"
+                ].includes(field)
+              ) {
+                field = `structures.${field}`;
+              } else {
+                field = `teams.${field}`;
+              }
+              break;
+            case "section_cn":
+              field = `${field}`;
+              break;
+            case "individual_account_fede":
+              if (field === "name") {
+                field = `teams.${field}`;
+              } else {
+                field = `individual_account_fede.${field}`;
+              }
+              break;
+            default:
+              break;
+          }
         }
 
         const query = {
-          _page: page,
+          _page: page || 1,
           _perPage: perPage || 10
         };
 
-        if (field !== "id") {
-          query._sortField = field;
-          query._sortDir = order || "ASC";
-        }
+        query._sortField = field || "id";
+        query._sortDir = order || "ASC";
 
         if (Object.keys(filters).length > 0) {
           query._filters = JSON.stringify(filters);
@@ -266,21 +264,42 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson) => {
     }
 
     const { url, options } = convertDataRequestToHTTP(type, resource, params);
-    if (options.body && options.body.image) {
-      return convertFileToBase64(options.body.image).then(image => {
-        options.body.image = image;
-        options.body = JSON.stringify(options.body);
-        return httpClient(url, options).then(response =>
-          convertHTTPResponse(response, type, resource, params)
-        );
-      });
-    } else {
-      if (options.body) {
-        options.body = JSON.stringify(options.body);
+    if (options.body) {
+      const principal_it = sessionStorage.getItem("principal_it");
+      const structure_code = sessionStorage.getItem("structure_code");
+      const team_number = sessionStorage.getItem("team_number");
+      const secondary_team_code = sessionStorage.getItem("secondary_team_code");
+      const itmo_principal = sessionStorage.getItem("itmo_principal");
+      if (principal_it) {
+        options.body.principal_it = principal_it;
+        sessionStorage.removeItem("principal_it");
       }
-      return httpClient(url, options).then(response =>
-        convertHTTPResponse(response, type, resource, params)
-      );
+      if (structure_code) {
+        options.body.structure_code = structure_code;
+      }
+      if (team_number) {
+        options.body.team_number = team_number;
+      }
+      if (secondary_team_code) {
+        options.body.secondary_team_code = secondary_team_code;
+      }
+      if (itmo_principal) {
+        options.body.itmo_principal = itmo_principal;
+      }
+      sessionStorage.clear();
+      if (options.body.image) {
+        return convertFileToBase64(options.body.image).then(image => {
+          options.body.image = image;
+          options.body = JSON.stringify(options.body);
+          return httpClient(url, options).then(response =>
+            convertHTTPResponse(response, type, resource, params)
+          );
+        });
+      }
+      options.body = JSON.stringify(options.body);
     }
+    return httpClient(url, options).then(response =>
+      convertHTTPResponse(response, type, resource, params)
+    );
   };
 };

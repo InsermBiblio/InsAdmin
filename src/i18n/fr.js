@@ -71,6 +71,7 @@ export default {
         community: "Communauté",
         team_number: "Numéro d'équipe",
         team_name: "Intitulé d'équipe",
+        name: "Intitulé d'équipe",
         principal_it: "ITMO principal",
         regional_delegation: "Délégation régionale",
         specialized_commission: "Commission spécialisée",

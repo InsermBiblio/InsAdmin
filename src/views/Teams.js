@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Create,
   Datagrid,
@@ -9,40 +9,47 @@ import {
   SimpleForm,
   TextField,
   ReferenceField,
+  ReferenceInput,
+  AutocompleteInput,
   SelectInput,
   TextInput,
   BooleanInput,
-  ReferenceInput,
-  AutocompleteInput,
   BooleanField,
-  required
+  downloadCSV,
+  required,
+  SaveButton,
+  Toolbar
 } from "react-admin";
+import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
+import { ListAddActions, ListEditActions } from "../components/ListActions";
 import LinkRelational from "../components/LinkRelational";
 import {
   UrlSearchStructures,
   UrlSearchTeams,
   UrlSearchFedeInserm
 } from "../components/LinkAccount";
+import { renameKeys } from "../utils/utils";
+import AutoCompleteInput from "../components/AutoCompleteInput";
 
 const TeamsFilter = props => (
   <Filter {...props}>
     <TextInput label="Rechercher" source="match" alwaysOn />
 
-    <ReferenceInput
+    <AutoCompleteInput
       label="resources.teams.fields.structure_code"
-      source="teams.structure_code"
+      source="code"
       reference="structures"
-      allowEmpty={true}
-      perPage={50}
-    >
-      <AutocompleteInput optionText="name" />
-    </ReferenceInput>
+      field="structures"
+      optionText="code"
+      filter="structures.code"
+      fieldValue="code"
+    />
 
     <SelectInput
       source="structures.structure_type"
-      label="resources.account_structures_teams.fields.structure_type"
+      label="resources.teams.fields.structure_type"
       choices={[
         { id: "CIC", name: "CIC" },
         { id: "IFR", name: "IFR" },
@@ -64,7 +71,6 @@ const TeamsFilter = props => (
       label="resources.teams.fields.principal_it"
       source="teams.principal_it"
       reference="institutes"
-      allowEmpty={true}
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
@@ -73,7 +79,6 @@ const TeamsFilter = props => (
       label="resources.teams.fields.specialized_commission"
       source="teams.specialized_commission"
       reference="section_cn"
-      allowEmpty={true}
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
@@ -88,13 +93,14 @@ const TeamsFilter = props => (
     />
 
     <ReferenceInput
-      label="resources.teams.fields.regional_delegation"
+      label="resources.structures.fields.regional_delegation"
       source="structures.regional_delegation"
       reference="regionals_delegations"
       allowEmpty={true}
     >
-      <AutocompleteInput optionText="name" />
+      <AutocompleteInput optionText="code" />
     </ReferenceInput>
+
     <TextInput
       source="like_structures.mixt_university"
       label="resources.teams.fields.mixt_university"
@@ -111,8 +117,66 @@ const TeamsFilter = props => (
   </Filter>
 );
 
+const exporter = async (records, fetchRelatedRecords) => {
+  const listSpecializedCommission = await fetchRelatedRecords(
+    records,
+    "specialized_commission",
+    "section_cn"
+  );
+  const listStructures = await fetchRelatedRecords(
+    records,
+    "structure_code",
+    "structures"
+  );
+  const listPrincipalIt = await fetchRelatedRecords(
+    records,
+    "principal_it",
+    "institutes"
+  );
+  const listRegionalDelegation = await fetchRelatedRecords(
+    records,
+    "regional_delegation",
+    "regionals_delegations"
+  );
+  const dataWithRelation = records.map(record => ({
+    ...record,
+    specialized_commission:
+      listSpecializedCommission[record.specialized_commission] &&
+      listSpecializedCommission[record.specialized_commission].name,
+    structure_name:
+      listStructures[record.structure_code] &&
+      listStructures[record.structure_code].name,
+    structure_code:
+      listStructures[record.structure_code] &&
+      listStructures[record.structure_code].name,
+    principal_it:
+      listPrincipalIt[record.principal_it] &&
+      listPrincipalIt[record.principal_it].name,
+    regional_delegation:
+      listRegionalDelegation[record.regional_delegation] &&
+      listRegionalDelegation[record.regional_delegation].name
+  }));
+  const data = dataWithRelation.map(record => renameKeys(record, "teams"));
+  const csv = convertToCSV(data, {
+    delimiter: ";"
+  });
+  downloadCSV(csv, "teams");
+};
+
+const PostBulkActionButtons = props => (
+  <Fragment>
+    <DeleteButtonWithConfirmation label="Supprimer" {...props} />
+  </Fragment>
+);
+
 export const TeamsList = ({ ...props }) => (
-  <List {...props} filters={<TeamsFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<TeamsFilter />}
+    perPage={10}
+    exporter={exporter}
+    bulkActionButtons={<PostBulkActionButtons />}
+  >
     <Datagrid>
       <LinkRelational
         label="resources.teams.fields.structure_code"
@@ -132,6 +196,7 @@ export const TeamsList = ({ ...props }) => (
         source="regional_delegation"
         reference="regionals_delegations"
         linkType="show"
+        allowEmpty={true}
       >
         <TextField source="code" />
       </ReferenceField>
@@ -178,9 +243,15 @@ const TeamsTitle = ({ record }) => {
   return record.name;
 };
 
+const PostEditToolbar = props => (
+  <Toolbar {...props}>
+    <SaveButton />
+  </Toolbar>
+);
+
 export const TeamsEdit = ({ ...props }) => (
-  <Edit title={<TeamsTitle />} {...props}>
-    <SimpleForm>
+  <Edit title={<TeamsTitle />} {...props} actions={<ListEditActions />}>
+    <SimpleForm toolbar={<PostEditToolbar />}>
       <TextField
         source="structure_type"
         label="resources.teams.fields.structure_type"
@@ -229,15 +300,13 @@ export const TeamsEdit = ({ ...props }) => (
         validate={required("Ce champ est requis!")}
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
-        allowEmpty={true}
-        validate={required("Ce champ est requis!")}
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
+        field="structures"
+        optionText="code"
+      />
 
       <TextInput
         source="principal_lastname"
@@ -256,7 +325,6 @@ export const TeamsEdit = ({ ...props }) => (
         label="resources.teams.fields.principal_it"
         source="principal_it"
         reference="institutes"
-        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -265,7 +333,6 @@ export const TeamsEdit = ({ ...props }) => (
         label="resources.teams.fields.specialized_commission"
         source="specialized_commission"
         reference="section_cn"
-        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -421,7 +488,7 @@ export const TeamsEdit = ({ ...props }) => (
 );
 
 export const TeamsCreate = ({ ...props }) => (
-  <Create {...props}>
+  <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
       <TextInput
         source="team_number"
@@ -434,15 +501,13 @@ export const TeamsCreate = ({ ...props }) => (
         validate={required("Ce champ est requis!")}
       />
 
-      <ReferenceInput
+      <AutoCompleteInput
         label="resources.teams.fields.structure_code"
         source="structure_code"
         reference="structures"
-        allowEmpty={true}
-        validate={required("Ce champ est requis!")}
-      >
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
+        field="structures"
+        optionText="code"
+      />
 
       <TextInput
         source="principal_lastname"
@@ -461,7 +526,6 @@ export const TeamsCreate = ({ ...props }) => (
         label="resources.teams.fields.principal_it"
         source="principal_it"
         reference="institutes"
-        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
@@ -470,7 +534,6 @@ export const TeamsCreate = ({ ...props }) => (
         label="resources.teams.fields.specialized_commission"
         source="specialized_commission"
         reference="section_cn"
-        allowEmpty={true}
       >
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
