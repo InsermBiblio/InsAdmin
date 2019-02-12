@@ -177,6 +177,8 @@ const exporter = async (records, fetchRelatedRecords) => {
     "regional_delegation",
     "regionals_delegations"
   );
+  const listTeams = await fetchRelatedRecords(records, "team_number", "teams");
+
   const dataWithRelation = records.map(record => ({
     ...record,
     structure_code:
@@ -190,7 +192,9 @@ const exporter = async (records, fetchRelatedRecords) => {
       listSpecializedCommission[record.specialized_commission].name,
     regional_delegation:
       listRegionalDelegation[record.regional_delegation] &&
-      listRegionalDelegation[record.regional_delegation].name
+      listRegionalDelegation[record.regional_delegation].name,
+    team_number:
+      listTeams[record.team_number] && listTeams[record.team_number].team_number
   }));
   const data = dataWithRelation.map(record =>
     renameKeys(record, "account_structures_teams")
