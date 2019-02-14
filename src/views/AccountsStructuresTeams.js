@@ -26,6 +26,7 @@ import {
 import { renameKeys } from "../utils/utils";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { FrenchDateInput } from "../components/FrenchDateInput";
+import RandomPasswordGenerator from "../components/RandomPasswordGenerator";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import LinkRelational from "../components/LinkRelational";
@@ -467,11 +468,6 @@ export const AccountsStructuresTeamsEdit = ({ ...props }) => (
   </Edit>
 );
 
-const passwordValue = Math.random()
-  .toString(36)
-  .slice(-6)
-  .toUpperCase();
-
 export const AccountsStructuresTeamsCreate = ({ ...props }) => (
   <Create {...props} actions={<ListAddActions />}>
     <SimpleForm redirect="list">
@@ -480,11 +476,9 @@ export const AccountsStructuresTeamsCreate = ({ ...props }) => (
         label="resources.account_structures_teams.fields.login"
         validate={required("Ce champ est requis!")}
       />
-      <TextInput
+      <RandomPasswordGenerator
         source="password"
         label="resources.account_structures_teams.fields.password"
-        defaultValue={passwordValue}
-        validate={required("Ce champ est requis!")}
       />
       <SelectInput
         source="structure_type"
