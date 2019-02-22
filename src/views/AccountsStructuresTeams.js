@@ -162,12 +162,11 @@ const exporter = async (records, fetchRelatedRecords) => {
     renameKeys(record, "account_structures_teams")
   );
   data.forEach(element => {
-    if (element["Date d'inscription"])
+    if (element["Date d'inscription"]) {
       element["Date d'inscription"] = element["Date d'inscription"]
         .replace(/T/, " ")
         .replace(/\..+/, "");
-    element["Code de la structure"] = element.code;
-    delete element.code;
+    }
   });
 
   const csv = convertToCSV(data, {
