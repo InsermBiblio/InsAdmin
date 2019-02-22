@@ -158,46 +158,7 @@ const AccountsStructuresTeamsFilter = props => (
 );
 
 const exporter = async (records, fetchRelatedRecords) => {
-  const listSpecializedCommission = await fetchRelatedRecords(
-    records,
-    "specialized_commission",
-    "section_cn"
-  );
-  const listStructures = await fetchRelatedRecords(
-    records,
-    "structure_code",
-    "structures"
-  );
-  const listPrincipalIt = await fetchRelatedRecords(
-    records,
-    "principal_it",
-    "institutes"
-  );
-  const listRegionalDelegation = await fetchRelatedRecords(
-    records,
-    "regional_delegation",
-    "regionals_delegations"
-  );
-  const listTeams = await fetchRelatedRecords(records, "team_number", "teams");
-
-  const dataWithRelation = records.map(record => ({
-    ...record,
-    structure_code:
-      listStructures[record.structure_code] &&
-      listStructures[record.structure_code].name,
-    principal_it:
-      listPrincipalIt[record.principal_it] &&
-      listPrincipalIt[record.principal_it].name,
-    specialized_commission:
-      listSpecializedCommission[record.specialized_commission] &&
-      listSpecializedCommission[record.specialized_commission].name,
-    regional_delegation:
-      listRegionalDelegation[record.regional_delegation] &&
-      listRegionalDelegation[record.regional_delegation].name,
-    team_number:
-      listTeams[record.team_number] && listTeams[record.team_number].team_number
-  }));
-  const data = dataWithRelation.map(record =>
+  const data = records.map(record =>
     renameKeys(record, "account_structures_teams")
   );
   data.forEach(element => {
