@@ -14,6 +14,7 @@ import {
   SaveButton,
   Toolbar
 } from "react-admin";
+import { PostPagination } from "../utils/pagination";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -58,7 +59,8 @@ export const InstitutsList = ({ ...props }) => (
     {...props}
     exporter={exporter}
     filters={<InstitutsFilter />}
-    perPage={10}
+    pagination={<PostPagination />}
+    perPage={50}
     sort={{ field: "id", order: "ASC" }}
     bulkActionButtons={<PostBulkActionButtons />}
   >

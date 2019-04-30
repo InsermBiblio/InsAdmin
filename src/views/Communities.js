@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Datagrid, List, Filter, TextInput, downloadCSV } from "react-admin";
 import LinkEdit from "../components/LinkEdit";
+import { PostPagination } from "../utils/pagination";
 import { renameKeys } from "../utils/utils";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -30,7 +31,8 @@ export const CommunitiesList = ({ ...props }) => (
     {...props}
     exporter={exporter}
     filters={<CommunitiesFilter />}
-    perPage={10}
+    pagination={<PostPagination />}
+    perPage={50}
     sort={{ field: "id", order: "ASC" }}
     bulkActionButtons={<PostBulkActionButtons />}
   >

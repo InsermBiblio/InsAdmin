@@ -14,6 +14,7 @@ import {
   SaveButton,
   Toolbar
 } from "react-admin";
+import { PostPagination } from "../utils/pagination";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
 
@@ -33,7 +34,8 @@ export const UsersList = ({ ...props }) => (
   <List
     {...props}
     filters={<UsersFilter />}
-    perPage={25}
+    pagination={<PostPagination />}
+    perPage={50}
     sort={{ field: "id", order: "ASC" }}
     bulkActionButtons={<PostBulkActionButtons />}
   >

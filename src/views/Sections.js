@@ -15,6 +15,7 @@ import {
   SaveButton,
   Toolbar
 } from "react-admin";
+import { PostPagination } from "../utils/pagination";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -67,7 +68,8 @@ export const SectionsList = ({ ...props }) => (
     {...props}
     exporter={exporter}
     filters={<SectionsFilter />}
-    perPage={10}
+    pagination={<PostPagination />}
+    perPage={50}
     bulkActionButtons={<PostBulkActionButtons />}
   >
     <Datagrid>
