@@ -25,6 +25,7 @@ import {
   Toolbar
 } from "react-admin";
 import { renameKeys } from "../utils/utils";
+import { PostPagination } from "../utils/pagination";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { FrenchDateInput } from "../components/FrenchDateInput";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
@@ -243,7 +244,8 @@ export const AccountsFedeInsermList = props => (
   <List
     {...props}
     filters={<AccountsFedeInsermFilter />}
-    perPage={10}
+    pagination={<PostPagination />}
+    perPage={50}
     exporter={exporter}
     bulkActionButtons={<PostBulkActionButtons />}
   >
@@ -447,7 +449,7 @@ export const AccountsFedeInsermEdit = ({ ...props }) => (
         reference="regionals_delegations"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <TextInput
@@ -588,7 +590,7 @@ export const AccountsFedeInsermCreate = ({ ...props }) => (
         reference="regionals_delegations"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <TextInput

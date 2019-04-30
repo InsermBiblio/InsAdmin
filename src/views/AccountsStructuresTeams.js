@@ -24,6 +24,7 @@ import {
   Toolbar
 } from "react-admin";
 import { renameKeys } from "../utils/utils";
+import { PostPagination } from "../utils/pagination";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import { FrenchDateInput } from "../components/FrenchDateInput";
 import RandomPasswordGenerator from "../components/RandomPasswordGenerator";
@@ -190,7 +191,8 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
   <List
     {...props}
     filters={<AccountsStructuresTeamsFilter />}
-    perPage={10}
+    pagination={<PostPagination />}
+    perPage={50}
     exporter={exporter}
     bulkActionButtons={<PostBulkActionButtons />}
   >

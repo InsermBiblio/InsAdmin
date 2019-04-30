@@ -16,6 +16,7 @@ import {
   AutocompleteInput,
   ChipField
 } from "react-admin";
+import { PostPagination } from "../utils/pagination";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
 import { ListAddActions, ListEditActions } from "../components/ListActions";
@@ -28,7 +29,7 @@ const FavorisFilter = props => (
       label="resources.revues.fields.communities"
       source="community_id"
       reference="communities"
-      perPage={100}
+      perPage={50}
     >
       <AutocompleteInput optionText="name" />
     </ReferenceInput>
@@ -36,7 +37,12 @@ const FavorisFilter = props => (
 );
 
 export const FavorisList = ({ ...props }) => (
-  <List {...props} filters={<FavorisFilter />} perPage={10}>
+  <List
+    {...props}
+    filters={<FavorisFilter />}
+    pagination={<PostPagination />}
+    perPage={50}
+  >
     <Datagrid>
       <LinkEdit source="title" label="resources.revues.fields.title" />
 

@@ -24,6 +24,7 @@ import {
   SaveButton,
   Toolbar
 } from "react-admin";
+import { PostPagination } from "../utils/pagination";
 import { unparse as convertToCSV } from "papaparse/papaparse.min";
 import DeleteButtonWithConfirmation from "../components/DeleteButtonWithConfirmation";
 import LinkEdit from "../components/LinkEdit";
@@ -173,7 +174,8 @@ export const StructuresList = ({ ...props }) => (
   <List
     {...props}
     filters={<StructuresFilter />}
-    perPage={10}
+    pagination={<PostPagination />}
+    perPage={50}
     exporter={exporter}
     bulkActionButtons={<PostBulkActionButtons />}
   >
@@ -291,7 +293,7 @@ export const StructuresEdit = ({ ...props }) => (
         reference="regionals_delegations"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <ReferenceInput
@@ -582,7 +584,7 @@ export const StructuresCreate = ({ ...props }) => (
         reference="regionals_delegations"
         allowEmpty={true}
       >
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="code" />
       </ReferenceInput>
 
       <ReferenceInput
