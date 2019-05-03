@@ -75,6 +75,15 @@ const AccountsStructuresTeamsFilter = props => (
       filter="account_structures_teams.structure_code"
     />
 
+    <AutoCompleteInput
+      label="resources.account_structures_teams.fields.team_number"
+      source="team_number"
+      reference="teams"
+      field="teams"
+      optionText="team_number"
+      filter="account_structures_teams.team_number"
+    />
+
     <TextInput
       source="like_teams.name"
       label="resources.account_structures_teams.fields.name"
@@ -211,24 +220,21 @@ export const AccountsStructuresTeamsList = ({ ...props }) => (
         relationalId="structure_code"
         source="code"
       />
-      <ReferenceField
+
+      <LinkRelational
         label="resources.account_structures_teams.fields.team_number"
-        reference="teams"
-        source="team_number"
-        linkType="show"
-        allowEmpty={true}
-      >
-        <TextField source="team_number" />
-      </ReferenceField>
-      <ReferenceField
+        page="teams"
+        relationalId="team_number"
+        source="team_id"
+      />
+
+      <LinkRelational
         label="resources.account_structures_teams.fields.name"
-        reference="teams"
-        source="team_number"
-        linkType="show"
-        allowEmpty={true}
-      >
-        <TextField source="name" />
-      </ReferenceField>
+        page="teams"
+        relationalId="team_number"
+        source="name"
+      />
+
       <TextField
         source="type_of_code"
         label="resources.account_structures_teams.fields.type_of_code"
