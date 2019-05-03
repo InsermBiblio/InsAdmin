@@ -75,6 +75,15 @@ const AccountsStructuresTeamsFilter = props => (
       filter="account_structures_teams.structure_code"
     />
 
+    <AutoCompleteInput
+      label="resources.account_structures_teams.fields.team_number"
+      source="team_number"
+      reference="teams"
+      field="teams"
+      optionText="team_number"
+      filter="account_structures_teams.team_number"
+    />
+
     <TextInput
       source="like_teams.name"
       label="resources.account_structures_teams.fields.name"
