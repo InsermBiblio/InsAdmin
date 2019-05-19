@@ -292,6 +292,7 @@ export const AccountsFedeInsermList = props => (
         label="resources.individual_account_fede.fields.team_name"
         source="name"
       />
+
       <ReferenceField
         label="resources.individual_account_fede.fields.secondary_team_code"
         source="secondary_team_code"

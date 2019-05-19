@@ -62,6 +62,11 @@ const TeamsFilter = props => (
       ]}
     />
 
+    <TextInput
+      source="like_teams.team_number"
+      label="resources.teams.fields.team_number"
+    />
+
     <TextInput source="like_teams.name" label="resources.teams.fields.name" />
     <TextInput
       source="like_teams.principal_lastname"

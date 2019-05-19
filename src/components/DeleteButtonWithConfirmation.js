@@ -94,7 +94,7 @@ class DeleteButtonWithConfirmation extends Component {
           <DialogActions>
             <Button
               onClick={this.handleDelete}
-              label={label}
+              label="Confirmer"
               className={classnames(
                 "ra-delete-button",
                 classes.deleteButton,
