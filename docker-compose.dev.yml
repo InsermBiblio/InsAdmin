@@ -1,17 +1,23 @@
-version: "2"
+version: "3.5"
 
 services:
   devserver:
-    extends:
-      file: ./docker-compose.yml
-      service: node
+    image: node:8.12.0-alpine
+    volumes:
+      - .:/app
+      - ./public:/public
+    working_dir: /app
     environment:
       NODE_ENV: development
       REACT_APP_INSADMIN_HOST: http://localhost:3011/public
       REACT_APP_INSAPI_HOST: http://localhost:3000/admin
       PORT: 3011
-    volumes:
-      - ./public:/public
     ports:
       - 3011:3011
     command: npm start
+    networks:
+      - insfrontend
+
+networks:
+  insfrontend:
+    external: true

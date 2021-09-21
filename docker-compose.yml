@@ -1,15 +1,10 @@
-version: "2"
+version: "3.5"
 services:
-  node:
+  npm:
     image: node:8.12.0-alpine
     volumes:
       - .:/app
     working_dir: /app
-
-  npm:
-    extends:
-      file: ./docker-compose.yml
-      service: node
     environment:
       http_proxy: ${http_proxy}
       https_proxy: ${https_proxy}
@@ -17,9 +12,10 @@ services:
     entrypoint: ["npm"]
 
   build:
-    extends:
-      file: ./docker-compose.yml
-      service: node
+    image: node:8.12.0-alpine
+    volumes:
+      - .:/app
+    working_dir: /app
     environment:
       NODE_ENV: production
       REACT_APP_INSADMIN_HOST: ${REACT_APP_INSADMIN_HOST}

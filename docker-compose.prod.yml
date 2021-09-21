@@ -1,4 +1,4 @@
-version: "2"
+version: "3.5"
 
 services:
   server:
@@ -9,3 +9,9 @@ services:
     restart: always
     ports:
       - 3010:8080
+    networks:
+      - insfrontend
+
+networks:
+  frontend:
+    external: true
