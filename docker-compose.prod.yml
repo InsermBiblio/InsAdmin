@@ -1,11 +1,17 @@
-version: "2"
+version: "3.5"
 
 services:
   server:
-    image: vsnexus-registry.intra.inist.fr:8083/insermbiblio/insadmin:${insadmin_version}
+    image: vxnexus-registry.intra.inist.fr:8083/insermbiblio/insadmin:${insadmin_version}
     environment:
       NODE_ENV: production
     working_dir: /public
     restart: always
     ports:
       - 3010:8080
+    networks:
+      - insfrontend
+
+networks:
+  frontend:
+    external: true
