@@ -13,5 +13,5 @@ services:
       - insfrontend
 
 networks:
-  frontend:
+  insfrontend:
     external: true
